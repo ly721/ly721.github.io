@@ -364,7 +364,8 @@
 			<h3>vue项目遇到的问题</h3>
 			<p>在 build 项目时,报错 .plugins[0] may only be a two-tuple or three-tuple 检查配置文件babel.config.js发现
 			自己这样写
-			`plugins: [
+			<pre>
+				plugins: [
 			  [
 			    'component',
 			    {
@@ -374,9 +375,10 @@
 				 ...prodPlugins,
 				'@babel/plugin-syntax-dynamic-import'
 			  ]
-			]`</p>
+			]
+			</pre>
 			应该这样配置
-			`plugins: [
+			<pre>plugins: [
 			  [
 			    'component',
 			    {
@@ -386,7 +388,7 @@
 			  ],
 				 ...prodPlugins,
 				'@babel/plugin-syntax-dynamic-import'
-			]`
+			]</pre>
 			<div>
 				注意：在使用cdn加载elementui时，public/index.html一定要先加载vue.js再加载element-ui.js要不然组件就会无效！！
 			</div>
