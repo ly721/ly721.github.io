@@ -1,19 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>cate</title>
-    <url>/ly721.github.io/2020/08/09/cate/</url>
-    <content><![CDATA[<p>title: 分类测试标题<br>categories: 分类名</p>]]></content>
-  </entry>
-  <entry>
     <title>guide</title>
     <url>/ly721.github.io/2020/07/03/guide/</url>
     <content><![CDATA[<h2 id="git-guide"><a href="#git-guide" class="headerlink" title="git guide"></a>git guide</h2><p>`</p><ol><li>npm i -g hexo</li><li>在一个空目录 hexo init 初始化博客系统</li><li>hexodir\source_posts 中 md 文档就是博客文档</li><li>撰写博客 新建 .md文件</li><li>把 md文件 转html hexo g</li><li>cmd 中 hexo s 后在浏览器 localhost:4000</li><li>与 github 关联</li><li>npm i hexo-deployer-git –save 插件安装</li><li>配置文件 根目录下 _config.yml</li><li>`</li></ol>]]></content>
   </entry>
   <entry>
+    <title>cate</title>
+    <url>/ly721.github.io/2020/08/09/cate/</url>
+    <content><![CDATA[<p>title: 分类测试标题<br>categories: 分类名</p>]]></content>
+  </entry>
+  <entry>
+    <title>readme</title>
+    <url>/ly721.github.io/2020/08/03/readme/</url>
+    <content><![CDATA[<h3 id="React基础"><a href="#React基础" class="headerlink" title="React基础"></a>React基础</h3><ul><li>react 用于构建用户界面的渐进式JAVASCRIPT库，第一个真正意义上组件化思想<ul><li>本身只处理UI（数据驱动视图）</li><li>不处理AJAX</li><li>不关系路由<h4 id="react特点"><a href="#react特点" class="headerlink" title="react特点"></a>react特点</h4></li></ul></li><li>组件化</li><li>高效，虚拟DOM</li><li>灵活，渐进式，本身只处理UI，可以结合其他技术</li><li>声明式设计<ul><li>data响应式数据</li><li>methods处理函数</li><li>特点组件生命钩子</li><li>方法就是类成员</li></ul></li><li>JSX<ul><li>一种预编译javascript语言，允许你的js和HTML混搭</li><li>模板中就是JS逻辑</li></ul></li><li>单向数据流<ul><li>所有数据都是单向的，组件床底的数据都是单向的只能父组件=&gt;子组件</li><li>vue也是单向数据流</li><li>没有双向数据绑定<h4 id="react与vue对比"><a href="#react与vue对比" class="headerlink" title="react与vue对比"></a>react与vue对比</h4><ul><li>vues生产力更高，react技术占比比较重</li><li>两个框架都采用虚拟DOM</li><li>组件化</li><li>数据绑定</li></ul></li><li>都支持数据驱动视图</li><li>vue支持表单控件的双向数据绑定</li><li>react不支持双向数据绑定<ul><li>核心库很小，渐进式js库</li><li>React采用JSX语法编写组件</li><li>Vue采用单文件组件</li></ul></li><li>template，script，style<h4 id="react基础"><a href="#react基础" class="headerlink" title="react基础"></a>react基础</h4><ul><li>云端编程环境 只适用于demo测试</li><li>脚手架工具 <code>create-react-app</code></li></ul></li><li>类似于vue-cli</li><li>集成了webpack<ul><li>@babel/standalone 的作用是可以在浏览器中完成es6到es5的转换</li></ul></li><li>是一个独立的编译工具，支持调用它的api完成es6=&gt;es5<ul><li>react的核心理念：组件化，不支持管理dom模板，他必须把所有的模板放在组件中<h4 id="JSX环境-type-”text-babel”"><a href="#JSX环境-type-”text-babel”" class="headerlink" title="JSX环境 type=”text/babel”"></a>JSX环境 type=”text/babel”</h4></li><li>非模块化环境</li></ul><ul><li>babel-standalone</li><li>执行编译，速度慢</li><li>只是用开发测试环境</li></ul><ul><li>模块化环境</li></ul><ul><li>结合webpack配置babel响应的工具完成预编译</li><li>浏览器执行的是预编译结果</li><li>babel-preset-react</li></ul><ul><li>jsx语法基本使用</li></ul><ul><li>必须有一个根节点</li></ul><ul><li>jsx注释</li></ul></li><li>单行注释 {/**/}</li><li>多行注释 { /*<br>*/}<ul><li>动态属性</li></ul><ul><li>class使用className对应类名</li><li>for使用htmlfor</li><li>属性使用表达式 title={user.name}</li></ul><ul><li>单标签要/闭合</li><li>事件绑定 onClick={fname}</li></ul></li><li>使用驼峰命名</li><li>必须绑定一个函数</li><li>不能使用字符串方式，一定要使用{函数}来绑定<h4 id="React修改视图数据"><a href="#React修改视图数据" class="headerlink" title="React修改视图数据"></a>React修改视图数据</h4><ul><li>this.setState({}) 不能使用this.state.propName</li><li>命令行 hs -c-l -o</li></ul></li></ul></li></ul>]]></content>
+  </entry>
+  <entry>
     <title>index</title>
     <url>/ly721.github.io/2020/07/03/index/</url>
-    <content><![CDATA[<!DOCTYPE html><html><head><meta charset="utf-8"><title>some problem</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/ly721.github.io/atom.xml" title="我的博客" type="application/atom+xml"></head><style>*{margin:0;padding:0;box-sizing:border-box}body{padding:10px 30px}</style><body><p><a href="https://www.jianshu.com/p/efbeddc5eb19" target="_blank" rel="noopener"><span class="glyphicon glyphicon-send"></span> next主题设置</a></p><div class="vue"><center><h3>vue项目遇到的问题</h3></center><p>在 build 项目时,报错 .plugins[0] may only be a two-tuple or three-tuple 检查配置文件babel.config.js发现 自己这样写</p><pre>
+    <content><![CDATA[<!DOCTYPE html><html><head><meta charset="utf-8"><title>some problem</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/ly721.github.io/atom.xml" title="李Yur" type="application/atom+xml"></head><style>*{margin:0;padding:0;box-sizing:border-box}body{padding:10px 30px}</style><body><p><a href="https://www.jianshu.com/p/efbeddc5eb19" target="_blank" rel="noopener"><span class="glyphicon glyphicon-send"></span> next主题设置</a></p><div class="vue"><center><h3>vue项目遇到的问题</h3></center><p>在 build 项目时,报错 .plugins[0] may only be a two-tuple or three-tuple 检查配置文件babel.config.js发现 自己这样写</p><pre>
 				plugins: [
 			  [
 			    'component',
@@ -38,11 +43,6 @@
 				'@babel/plugin-syntax-dynamic-import'
 			]
 			</pre><a id="more"></a><div><span style="color:red">注意：</span>在使用cdn加载elementui时，public/index.html一定要先加载vue.js再加载element-ui.js要不然组件就会无效！！</div></div></body></html>]]></content>
-  </entry>
-  <entry>
-    <title>readme</title>
-    <url>/ly721.github.io/2020/08/03/readme/</url>
-    <content><![CDATA[<h3 id="React基础"><a href="#React基础" class="headerlink" title="React基础"></a>React基础</h3><ul><li>react 用于构建用户界面的渐进式JAVASCRIPT库，第一个真正意义上组件化思想<ul><li>本身只处理UI（数据驱动视图）</li><li>不处理AJAX</li><li>不关系路由<h4 id="react特点"><a href="#react特点" class="headerlink" title="react特点"></a>react特点</h4></li></ul></li><li>组件化</li><li>高效，虚拟DOM</li><li>灵活，渐进式，本身只处理UI，可以结合其他技术</li><li>声明式设计<ul><li>data响应式数据</li><li>methods处理函数</li><li>特点组件生命钩子</li><li>方法就是类成员</li></ul></li><li>JSX<ul><li>一种预编译javascript语言，允许你的js和HTML混搭</li><li>模板中就是JS逻辑</li></ul></li><li>单向数据流<ul><li>所有数据都是单向的，组件床底的数据都是单向的只能父组件=&gt;子组件</li><li>vue也是单向数据流</li><li>没有双向数据绑定<h4 id="react与vue对比"><a href="#react与vue对比" class="headerlink" title="react与vue对比"></a>react与vue对比</h4><ul><li>vues生产力更高，react技术占比比较重</li><li>两个框架都采用虚拟DOM</li><li>组件化</li><li>数据绑定</li></ul></li><li>都支持数据驱动视图</li><li>vue支持表单控件的双向数据绑定</li><li>react不支持双向数据绑定<ul><li>核心库很小，渐进式js库</li><li>React采用JSX语法编写组件</li><li>Vue采用单文件组件</li></ul></li><li>template，script，style<h4 id="react基础"><a href="#react基础" class="headerlink" title="react基础"></a>react基础</h4><ul><li>云端编程环境 只适用于demo测试</li><li>脚手架工具 <code>create-react-app</code></li></ul></li><li>类似于vue-cli</li><li>集成了webpack<ul><li>@babel/standalone 的作用是可以在浏览器中完成es6到es5的转换</li></ul></li><li>是一个独立的编译工具，支持调用它的api完成es6=&gt;es5<ul><li>react的核心理念：组件化，不支持管理dom模板，他必须把所有的模板放在组件中<h4 id="JSX环境-type-”text-babel”"><a href="#JSX环境-type-”text-babel”" class="headerlink" title="JSX环境 type=”text/babel”"></a>JSX环境 type=”text/babel”</h4></li><li>非模块化环境</li></ul><ul><li>babel-standalone</li><li>执行编译，速度慢</li><li>只是用开发测试环境</li></ul><ul><li>模块化环境</li></ul><ul><li>结合webpack配置babel响应的工具完成预编译</li><li>浏览器执行的是预编译结果</li><li>babel-preset-react</li></ul><ul><li>jsx语法基本使用</li></ul><ul><li>必须有一个根节点</li></ul><ul><li>jsx注释</li></ul></li><li>单行注释 {/**/}</li><li>多行注释 { /*<br>*/}<ul><li>动态属性</li></ul><ul><li>class使用className对应类名</li><li>for使用htmlfor</li><li>属性使用表达式 title={user.name}</li></ul><ul><li>单标签要/闭合</li><li>事件绑定 onClick={fname}</li></ul></li><li>使用驼峰命名</li><li>必须绑定一个函数</li><li>不能使用字符串方式，一定要使用{函数}来绑定<h4 id="React修改视图数据"><a href="#React修改视图数据" class="headerlink" title="React修改视图数据"></a>React修改视图数据</h4><ul><li>this.setState({}) 不能使用this.state.propName</li><li>命令行 hs -c-l -o</li></ul></li></ul></li></ul>]]></content>
   </entry>
   <entry>
     <title>tag</title>
