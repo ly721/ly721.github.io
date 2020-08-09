@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>guide</title>
-    <url>/ly721.github.io/2020/07/03/guide/</url>
-    <content><![CDATA[<h2 id="git-guide"><a href="#git-guide" class="headerlink" title="git guide"></a>git guide</h2><p>`</p><ol><li>npm i -g hexo</li><li>在一个空目录 hexo init 初始化博客系统</li><li>hexodir\source_posts 中 md 文档就是博客文档</li><li>撰写博客 新建 .md文件</li><li>把 md文件 转html hexo g</li><li>cmd 中 hexo s 后在浏览器 localhost:4000</li><li>与 github 关联</li><li>npm i hexo-deployer-git –save 插件安装</li><li>配置文件 根目录下 _config.yml</li><li>`</li></ol>]]></content>
-  </entry>
-  <entry>
     <title>cate</title>
     <url>/ly721.github.io/2020/08/09/cate/</url>
     <content><![CDATA[<p>title: 分类测试标题<br>categories: 分类名</p>]]></content>
@@ -48,5 +43,10 @@
     <title>tag</title>
     <url>/ly721.github.io/2020/08/09/tag/</url>
     <content><![CDATA[<p>title: 标签测试文章标题<br>tags:</p><ul><li>标签1</li><li>标签2</li></ul>]]></content>
+  </entry>
+  <entry>
+    <title>guide</title>
+    <url>/ly721.github.io/2020/07/03/guide/</url>
+    <content><![CDATA[<h2 id="git-guide"><a href="#git-guide" class="headerlink" title="git guide"></a>git guide</h2><p>`</p><ol><li>npm i -g hexo</li><li>在一个空目录 hexo init 初始化博客系统</li><li>hexodir\source_posts 中 md 文档就是博客文档</li><li>撰写博客 新建 .md文件</li><li>把 md文件 转html hexo g</li><li>cmd 中 hexo s 后在浏览器 localhost:4000</li><li>与 github 关联</li><li>npm i hexo-deployer-git –save 插件安装</li><li>配置文件 根目录下 _config.yml</li><li>`</li></ol>]]></content>
   </entry>
 </search>
