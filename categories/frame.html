@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="一、React基础 react 用于构建用户界面的渐进式JAVASCRIPT库，第一个真正意义上组件化思想    - 本身只处理UI（数据驱动视图）    - 不处理AJAX    - 不关系路由1.react特点 组件化 高效，虚拟DOM 灵活，渐进式，本身只处理UI，可以结合其他技术 声明式设计 data响应式数据 methods处理函数 特点组件生命钩子 方法就是类成员   JSX 一种预编">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Lucky Girl">
+<meta property="og:url" content="http://example.com/categories/frame.html">
+<meta property="og:site_name" content="Lucky Girl">
+<meta property="og:description" content="一、React基础 react 用于构建用户界面的渐进式JAVASCRIPT库，第一个真正意义上组件化思想    - 本身只处理UI（数据驱动视图）    - 不处理AJAX    - 不关系路由1.react特点 组件化 高效，虚拟DOM 灵活，渐进式，本身只处理UI，可以结合其他技术 声明式设计 data响应式数据 methods处理函数 特点组件生命钩子 方法就是类成员   JSX 一种预编">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/lifecycle.png">
+<meta property="og:image" content="http://example.com/categories/images/chunk2.png">
+<meta property="og:image" content="http://example.com/categories/images/chunk3.png">
+<meta property="article:published_time" content="2021-06-07T07:22:12.178Z">
+<meta property="article:modified_time" content="2021-03-20T06:55:13.079Z">
+<meta property="article:author" content="李泼泼">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/lifecycle.png">
+
+<link rel="canonical" href="http://example.com/categories/frame">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : false,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title> | Lucky Girl
+</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?41fc030db57d5570dd22f78997dc4a7e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Lucky Girl</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Yur's Garden</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/abouts/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404.html" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+  
+  
+
+          <div class="content page posts-expand">
+            
+
+    
+    
+    
+    <div class="post-block" lang="zh-CN">
+      <header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">
+</h1>
+
+<div class="post-meta">
+  
+
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+          <h3 id="一、React基础"><a href="#一、React基础" class="headerlink" title="一、React基础"></a>一、React基础</h3><ul>
+<li>react 用于构建用户界面的渐进式JAVASCRIPT库，第一个真正意义上组件化思想    - 本身只处理UI（数据驱动视图）    - 不处理AJAX    - 不关系路由<h4 id="1-react特点"><a href="#1-react特点" class="headerlink" title="1.react特点"></a>1.react特点</h4></li>
+<li>组件化</li>
+<li>高效，虚拟DOM</li>
+<li>灵活，渐进式，本身只处理UI，可以结合其他技术</li>
+<li>声明式设计<ul>
+<li>data响应式数据</li>
+<li>methods处理函数</li>
+<li>特点组件生命钩子</li>
+<li>方法就是类成员</li>
+</ul>
+</li>
+<li>JSX<ul>
+<li>一种预编译javascript语言，允许你的js和HTML混搭</li>
+<li>模板中就是JS逻辑</li>
+</ul>
+</li>
+<li>单向数据流<ul>
+<li>所有数据都是单向的，组件床底的数据都是单向的只能父组件=&gt;子组件</li>
+<li>vue也是单向数据流</li>
+<li>没有双向数据绑定<h4 id="2-react与vue对比"><a href="#2-react与vue对比" class="headerlink" title="2.react与vue对比"></a>2.react与vue对比</h4></li>
+</ul>
+</li>
+<li>vue生产力更高，react技术占比比较重</li>
+<li>两个框架都采用虚拟DOM</li>
+<li>组件化</li>
+<li>数据绑定<ul>
+<li>都支持数据驱动视图</li>
+<li>vue支持表单控件的双向数据绑定</li>
+<li>react不支持双向数据绑定</li>
+</ul>
+</li>
+<li>核心库很小，渐进式js库</li>
+<li>React采用JSX语法编写组件</li>
+<li>Vue采用单文件组件<ul>
+<li>template，script，style<h4 id="3-react基础"><a href="#3-react基础" class="headerlink" title="3.react基础"></a>3.react基础</h4></li>
+</ul>
+</li>
+<li>云端编程环境 只适用于demo测试</li>
+<li>脚手架工具 <code>create-react-app</code><ul>
+<li>类似于vue-cli</li>
+<li>集成了webpack</li>
+</ul>
+</li>
+<li>@babel/standalone 的作用是可以在浏览器中完成es6到es5的转换<ul>
+<li>是一个独立的编译工具，支持调用它的api完成es6=&gt;es5</li>
+</ul>
+</li>
+<li>react的核心理念：组件化，不支持管理dom模板，他必须把所有的模板放在组件中<h4 id="4-JSX环境-type-”text-babel”"><a href="#4-JSX环境-type-”text-babel”" class="headerlink" title="4.JSX环境 type=”text/babel”"></a>4.JSX环境 type=”text/babel”</h4></li>
+<li>非模块化环境<ul>
+<li>babel-standalone</li>
+<li>执行编译，速度慢</li>
+<li>只是用开发测试环境</li>
+</ul>
+</li>
+<li>模块化环境<ul>
+<li>结合webpack配置babel响应的工具完成预编译</li>
+<li>浏览器执行的是预编译结果</li>
+<li>babel-preset-react</li>
+</ul>
+</li>
+<li>jsx语法基本使用<ul>
+<li>必须有一个根节点</li>
+</ul>
+</li>
+<li>jsx注释<ul>
+<li>单行注释  {/**/}</li>
+<li>多行注释 { /*</li>
+</ul>
+  */}</li>
+<li>动态属性 <ul>
+<li>class使用className对应类名</li>
+<li>for使用htmlfor</li>
+<li>属性使用表达式 title={user.name}</li>
+</ul>
+</li>
+<li>单标签要/闭合</li>
+<li>事件绑定 onClick={fname}<ul>
+<li>使用驼峰命名</li>
+<li>必须绑定一个函数</li>
+<li>不能使用字符串方式，一定要使用{函数}来绑定<h4 id="5-React修改视图数据"><a href="#5-React修改视图数据" class="headerlink" title="5.React修改视图数据"></a>5.React修改视图数据</h4></li>
+</ul>
+</li>
+<li>this.setState({}) 不能使用this.state.propName</li>
+<li> 命令行 hs -c-l -o<h3 id="二-VUE"><a href="#二-VUE" class="headerlink" title="二/VUE"></a>二/VUE</h3><h4 id="1-使用vue"><a href="#1-使用vue" class="headerlink" title="1.使用vue"></a>1.使用vue</h4></li>
+<li>1.引包</li>
+<li>2.创建vue实例化对象 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var vm = new Vue(&#123;</span><br><span class="line">   		   el:&#x27;#app&#x27;, </span><br><span class="line">     &#125;) </span><br></pre></td></tr></table></figure>
+</li>
+<li>vue核心：数据发生改变时，视图也会发生改变（数据驱动视图）<h4 id="2-指令系统"><a href="#2-指令系统" class="headerlink" title="2.指令系统"></a>2.指令系统</h4></li>
+<li>： 双大括号插值</li>
+<li>v-text：   innerText</li>
+<li>v-html：   innerHTML</li>
+<li>v-if：    条件渲染  如果属性对应的值为假则不在页面渲染，也就是不创建该dom元素添加到页面中，因为是dom元素的创建与销毁，切换开销大</li>
+<li>v-show： 就是控制css中display样式属性，如果对应属性值为真，即为给该dom的display样式设置为block,否则设置为none。需要频繁切换时推荐使用</li>
+<li>v-bind：  绑定标签属性，v-bind:class={active:true} ==&gt; 简写 :class={active:true}</li>
+<li>v-on:eventName：  绑定事件  简写@事件名</li>
+<li>v-for = “(item,index) in arr”</li>
+<li>v-model ： 双向绑定数据，只体现在ui控件上(要有value属性) 是v-on:input 和v-bind:value 的语法糖<h4 id="3-局部组件和全局组件"><a href="#3-局部组件和全局组件" class="headerlink" title="3.局部组件和全局组件"></a>3.局部组件和全局组件</h4></li>
+<li>局部组件<ul>
+<li>1.声子<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> var App = &#123;</span><br><span class="line">	data()&#123;</span><br><span class="line">		return &#123;&#125;</span><br><span class="line">	&#125;,</span><br><span class="line">	template:&#x27;&lt;div&gt;我是入口组件&lt;/div&gt;&#x27;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>2.挂子 在vue实例对象的components属性中声明 components:{App}</li>
+<li>3.用子 在vue实例对象的template属性中就可以使用该局部组件了 template:’<App />‘</li>
+</ul>
+</li>
+<li>全局组件<ul>
+<li>全局组件的创建<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(&#x27;componentName&#x27;,&#123;</span><br><span class="line">		   ...options</span><br><span class="line">	   &#125;)</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h4 id="4-父子组件通信"><a href="#4-父子组件通信" class="headerlink" title="4.父子组件通信"></a>4.父子组件通信</h4><ul>
+<li>父给子传<ul>
+<li>1.父组件绑定自定义的属性</li>
+<li>2.在子组件中使用props接收父组件传递的数据（绑定的属性值）</li>
+<li>3.在子组件任意使用</li>
+</ul>
+</li>
+<li>子传父<ul>
+<li>1.在父组件上绑定自定义事件</li>
+<li>2.在子组件中触发原生的事件，在该事件函数中使用$emit触发父组件的自定义事件 $emit(事件名，消息)<h4 id="5-过滤器"><a href="#5-过滤器" class="headerlink" title="5.过滤器"></a>5.过滤器</h4></li>
+</ul>
+</li>
+<li>作用：为页面中数据进行添油加醋功能</li>
+<li>全局过滤器： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Vue.filter(过滤器名,fn)</span><br></pre></td></tr></table></figure></li>
+<li>局部过滤器：<ul>
+<li>声明过滤器<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;数据 | 过滤器名 &#125;&#125;</span><br></pre></td></tr></table></figure></li>
+<li>在组件内加filters属性<h4 id="6-watch监听属性（简单数据）"><a href="#6-watch监听属性（简单数据）" class="headerlink" title="6.watch监听属性（简单数据）"></a>6.watch监听属性（简单数据）</h4></li>
+</ul>
+</li>
+<li>简单监视<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> watch:&#123;</span><br><span class="line">param:function(newVal,oldVal)&#123;</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>深度监视<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">watch:&#123;</span><br><span class="line">		arr: &#123;</span><br><span class="line">		  deep:true,</span><br><span class="line">		  handle:function(newV,oldV)&#123;</span><br><span class="line">			  </span><br><span class="line">		  &#125;</span><br><span class="line">	    &#125;  </span><br><span class="line">	  &#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="7-methods与computed计算属性比较"><a href="#7-methods与computed计算属性比较" class="headerlink" title="7.methods与computed计算属性比较"></a>7.methods与computed计算属性比较</h4><pre><code>+ 1、使用methods方法完成计算业务缺点：
+  -  只要调用一次计算方法，真个计算方法都会执行一次，如果在一个页面中多次使用到计算结果，可能会造成重复计算，导致页面加载性能变低
++ 2、computed：vue提供的一个计算属性
+  - 作用： 在完成某种业务是，往往页面结果需要经过多次计算才能获取，computed属性就是用来完成业务结果多次计算
+  - 优点： 在完成计算同时也会将本次计算结果缓存，如果数据没有发生变化，在页面中多次使用，计算方法仅仅执行一次
+  - 使用： &#123;&#123; 属性名称 &#125;&#125;  
+</code></pre>
+<h4 id="8-事件修饰符"><a href="#8-事件修饰符" class="headerlink" title="8.事件修饰符"></a>8.事件修饰符</h4><pre><code>+ 作用：用来和事件连用，觉得事件触发条件和决定事件触发机制
++ 1、常用事件修饰符（可以连用）
+  - .stop  停止事件冒泡
+  - .prevent  阻止默认行为
+  - .self  只触发自身行为
+  - .once   只能让事件执行一次
++ 2、按键修饰符
+  - 作用： 与键盘的按键事件(keyup keydown ...)绑定在一起，用来修饰特定的按键事件的修饰符
+  - .enter   @keyup.enter.delete  只会监听回车按键,删除键抬起
+  - .tab
+  - .delete
+  - .space
+  - .esc
+  - .down
+  - .up
+  - .left
+  - .right
+</code></pre>
+<h4 id="9-vue组件的生命周期"><a href="#9-vue组件的生命周期" class="headerlink" title="9.*vue组件的生命周期"></a>9.*vue组件的生命周期</h4><p>   <img src="../images/lifecycle.png" alt="vue组件的生命周期"><br>初始化阶段：</p>
+<ul>
+<li>1.beforeCreate()      - 组件创建之前,注意：在这个函数执行的时候vue实例仅仅完成内部事件和使用生命周期方法初始化</li>
+<li>2.created()           - 组件创建之后，可以操作后端数据，数据驱动视图     - 注意：在这个函数执行的时候vue实例已经完成自定义data、methods、computed等属性初始化以及语法校验    - 应用：发起AJAX请求</li>
+<li>3.beforeMount()       - 挂载数据到DOM之前    - 注意：在这个函数执行的时候，vue实例仅仅是将el属性指向html编译成vue模板，此刻并没有完成模板内容赋值，也就是<h1></h1></li>
+<li>4.mounted()          - 挂载数据到DOM之后  可操作dom    - 注意：在这个函数执行的时候vue实例会将data数据渲染到编译的模板中并形成虚拟dom，替换el指向dom<br>运行阶段：（执行多次）</li>
+<li>5.deforeUpdate()      - 更新DOM之前   可以获取原始的DOM    - 注意：在这个函数执行的时候vue实例的data数据发生改变，但是页面中的数据还是原始数据</li>
+<li>6.updated()           - 更新dom之后   可以获取最新的DOM    - 注意：在这个函数执行的时候，vue实例中的data数据与页面中数据已经一致<br>销毁阶段：</li>
+<li>7.beforeDestroy()     - 组件销毁之前    - 注意： 在这个函数执行的时候vue实例仅仅开始销毁 data methods…还在</li>
+<li>8.destroyed()         - 组件销毁之后    - 注意：在这个函数执行的时候vue实例的event childcomponents 监听机制 全部清空 </li>
+<li>更多<ul>
+<li>actived    组件被激活</li>
+<li>deactived  组件被使用</li>
+<li>vue的内置组件 <keep-alive></keep-alive> （缓存机制）可以再组件的切换过程中将状态保留在内存中，防止重复渲染DOM</li>
+</ul>
+</li>
+</ul>
+<h4 id="10-组件通信5种方式"><a href="#10-组件通信5种方式" class="headerlink" title="10.组件通信5种方式"></a>10.组件通信5种方式</h4><ul>
+<li>1.props和$emit:父组件向子组件传递数据是通过prop传递的，子组件传数据给父组件是通过$emit触发事件来完成的。<ul>
+<li>父组件传递msg数据给子组件，并通过v-on绑定了一个自定义事件来监听子组件的触发事件</li>
+<li>子组件通过props获取到msg数据，通过this.$emit触发父组件绑定的自定义事件</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plaintext"><figcaption><span>html></span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=&quot;utf-8&quot;&gt;</span><br><span class="line">		&lt;title&gt;组件通信&lt;/title&gt;</span><br><span class="line">		&lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue&quot;&gt;&lt;/script&gt;</span><br><span class="line">	&lt;/head&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">		&lt;div id=&quot;app&quot;&gt;</span><br><span class="line">			&lt;Parent&gt;&lt;/Parent&gt;</span><br><span class="line">			&lt;Parent1&gt;&lt;/Parent1&gt;</span><br><span class="line">		&lt;/div&gt;</span><br><span class="line">		&lt;script&gt;</span><br><span class="line">			Vue.component(&#x27;Parent&#x27;,&#123;</span><br><span class="line">				data()&#123;</span><br><span class="line">					return &#123;</span><br><span class="line">					    msg:&#x27;父组件数据&#x27;	</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;,</span><br><span class="line">				template:`&lt;div&gt;</span><br><span class="line">				&lt;h6&gt;我是父组件&lt;/h6&gt;</span><br><span class="line">				&lt;Child :childdata=&quot;msg&quot; @changeData1=&quot;changeData&quot;/&gt;</span><br><span class="line">				&lt;/div&gt;`,</span><br><span class="line">				methods:&#123;</span><br><span class="line">					changeData(val)&#123;</span><br><span class="line">						console.log(val)</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;)</span><br><span class="line">			Vue.component(&#x27;Child&#x27;,&#123;</span><br><span class="line">				props:[&#x27;childdata&#x27;],</span><br><span class="line">				template:`&lt;div&gt;</span><br><span class="line">				&lt;h6&gt;我是子组件 &lt;/h6&gt;</span><br><span class="line">				&lt;input type=&quot;text&quot; v-model=&quot;childdata&quot; @input=&quot;changeData(childdata)&quot;&gt;</span><br><span class="line">				&#123;&#123;childdata&#125;&#125;</span><br><span class="line">				&lt;/div&gt;`,</span><br><span class="line">				methods:&#123;</span><br><span class="line">					changeData(val)&#123;</span><br><span class="line">						this.$emit(&#x27;changeData1&#x27;,val)</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;)</span><br><span class="line">			Vue.component(&#x27;Parent1&#x27;,&#123;</span><br><span class="line">				data()&#123;</span><br><span class="line">					return &#123;</span><br><span class="line">						msg:&#x27;父组件数据1&#x27;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;,</span><br><span class="line">				template:&#x27;&lt;Child1 :data=&quot;msg&quot; @changes=changedata&gt;&lt;/Child1&gt;&#x27;,</span><br><span class="line">				methods:&#123;</span><br><span class="line">					changedata:function(val)&#123;</span><br><span class="line">						console.log(val)</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">				&#125;)</span><br><span class="line">				Vue.component(&#x27;Child1&#x27;,&#123;</span><br><span class="line">					props:[&#x27;data&#x27;],</span><br><span class="line">					template:`&lt;div&gt;</span><br><span class="line">					&lt;h1&gt;子组件我是&lt;/h1&gt;</span><br><span class="line">					&lt;input type=&quot;text&quot; v-model=&quot;data&quot; @input=&quot;changedata(data)&quot;/&gt;</span><br><span class="line">					&#123;&#123;data&#125;&#125;</span><br><span class="line">					&lt;/div&gt;`,</span><br><span class="line">					methods:&#123;</span><br><span class="line">						changedata:function(val)&#123;</span><br><span class="line">							this.$emit(&#x27;changes&#x27;,val)</span><br><span class="line">						&#125;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;)</span><br><span class="line">			var App = new Vue(&#123;</span><br><span class="line">				el:&#x27;#app&#x27;</span><br><span class="line">			&#125;)</span><br><span class="line">		&lt;/script&gt;</span><br><span class="line">	&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>2.$attrs和$listeners:解决很多个组件嵌套通信，父往子传使用$attrs  v-bind=”$attrs”</li>
+<li>3.中央事件总线（兄弟组件）: 新建bus对象，通过bus.$emit触发事件，bus.$on监听触发的事件</li>
+</ul>
+<figure class="highlight plaintext"><figcaption><span>html></span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=&quot;utf-8&quot;&gt;</span><br><span class="line">		&lt;title&gt;兄弟组件通信&lt;/title&gt;</span><br><span class="line">		&lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue&quot;&gt;&lt;/script&gt;</span><br><span class="line">	&lt;/head&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">		&lt;div id=&quot;app&quot;&gt;</span><br><span class="line">			&lt;brother1&gt;&lt;/brother1&gt;</span><br><span class="line">			&lt;brother2&gt;&lt;/brother2&gt;</span><br><span class="line">		&lt;/div&gt;</span><br><span class="line">		&lt;script&gt;</span><br><span class="line">			Vue.prototype.bus=new Vue()</span><br><span class="line">			Vue.component(&#x27;brother1&#x27;,&#123;</span><br><span class="line">				data()&#123;</span><br><span class="line">					return &#123;</span><br><span class="line">						msg:&#x27;1&#x27;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;,</span><br><span class="line">				template:`&lt;div&gt;</span><br><span class="line">				我是兄1组件</span><br><span class="line">				&#123;&#123;msg&#125;&#125;</span><br><span class="line">				&lt;/div&gt;`,</span><br><span class="line">				mounted()&#123;</span><br><span class="line">					    this.bus.$on(&#x27;changes&#x27;,function(val)&#123;</span><br><span class="line">							console.log(val)</span><br><span class="line">							&#125;)</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;)</span><br><span class="line">			Vue.component(&#x27;brother2&#x27;,&#123;</span><br><span class="line">			  template:`&lt;div&gt;</span><br><span class="line">			  我是兄2组件</span><br><span class="line">			  &lt;button @click=&quot;changeData()&quot;&gt;发送&lt;/button&gt;</span><br><span class="line">			  &lt;/div&gt;`,</span><br><span class="line">			  methods:&#123;</span><br><span class="line">				  changeData()&#123;//点击触发</span><br><span class="line">				  console.log(this)</span><br><span class="line">					this.bus.$emit(&#x27;changes&#x27;,&#x27;兄2组件数据&#x27;)  </span><br><span class="line">				  &#125;</span><br><span class="line">			  &#125;</span><br><span class="line">			&#125;)</span><br><span class="line">			var App = new Vue(&#123;</span><br><span class="line">				el:&#x27;#app&#x27;</span><br><span class="line">			&#125;)</span><br><span class="line">		&lt;/script&gt;</span><br><span class="line">	&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>4.父组件通过provide来提供变量，然后在子组件中通过inject来注入变量。不论子组件有多深，只要调用了inject那么就可以注入provide中的数据。</li>
+<li>而不是局限于只能从当前父组件的prop属性来获取数据，只要在父组件的生命周期内，子组件都可以调用。</li>
+<li>5.$children 和 $parent<h4 id="11-获取dom元素"><a href="#11-获取dom元素" class="headerlink" title="11.获取dom元素"></a>11.获取dom元素</h4></li>
+<li>this.$ref.xxx 此时需要给标签绑定属性 ref=’xxx’,如果是给组件加ref属性，那么我们获取到的是该组件</li>
+<li>$nextTick()是在dom更新循环结束之后执行回调函数，在修改数据之后使用这个方法在回调中获取到更新之后的dom<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=&quot;utf-8&quot;&gt;</span><br><span class="line">		&lt;title&gt;&lt;/title&gt;</span><br><span class="line">		&lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue&quot;&gt;&lt;/script&gt;</span><br><span class="line">	&lt;/head&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">		&lt;div id=&quot;app&quot;&gt;</span><br><span class="line">			&lt;button ref=&quot;btn1&quot;&gt;按钮1&lt;/button&gt;</span><br><span class="line">			&lt;button ref=&quot;btn2&quot;&gt;按钮2&lt;/button&gt;</span><br><span class="line">			&lt;input type=&quot;text&quot; v-show=&quot;isShow&quot; ref=&quot;input&quot;&gt;</span><br><span class="line">			&lt;com ref=&quot;com&quot;&gt;&lt;/com&gt;</span><br><span class="line">		&lt;/div&gt;</span><br><span class="line">		&lt;script&gt;</span><br><span class="line">			Vue.component(&#x27;com&#x27;,&#123;</span><br><span class="line">				data()&#123;</span><br><span class="line">					return &#123;&#125;</span><br><span class="line">				&#125;,</span><br><span class="line">				template:`&lt;div&gt;&lt;h1&gt;componentA</span><br><span class="line">				&lt;/h1&gt;&lt;span&gt;感谢你曾来过&lt;/span&gt;&lt;/div&gt;`</span><br><span class="line">			&#125;)</span><br><span class="line">			var App = new Vue(&#123;</span><br><span class="line">				el:&#x27;#app&#x27;,</span><br><span class="line">				data()&#123;</span><br><span class="line">				return&#123;</span><br><span class="line">				  isShow:false</span><br><span class="line">				&#125;&#125;,</span><br><span class="line">				created()&#123;</span><br><span class="line">				  console.log(this.$refs.btn1)</span><br><span class="line">				 </span><br><span class="line">				&#125;,</span><br><span class="line">				mounted()&#123;</span><br><span class="line">					console.log(this.$refs.btn1)</span><br><span class="line">					console.log(this.$refs.com)</span><br><span class="line">					this.isShow = true</span><br><span class="line">					// this.$refs.input.focus()</span><br><span class="line">					this.$nextTick(function()&#123;</span><br><span class="line">							this.$refs.input.focus()</span><br><span class="line">					&#125;)</span><br><span class="line">				&#125;,</span><br><span class="line">			&#125;)</span><br><span class="line">			</span><br><span class="line">		&lt;/script&gt;</span><br><span class="line">	&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="12-路由导航"><a href="#12-路由导航" class="headerlink" title="12.路由导航"></a>12.路由导航</h4><ul>
+<li>编程式导航 this.$router.push(options)</li>
+<li>声明式导航 <router-link to="xx"></router-link></li>
+<li>导航守卫   router.beforeEach((to,from,next)=&gt;{      next();     })</li>
+</ul>
+<h4 id="三、axios的基本使用-gt-ajax异步请求技术"><a href="#三、axios的基本使用-gt-ajax异步请求技术" class="headerlink" title="三、axios的基本使用 =&gt; ajax异步请求技术"></a>三、axios的基本使用 =&gt; ajax异步请求技术</h4><p> axios文档 <a target="_blank" rel="noopener" href="http://www.axios-js.com/">中文网站</a></p>
+<ul>
+<li>1.特性</li>
+</ul>
+<ul>
+<li>在浏览器中创建XMLHttpRequest</li>
+<li>在nodejs创建http请求</li>
+<li>支持Promise</li>
+<li>拦截请求响应</li>
+<li>自动转换JSON数据</li>
+<li>支持XSRF防御</li>
+<li>可以取消请求</li>
+</ul>
+<ul>
+<li>2.GET方式请求<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">axios.get(url)</span><br><span class="line">  .then(function (response) &#123;</span><br><span class="line">    console.log(response);</span><br><span class="line">  &#125;)</span><br><span class="line">  .catch(function (error) &#123;</span><br><span class="line">    console.log(error);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure></li>
+<li>3.POST方式请求</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">axios.post(url,params请求数据)</span><br><span class="line">  .then(function (response) &#123;</span><br><span class="line">    console.log(response);</span><br><span class="line">  &#125;)</span><br><span class="line">  .catch(function (error) &#123;</span><br><span class="line">    console.log(error);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>4.axios的并发请求</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function getUserAccount() &#123;</span><br><span class="line">  return axios.get(&#x27;/user/12345&#x27;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function getUserPermissions() &#123;</span><br><span class="line">  return axios.get(&#x27;/user/12345/permissions&#x27;);</span><br><span class="line">&#125;</span><br><span class="line">axios.all([getUserAccount(), getUserPermissions()])</span><br><span class="line">  .then(axios.spread(function (acct, perms) &#123;</span><br><span class="line">    // 两个请求都执行完成,拿到请求结果合并</span><br><span class="line">  &#125;));</span><br><span class="line">    axios.all([r1,r2])  并发请求</span><br><span class="line">    axios.spread(r1,r2)  合并请求</span><br></pre></td></tr></table></figure></li>
+<li><ol start="5">
+<li>配置<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">axios.get(url,config)</span><br><span class="line">config的options:</span><br><span class="line">&#123;</span><br><span class="line"> //发送数据之前</span><br><span class="line"> transformRequest:[function(data)&#123;</span><br><span class="line">  //对data进行任意处理转换</span><br><span class="line">  return data;</span><br><span class="line"> &#125;],</span><br><span class="line"> //在传递给then(),catch()之前，允许修改数据，但是只能用在&#x27;PUT&#x27;,&#x27;POST&#x27;,&#x27;PATCH&#x27;几个请求</span><br><span class="line"> transformResponse:[function(data)&#123;</span><br><span class="line">  return data;</span><br><span class="line"> &#125;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<ul>
+<li><ol start="6">
+<li>axios.defaults.baseURL = ‘’ 明确知道域名时配置</li>
+</ol>
+</li>
+<li><p>7.请求拦截</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">axios.interceptor.request.use((config)=&gt;&#123;</span><br><span class="line"> //模拟cookie机制</span><br><span class="line"> var token = localStorage.getItem(&#x27;token&#x27;);</span><br><span class="line"> if(token)&#123;</span><br><span class="line">  config.headers[&#x27;token&#x27;] = token</span><br><span class="line"> &#125;</span><br><span class="line">&#125;,function(error)&#123;</span><br><span class="line"> return Promise.reject(error);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
+<li><p>8.响应拦截</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">axios.interceptor.response.use((res)=&gt;&#123;&#125;,funciton(err)&#123;</span><br><span class="line"> return Promise.reject(err);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h3 id="四、webpack-打包工具-（静态资源-模块化开发）"><a href="#四、webpack-打包工具-（静态资源-模块化开发）" class="headerlink" title="四、webpack 打包工具 （静态资源 模块化开发）"></a>四、webpack 打包工具 （静态资源 模块化开发）</h3><ul>
+<li>1.分析打包生成的build.js文件<ul>
+<li>/*0 导出一个全局变量g,在web端指向window */</li>
+<li>/* 1 导出入口文件mian.js的代码 一个vue实例对象 */</li>
+<li>/* 2 vue源码本身 */</li>
+<li>/* 3、4、5 都与node_modules/setimmediate有关  vue的dom异步更新机制*/</li>
+<li>/* 6 导出APP.JS的代码 */</li>
+</ul>
+</li>
+<li>2.配置文件 webpack.config.js(基于nodejs)<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></td><td class="code"><pre><span class="line"> module.exports = &#123;</span><br><span class="line">  //入口文件</span><br><span class="line">  entry:&#123;&#x27;main.js&#x27;&#125;,</span><br><span class="line">  //出口文件</span><br><span class="line">  output:&#123;</span><br><span class="line">   path:&#x27;&#x27;,</span><br><span class="line">   filename:&#x27;&#x27;</span><br><span class="line">  &#125;,</span><br><span class="line">  //文件监视改动 自动产出出口文件</span><br><span class="line">  watch:true,</span><br><span class="line">  //模块</span><br><span class="line">  module:[</span><br><span class="line">   //匹配规则</span><br><span class="line">   rule:[&#123;</span><br><span class="line">	   test:/reg/,</span><br><span class="line">	   use:[loader]</span><br><span class="line">   &#125;]</span><br><span class="line">  ],</span><br><span class="line">  //插件</span><br><span class="line">  plugin:[</span><br><span class="line">   </span><br><span class="line">  ]</span><br><span class="line"> &#125;</span><br><span class="line"> //for example</span><br><span class="line"> const path = require(&quot;path&quot;);</span><br><span class="line"> const  VueLoaderPlugin = require(&#x27;vue-loader/lib/plugin&#x27;);</span><br><span class="line"> const HtmlWebpackPlugin = require(&#x27;html-webpack-plugin&#x27;);</span><br><span class="line"> module.exports = &#123;</span><br><span class="line"> 	mode: &#x27;development&#x27;,</span><br><span class="line"> 	entry: &#x27;./main.js&#x27;,</span><br><span class="line"> 	output:&#123;</span><br><span class="line"> 		path:path.resolve(__dirname,&#x27;dist&#x27;),</span><br><span class="line"> 		filename:&#x27;build.js&#x27;</span><br><span class="line"> 	&#125;,</span><br><span class="line"> 	module:&#123;</span><br><span class="line"> 		//遇到后缀为.css的文件，webpack先用css-loader加载器去解析这个文件</span><br><span class="line"> 		//最后计算完的css,将会使用style-loader生成一个内容为最终解析完的css代码</span><br><span class="line"> 	  rules:[</span><br><span class="line"> 		  &#123;</span><br><span class="line"> 			test:/\.css$/i,</span><br><span class="line"> 		    use:[&#x27;style-loader&#x27;,&#x27;css-loader&#x27;],</span><br><span class="line"> 		  &#125;,</span><br><span class="line"> 		  &#123;</span><br><span class="line"> 			  test: /\.(png|jpg|svg|jpeg|gif)$/i,</span><br><span class="line"> 			  use: [</span><br><span class="line"> 				  &#123;</span><br><span class="line"> 					  loader:&#x27;url-loader&#x27;,</span><br><span class="line"> 					  options:&#123;</span><br><span class="line"> 						  limit: 10000,</span><br><span class="line"> 					  &#125;,</span><br><span class="line"> 				  &#125;,</span><br><span class="line"> 			  ],</span><br><span class="line"> 		  &#125;,</span><br><span class="line"> 		  //转换es6语法</span><br><span class="line"> 		  &#123;</span><br><span class="line"> 			  test:/\.js$/,</span><br><span class="line"> 			  exclude:/node_modules/,</span><br><span class="line"> 			  use:&#123;</span><br><span class="line"> 				  loader:&#x27;babel-loader&#x27;,</span><br><span class="line"> 				  options:&#123;</span><br><span class="line"> 				  		presets:[&#x27;@babel/preset-env&#x27;],//处理关键字</span><br><span class="line"> 						plugins:[&#x27;@babel/plugin-transform-runtime&#x27;],//处理函数</span><br><span class="line"> 				  &#125;</span><br><span class="line"> 			  &#125;,</span><br><span class="line"> 			  </span><br><span class="line"> 		  &#125;,</span><br><span class="line">  //vue单文件引入1.依赖 vue-loader   2.插件VueLoaderPlugin</span><br><span class="line"> &lt;!--入口文件的 vue实例渲染就使用render函数：（需要npm i  vue-template-compiler）</span><br><span class="line"> 使用虚拟dom来渲染节点提升性能，因为他是基于JavaScript计算。</span><br><span class="line"> 通过使用createElement(h)来创建dom节点，createElement是render的核心方法。</span><br><span class="line"> vue编译的时候会把template里面的节点解析成虚拟dom</span><br><span class="line">  new Vue(&#123;</span><br><span class="line">  	el:&#x27;#app&#x27;,</span><br><span class="line">  	render: c =&gt;c(App)</span><br><span class="line">  &#125;) --&gt;</span><br><span class="line">  &#123;</span><br><span class="line">	test:/\.vue$/,</span><br><span class="line">	use:[&#x27;vue-loader&#x27;]</span><br><span class="line">  &#125;,</span><br><span class="line"> 		  &#123;</span><br><span class="line"> 			  test:/\.less$/,</span><br><span class="line"> 			  use:[&#x27;style-loader&#x27;,&#x27;css-loader&#x27;,&#x27;less-loader&#x27;]</span><br><span class="line"> 		  &#125;</span><br><span class="line"> 		],</span><br><span class="line"> 	&#125;,</span><br><span class="line"> 	plugins:[</span><br><span class="line">//输出到哪里</span><br><span class="line"> 		new HtmlWebpackPlugin(&#123;</span><br><span class="line">	//chunks主要用于多入口文件，当你有多个入口文件的时候，它就会编译生成多个打包后的文件，chunks就能选择你要使用那些js文件</span><br><span class="line">	chunks:[&#x27;common&#x27;,&#x27;vendor&#x27;,&#x27;main&#x27;],</span><br><span class="line"> 			template:&#x27;./index.html&#x27;,</span><br><span class="line">	inject:true,</span><br><span class="line">	//inject(注入)的值：true（注到html文件body底部） body（注到body底部） head（script注到head底部）</span><br><span class="line"> 		&#125;),</span><br><span class="line">new VueLoaderPlugin(),</span><br><span class="line"></span><br><span class="line"> 	],</span><br><span class="line"> 	watch:true,</span><br><span class="line"> &#125;</span><br><span class="line"> </span><br></pre></td></tr></table></figure></li>
+<li>3.webpack-dev-server  常用配置参数    - –open 自动打卡浏览器    -  – hot 热更新 需要插件 new webpack.HotModuleReplacementPlugin()    -  – inline 自动更新    -  – port xxx 指定端口号    -  – process 显示编译进度    - 在package.json中的scripts属性内加<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;dev&quot;: &quot;webpack-dev-server --open --hot --inline --port 3000&quot;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<ul>
+<li>执行使用命令 npm run dev即可自动打开浏览器窗口显示页面</li>
+</ul>
+<ul>
+<li>4.CommonsChunkPlugin的使用 （老版本）    - CommonChunkPlugin主要是用来提取第三方库和公共模块，避免首屏加载的bundle文件<br>或者按需加载的bundle文件体积过大，从而导致加载时间过长。    - chunk分类<br> · webpack配置的入口文件是chunk，理解为 entry chunk<br> · 入口文件以及它的依赖文件通过code split出来的也是chunk 可以理解为children chunk<br> · 通过CommonsChunkPlugin创建出来的文件也是chunk，理解为Commons chunk    - webpack 多入口文件<br>1.抽离入口文件的公共模块<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">const path = require(&#x27;path&#x27;);</span><br><span class="line">const webpack = require(&quot;webpack&quot;);</span><br><span class="line">const packagejson = require(&#x27;./package.json&#x27;);</span><br><span class="line">module.exports =&#123;</span><br><span class="line">	entry:&#123;</span><br><span class="line">		&quot;main1&quot;: &quot;./main1.js&quot;,</span><br><span class="line">		&quot;main2&quot;: &quot;./main2.js&quot;,</span><br><span class="line">		&quot;vendor&quot;: Object.keys(packagejson.dependencies)//获取生产环境依赖的库</span><br><span class="line">	&#125;,</span><br><span class="line">	output:&#123;</span><br><span class="line">		path:path.resolve(__dirname,&#x27;dist&#x27;),</span><br><span class="line">		filename:&#x27;[name].js&#x27;</span><br><span class="line">	&#125;,</span><br><span class="line">	watch:true,</span><br><span class="line">	plugins:[</span><br><span class="line">		new webpack.optimize.CommonsChunkPlugin(&#123;</span><br><span class="line">			name:[&#x27;vendor&#x27;],</span><br><span class="line">			filename:&#x27;[name].js&#x27;</span><br><span class="line">		&#125;)</span><br><span class="line">	]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+打包运行成功之后如图所示：<br><img src="'./images/chunk.png'" alt="npm run dev"><br>此时我们打开vendor.js文件发现main1.js和main2.js文件依赖的vue和common.js以及webpack的运行文件都被打包在这里，这样我们达到了提取公共模块的目的。</li>
+<li><ol start="5">
+<li>上面虽然都分到一个js文件中，但是就会希望vendor.js中只有第三方库，所以我们要将自定义公共模块以及webpack运行文件单独分离出来。</li>
+</ol>
+<ul>
+<li>1.先单独抽离出webpack运行文件<br> 修改webpack配置文件<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">   plugins: [</span><br><span class="line">	new webpack.optimize.CommonsChunkPlugin(&#123;</span><br><span class="line">		name: [&#x27;vendor&#x27;,&#x27;runtime&#x27;],</span><br><span class="line">		filename: &#x27;[name].js&#x27;</span><br><span class="line">	&#125;)</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+上面代码其实等价于下面这个代码：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"> plugins: [</span><br><span class="line"> 	new webpack.optimize.CommonsChunkPlugin(&#123;</span><br><span class="line"> 		name: [&#x27;vendor&#x27;],</span><br><span class="line"> 		filename: &#x27;[name].js&#x27;</span><br><span class="line"> 	&#125;),</span><br><span class="line">new webpack.optimize.CommonsChunkPlugin(&#123;</span><br><span class="line">	name:[&#x27;runtime&#x27;],</span><br><span class="line">	filename:&#x27;[name].js&#x27;,</span><br><span class="line">	chunks:[&#x27;vendor&#x27;],//从vendor.js中抽离</span><br><span class="line">&#125;)</span><br><span class="line"> ]</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<p><img src="./images/chunk2.png" alt="抽离webpack运行时文件"><br>根据上图我们发现多了一个runtime.js文件，这个就是webpack运行时文件。</p>
+<ul>
+<li>*2.单独抽离第三方库和自定义公共模块<br>minChunks可以设置为数字、函数和Infinity，默认值是2.<br>minChunks的含义：<br>  1.数字：模块被多少个chunk公共引用才被抽取出来成为 commons chunk<br>  2.函数：接受(module,count)两个形参，返回一个布尔值，你可以在函数内进行你规定好的逻辑来决定某个模块是否<br>  提取成为commons chunk<br>  3.Infinity: 只有当入口文件个数&gt;=3才生效，用来在第三方库中分离自定义的公共模块。<br>minChunks设置为Infinity,修改webpack配置文件如下<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">plugins:[</span><br><span class="line">   new webpack.optimize.CommonsChunkPlugin(&#123;</span><br><span class="line">	   name:[&#x27;vendor&#x27;,&#x27;runtime&#x27;],</span><br><span class="line">	   filename:&#x27;[name].js&#x27;,</span><br><span class="line">	   minChunks: Infinity //用来在第三方库中分离自定义的公共模块</span><br><span class="line">   &#125;),</span><br><span class="line">	new webpack.optimize.CommonsChunkPlugin(&#123;</span><br><span class="line">		name:[&#x27;common&#x27;],</span><br><span class="line">		filename:&#x27;[name].js&#x27;,</span><br><span class="line">		chunks:[&#x27;main1&#x27;,&#x27;main2&#x27;],//从那几个入口文件中抽离公共模块</span><br><span class="line">	&#125;) </span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<img src="./images/chunk3.png" alt="抽离自定义公共模块"></li>
+</ul>
+<h3 id="从webpack-v4开始"><a href="#从webpack-v4开始" class="headerlink" title="从webpack v4开始"></a>从webpack v4开始</h3><ul>
+<li>移除了 CommonsChunkPlugin，取而代之的是 optimization.splitChunks</li>
+<li>splitChunks.chunks 类型为函数function(chunk) 或者字符串<ul>
+<li>string值有：’all’(表示优化后的chunks可以包括异步和非异步modules.),’async’(优化异步模块的复用性),’initial’,</li>
+</ul>
+</li>
+</ul>
+<h4 id="webpack异步加载原理"><a href="#webpack异步加载原理" class="headerlink" title="webpack异步加载原理"></a>webpack异步加载原理</h4><ul>
+<li>webpack.ensure的原理<br>把一些js模块给独立出一个个js文件，然后需要用到的时候，再创建一个script对象，加入到document.head对象中即可。<br>浏览器会自动发起请求这个js文件，再回调函数中定义的到这个js文件之后，需要做什么逻辑操作<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">异步加载a.js</span><br><span class="line">requie.resure([],function()&#123;</span><br><span class="line">	var a = require(&quot;./a.js&quot;);</span><br><span class="line">	alert(a.data);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      </div>
+      
+      
+      
+    </div>
+    
+
+    
+    
+    
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81React%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">一、React基础</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-react%E7%89%B9%E7%82%B9"><span class="nav-number">1.1.</span> <span class="nav-text">1.react特点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-react%E4%B8%8Evue%E5%AF%B9%E6%AF%94"><span class="nav-number">1.2.</span> <span class="nav-text">2.react与vue对比</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-react%E5%9F%BA%E7%A1%80"><span class="nav-number">1.3.</span> <span class="nav-text">3.react基础</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-JSX%E7%8E%AF%E5%A2%83-type-%E2%80%9Dtext-babel%E2%80%9D"><span class="nav-number">1.4.</span> <span class="nav-text">4.JSX环境 type&#x3D;”text&#x2F;babel”</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-React%E4%BF%AE%E6%94%B9%E8%A7%86%E5%9B%BE%E6%95%B0%E6%8D%AE"><span class="nav-number">1.5.</span> <span class="nav-text">5.React修改视图数据</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C-VUE"><span class="nav-number">2.</span> <span class="nav-text">二&#x2F;VUE</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E4%BD%BF%E7%94%A8vue"><span class="nav-number">2.1.</span> <span class="nav-text">1.使用vue</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E6%8C%87%E4%BB%A4%E7%B3%BB%E7%BB%9F"><span class="nav-number">2.2.</span> <span class="nav-text">2.指令系统</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E5%B1%80%E9%83%A8%E7%BB%84%E4%BB%B6%E5%92%8C%E5%85%A8%E5%B1%80%E7%BB%84%E4%BB%B6"><span class="nav-number">2.3.</span> <span class="nav-text">3.局部组件和全局组件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E7%88%B6%E5%AD%90%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1"><span class="nav-number">2.4.</span> <span class="nav-text">4.父子组件通信</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-%E8%BF%87%E6%BB%A4%E5%99%A8"><span class="nav-number">2.5.</span> <span class="nav-text">5.过滤器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-watch%E7%9B%91%E5%90%AC%E5%B1%9E%E6%80%A7%EF%BC%88%E7%AE%80%E5%8D%95%E6%95%B0%E6%8D%AE%EF%BC%89"><span class="nav-number">2.6.</span> <span class="nav-text">6.watch监听属性（简单数据）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-methods%E4%B8%8Ecomputed%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7%E6%AF%94%E8%BE%83"><span class="nav-number">2.7.</span> <span class="nav-text">7.methods与computed计算属性比较</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-%E4%BA%8B%E4%BB%B6%E4%BF%AE%E9%A5%B0%E7%AC%A6"><span class="nav-number">2.8.</span> <span class="nav-text">8.事件修饰符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-vue%E7%BB%84%E4%BB%B6%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-number">2.9.</span> <span class="nav-text">9.*vue组件的生命周期</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number"></span> <span class="nav-text"></span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#10-%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A15%E7%A7%8D%E6%96%B9%E5%BC%8F"><span class="nav-number">0.1.</span> <span class="nav-text">10.组件通信5种方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#11-%E8%8E%B7%E5%8F%96dom%E5%85%83%E7%B4%A0"><span class="nav-number">0.2.</span> <span class="nav-text">11.获取dom元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#12-%E8%B7%AF%E7%94%B1%E5%AF%BC%E8%88%AA"><span class="nav-number">0.3.</span> <span class="nav-text">12.路由导航</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%89%E3%80%81axios%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8-gt-ajax%E5%BC%82%E6%AD%A5%E8%AF%B7%E6%B1%82%E6%8A%80%E6%9C%AF"><span class="nav-number">0.4.</span> <span class="nav-text">三、axios的基本使用 &#x3D;&gt; ajax异步请求技术</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E3%80%81webpack-%E6%89%93%E5%8C%85%E5%B7%A5%E5%85%B7-%EF%BC%88%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90-%E6%A8%A1%E5%9D%97%E5%8C%96%E5%BC%80%E5%8F%91%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">四、webpack 打包工具 （静态资源 模块化开发）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8Ewebpack-v4%E5%BC%80%E5%A7%8B"><span class="nav-number">2.</span> <span class="nav-text">从webpack v4开始</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#webpack%E5%BC%82%E6%AD%A5%E5%8A%A0%E8%BD%BD%E5%8E%9F%E7%90%86"><span class="nav-number">2.1.</span> <span class="nav-text">webpack异步加载原理</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="李泼泼"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">李泼泼</p>
+  <div class="site-description" itemprop="description">向着目标奔跑！！！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">1</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ly721" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ly721" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1037442605@qq.com" title="E-Mail → mailto:1037442605@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">李泼泼</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+  
+  <span class="site-uv">
+   <i class="fa fa-user"></i> 本站访问数
+   <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+   人
+   </span>
+   
+   
+   
+   <span class="site-pv">
+    <i class="fa fa-eye"></i> 本站总访问量
+    <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    次
+    </span>
+    
+   </div>
+
+
+<span>
+  <span class="post-meta-divider">|</span>
+  本站已运行
+  <span id="showDays"></span>
+</span>
+<script>
+  var seconds = 1000;
+  var minutes = seconds * 60;
+  var hours = minutes * 60;
+  var days = hours * 24;
+  var years = days * 365;
+  var birthDay = Date.UTC(2019,01,20,14,00,00); // 这里设置建站时间
+  setInterval(function() {
+    var today = new Date();
+    var todayYear = today.getFullYear();
+    var todayMonth = today.getMonth()+1;
+    var todayDate = today.getDate();
+    var todayHour = today.getHours();
+    var todayMinute = today.getMinutes();
+    var todaySecond = today.getSeconds();
+    var now = Date.UTC(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond);
+    var diff = now - birthDay;
+    var diffYears = Math.floor(diff/years);
+    var diffDays = Math.floor((diff/days)-diffYears*365);
+    var diffHours = Math.floor((diff-(diffYears*365+diffDays)*days)/hours);
+    var diffMinutes = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours)/minutes);
+    var diffSeconds = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours-diffMinutes*minutes)/seconds);
+      document.getElementById('showDays').innerHTML=""+diffYears+"年"+diffDays+"天"+diffHours+"小时"+diffMinutes+"分钟"+diffSeconds+"秒";
+  }, 1000);
+</script>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":175,"height":350},"mobile":{"show":true},"log":false});</script></body>
+</html>

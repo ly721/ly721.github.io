@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title></title>
+    <url>/2021/06/07/problem/</url>
+    <content><![CDATA[<h3 id="项目遇到的问题"><a href="#项目遇到的问题" class="headerlink" title="项目遇到的问题"></a>项目遇到的问题</h3><pre><code>1.在 build 项目时,报错 .plugins[0] may only be a two-tuple or three-tuple 检查配置文件babel.config.js发现问题
+</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">	plugins: [</span><br><span class="line">  [</span><br><span class="line">    &#x27;component&#x27;,</span><br><span class="line">    &#123;</span><br><span class="line">      libraryName: &#x27;element-ui&#x27;,</span><br><span class="line">      styleLibraryName: &#x27;theme-chalk&#x27;</span><br><span class="line">    &#125;,</span><br><span class="line">	 ...prodPlugins,</span><br><span class="line">	&#x27;@babel/plugin-syntax-dynamic-import&#x27;</span><br><span class="line">  ]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<pre><code>应该这样配置
+</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">   plugins: [</span><br><span class="line">  [</span><br><span class="line">    &#x27;component&#x27;,</span><br><span class="line">    &#123;</span><br><span class="line">      libraryName: &#x27;element-ui&#x27;,</span><br><span class="line">      styleLibraryName: &#x27;theme-chalk&#x27;</span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">	 ...prodPlugins,</span><br><span class="line">	&#x27;@babel/plugin-syntax-dynamic-import&#x27;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>注意：在使用cdn加载elementui时，public/index.html一定要先加载vue.js再加载element-ui.js要不然组件就会无效！！</li>
+<li>error<br><img src="../images/mainerr.png" alt="error"><br>遇到图上错误是因为next-util的package.json中的入口文件index.js丢失，我们可以点击<a href="https://github.com/theme-next/next-util/">这里</a><br>找到对应的index.js下载到我们node_modules/next-util文件夹中即可。</li>
+</ol>
+<h3 id="更新blog到github上出现如下错误"><a href="#更新blog到github上出现如下错误" class="headerlink" title="更新blog到github上出现如下错误"></a>更新blog到github上出现如下错误</h3><pre><code>ERROR: fatal: unable to access &#39;https://github.com/ly721/ly721.github.io.git/&#39;: OpenSSL
+SSL_read: Connection was reset, errno 10054
+GIT BASH 指令：env|grep -i proxy 两次
+</code></pre>
+]]></content>
+  </entry>
+</search>
