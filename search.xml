@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title></title>
-    <url>/2021/06/07/gitconf/</url>
+    <title>hexo &amp; git</title>
+    <url>/2020/08/08/gitconf/</url>
     <content><![CDATA[<h2 id="git-guide"><a href="#git-guide" class="headerlink" title="git guide"></a>git guide</h2><ol>
 <li>npm i -g hexo</li>
 <li>在一个空目录 hexo init 初始化博客系统</li>
@@ -18,7 +18,7 @@
 ]]></content>
   </entry>
   <entry>
-    <title>about</title>
+    <title>计网</title>
     <url>/2020/08/08/http/</url>
     <content><![CDATA[<h3 id="计算机网络基础"><a href="#计算机网络基础" class="headerlink" title="计算机网络基础"></a>计算机网络基础</h3><p>一、书籍推荐：《图解HTTPS》《HTTP权威指南》<br>二、HTTP缓存<br>   HTTP缓存分为强缓存和协商缓存：<br>   先通过Cache-control验证强缓存是否可用，可用就直接读取缓存，否则进入协商缓存阶段，发起http请求，服务器通过<br>   请求头是否有If-Modified-Since 和 If-None-Match 条件请求字段检查资源是否更新：<br>   如果资源更新，那么就返回资源和200状态码；<br>   如果资源未更新，那么告诉浏览器直接使用缓存获取资源。<br>三、http常用状态码以及使用场景<br>  1xx: 表示当前是协议的中间态，还需要后续请求<br>  2xx:表示请求成功<br>  3xx:表示重定向状态<br>  4XX:表示请求报文出错<br>  5xx: 表示服务器错误</p>
 <p>  常用状态码：<br>  101: 切换请求协议，从http切换到websocket<br>  200: 请求成功<br>  301 永久重定向：会缓存<br>  302 临时重定向：不会缓存<br>  304 协商缓存命中<br>  403 服务器禁止访问<br>  404 资源未找到<br>  400 请求错误<br>  500 服务端错误</p>
@@ -35,14 +35,9 @@
 ]]></content>
   </entry>
   <entry>
-    <title>分类</title>
-    <url>/2020/08/08/index/</url>
-    <content><![CDATA[<h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3>]]></content>
-  </entry>
-  <entry>
-    <title></title>
-    <url>/2021/06/07/problem/</url>
-    <content><![CDATA[<h3 id="项目遇到的问题"><a href="#项目遇到的问题" class="headerlink" title="项目遇到的问题"></a>项目遇到的问题</h3><pre><code>1.在 build 项目时,报错 .plugins[0] may only be a two-tuple or three-tuple 检查配置文件babel.config.js发现问题
+    <title>项目遇到的问题</title>
+    <url>/2020/08/08/problem/</url>
+    <content><![CDATA[<h3 id="一问题"><a href="#一问题" class="headerlink" title="一问题"></a>一问题</h3><pre><code>1.在 build 项目时,报错 .plugins[0] may only be a two-tuple or three-tuple 检查配置文件babel.config.js发现问题
 </code></pre>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">	plugins: [</span><br><span class="line">  [</span><br><span class="line">    &#x27;component&#x27;,</span><br><span class="line">    &#123;</span><br><span class="line">      libraryName: &#x27;element-ui&#x27;,</span><br><span class="line">      styleLibraryName: &#x27;theme-chalk&#x27;</span><br><span class="line">    &#125;,</span><br><span class="line">	 ...prodPlugins,</span><br><span class="line">	&#x27;@babel/plugin-syntax-dynamic-import&#x27;</span><br><span class="line">  ]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
 <pre><code>应该这样配置
@@ -59,8 +54,8 @@ GIT BASH 指令：env|grep -i proxy 两次
 ]]></content>
   </entry>
   <entry>
-    <title></title>
-    <url>/2021/06/07/frame/</url>
+    <title>React &amp; Vue</title>
+    <url>/2020/08/08/frame/</url>
     <content><![CDATA[<h3 id="一、React基础"><a href="#一、React基础" class="headerlink" title="一、React基础"></a>一、React基础</h3><ul>
 <li>react 用于构建用户界面的渐进式JAVASCRIPT库，第一个真正意义上组件化思想    - 本身只处理UI（数据驱动视图）    - 不处理AJAX    - 不关系路由<h4 id="1-react特点"><a href="#1-react特点" class="headerlink" title="1.react特点"></a>1.react特点</h4></li>
 <li>组件化</li>
