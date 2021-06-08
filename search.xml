@@ -1,23 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>hexo &amp; git</title>
-    <url>/2020/08/08/gitconf/</url>
-    <content><![CDATA[<h2 id="git-guide"><a href="#git-guide" class="headerlink" title="git guide"></a>git guide</h2><ol>
-<li>npm i -g hexo</li>
-<li>在一个空目录 hexo init 初始化博客系统</li>
-<li>hexodir\source_posts 中 md 文档就是博客文档</li>
-<li>撰写博客 新建 .md文件</li>
-<li>把 md文件 转html  hexo g</li>
-<li>cmd 中 hexo s 后在浏览器 localhost:4000 </li>
-<li>与 github 关联</li>
-<li>npm i hexo-deployer-git –save 插件安装</li>
-<li>配置文件 根目录下 _config.yml</li>
-<li>更新blog使用命令 :1.hexo clean 2. hexo g -d</li>
-</ol>
-]]></content>
-  </entry>
-  <entry>
     <title>计网</title>
     <url>/2020/08/08/http/</url>
     <content><![CDATA[<h3 id="计算机网络基础"><a href="#计算机网络基础" class="headerlink" title="计算机网络基础"></a>计算机网络基础</h3><p>一、书籍推荐：《图解HTTPS》《HTTP权威指南》<br>二、HTTP缓存<br>   HTTP缓存分为强缓存和协商缓存：<br>   先通过Cache-control验证强缓存是否可用，可用就直接读取缓存，否则进入协商缓存阶段，发起http请求，服务器通过<br>   请求头是否有If-Modified-Since 和 If-None-Match 条件请求字段检查资源是否更新：<br>   如果资源更新，那么就返回资源和200状态码；<br>   如果资源未更新，那么告诉浏览器直接使用缓存获取资源。<br>三、http常用状态码以及使用场景<br>  1xx: 表示当前是协议的中间态，还需要后续请求<br>  2xx:表示请求成功<br>  3xx:表示重定向状态<br>  4XX:表示请求报文出错<br>  5xx: 表示服务器错误</p>
@@ -32,6 +15,55 @@
 <p>九、TCP滑动窗口（分为发送窗口和接收窗口）</p>
 <pre><code>在TCP连接中，对于发送端和接收端，TCP需要把发送的数据放到发送缓存区，将接收的数据放到接收缓存区。经常会发生发送端发送过多而接收端无法接收的情况，所以需要流量控制，也就是根据接收缓存区的大小来控制发送端的发送。如果接收缓存区已经满了，此时发送端就不需要继续发送数据了。
 </code></pre>
+]]></content>
+  </entry>
+  <entry>
+    <title>hexo &amp; next主题</title>
+    <url>/2020/08/08/gitconf/</url>
+    <content><![CDATA[<h2 id="git-guide"><a href="#git-guide" class="headerlink" title="git guide"></a>git guide</h2><ol>
+<li>npm i -g hexo 安装全局hexo</li>
+<li>在一个空目录 hexo init 初始化博客系统</li>
+<li>hexodir\source_posts 下的 .md 文档就是博客文档</li>
+<li>撰写博客 新建 .md文件</li>
+<li>把 md文件 转html  hexo g</li>
+<li>cmd 中 hexo s –debug  后在浏览器 localhost:4000 查看格式</li>
+<li>与 github 关联</li>
+<li>npm i hexo-deployer-git –save 插件安装</li>
+<li>配置文件 根目录下 _config.yml</li>
+<li>更新blog使用命令 :1.hexo clean 2. hexo g -d</li>
+</ol>
+<h2 id="博客-使用-next-主题"><a href="#博客-使用-next-主题" class="headerlink" title="博客 使用 next 主题"></a>博客 使用 next 主题</h2><ul>
+<li>下载next主题文件夹<ul>
+<li>安装next主题到博客目录主题文件夹下<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$  git clone https://github.com/theme-next/hexo-theme-next themes/next</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>使用主题，更改站点配置文件 theme 字段值为 next</li>
+</ul>
+<ul>
+<li>设置站点统计—-使用不蒜子统计</li>
+</ul>
+<ul>
+<li>1.主题配置文件加入如下字段<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">busuanzi_count:</span><br><span class="line"> # count values only if the other configs are false</span><br><span class="line"> enable: true</span><br><span class="line"> # custom uv span for the whole site</span><br><span class="line"> site_uv: true</span><br><span class="line"> site_uv_header: &lt;i class=&quot;fa fa-user&quot;&gt;&lt;/i&gt; 本站访问数</span><br><span class="line"> site_uv_footer: 人</span><br><span class="line"> # custom pv span for the whole site</span><br><span class="line"> site_pv: true</span><br><span class="line"> site_pv_header: &lt;i class=&quot;fa fa-eye&quot;&gt;&lt;/i&gt; 本站总访问量</span><br><span class="line"> site_pv_footer: 次</span><br><span class="line"> # custom pv span for one page only</span><br><span class="line"> page_pv: false</span><br><span class="line"> page_pv_header: &lt;i class=&quot;fa fa-file-o&quot;&gt;&lt;/i&gt; 本文总阅读量</span><br><span class="line"> page_pv_footer: 次</span><br></pre></td></tr></table></figure></li>
+<li>2.在themes/next/layout/_partials/footer.swig 文件加入</li>
+</ul>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;% if theme.busuanzi_count.enable %&#125;</span><br><span class="line">&lt;div class=&quot;busuanzi-count&quot;&gt;</span><br><span class="line">  &lt;script async src=&quot;https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js&quot;&gt;</span><br><span class="line">  &lt;/script&gt;</span><br><span class="line">  &#123;% if theme.busuanzi_count.site_uv %&#125;</span><br><span class="line">  &lt;span class=&quot;site-uv&quot;&gt;</span><br><span class="line">   &#123;&#123; theme.busuanzi_count.site_uv_header &#125;&#125;</span><br><span class="line">   &lt;span class=&quot;busuanzi-value&quot; id=&quot;busuanzi_value_site_uv&quot;&gt;&lt;/span&gt;</span><br><span class="line">   &#123;&#123; theme.busuanzi_count.site_uv_footer &#125;&#125;</span><br><span class="line">   &lt;/span&gt;</span><br><span class="line">   &#123;% endif %&#125;</span><br><span class="line">   </span><br><span class="line">   &#123;% if theme.busuanzi_count.site_pv %&#125;</span><br><span class="line">   &lt;span class=&quot;site-pv&quot;&gt;</span><br><span class="line">    &#123;&#123; theme.busuanzi_count.site_pv_header &#125;&#125;</span><br><span class="line">    &lt;span class=&quot;busuanzi-value&quot; id=&quot;busuanzi_value_site_pv&quot;&gt;&lt;/span&gt;</span><br><span class="line">    &#123;&#123; theme.busuanzi_count.site_pv_footer &#125;&#125;</span><br><span class="line">    &lt;/span&gt;</span><br><span class="line">    &#123;% endif %&#125;</span><br><span class="line">   &lt;/div&gt;</span><br><span class="line">&#123;% endif %&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>3.加入本站运行时间,在上面文件最后加入如下代码即可<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;span&gt;</span><br><span class="line">  &lt;span class=&quot;post-meta-divider&quot;&gt;|&lt;/span&gt;</span><br><span class="line">  本站已运行</span><br><span class="line">  &lt;span id=&quot;showDays&quot;&gt;&lt;/span&gt;</span><br><span class="line">&lt;/span&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  var seconds = 1000;</span><br><span class="line">  var minutes = seconds * 60;</span><br><span class="line">  var hours = minutes * 60;</span><br><span class="line">  var days = hours * 24;</span><br><span class="line">  var years = days * 365;</span><br><span class="line">  var birthDay = Date.UTC(2019,01,20,14,00,00); // 这里设置建站时间</span><br><span class="line">  setInterval(function() &#123;</span><br><span class="line">    var today = new Date();</span><br><span class="line">    var todayYear = today.getFullYear();</span><br><span class="line">    var todayMonth = today.getMonth()+1;</span><br><span class="line">    var todayDate = today.getDate();</span><br><span class="line">    var todayHour = today.getHours();</span><br><span class="line">    var todayMinute = today.getMinutes();</span><br><span class="line">    var todaySecond = today.getSeconds();</span><br><span class="line">    var now = Date.UTC(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond);</span><br><span class="line">    var diff = now - birthDay;</span><br><span class="line">    var diffYears = Math.floor(diff/years);</span><br><span class="line">    var diffDays = Math.floor((diff/days)-diffYears*365);</span><br><span class="line">    var diffHours = Math.floor((diff-(diffYears*365+diffDays)*days)/hours);</span><br><span class="line">    var diffMinutes = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours)/minutes);</span><br><span class="line">    var diffSeconds = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours-diffMinutes*minutes)/seconds);</span><br><span class="line">      document.getElementById(&#x27;showDays&#x27;).innerHTML=&quot;&quot;+diffYears+&quot;年&quot;+diffDays+&quot;天&quot;+diffHours+&quot;小时&quot;+diffMinutes+&quot;分钟&quot;+diffSeconds+&quot;秒&quot;;</span><br><span class="line">  &#125;, 1000);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<ul>
+<li>设置头像、背景图片等</li>
+</ul>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 主题配置文件</span><br><span class="line">avatar:</span><br><span class="line">  # Replace the default image and set the url here.</span><br><span class="line">  # 将头像放到 themes/next/source/images目录</span><br><span class="line">  url: /images/avatar.jpg</span><br><span class="line">  </span><br><span class="line"># 找到themes/next/source/css/main.styl样式文件，设如下自定义样式即可 </span><br><span class="line">// 自定义样式</span><br><span class="line">body &#123;</span><br><span class="line">  background: url(../images/bg.jpg);</span><br><span class="line">	background-repeat: no-repeat;</span><br><span class="line">	background-position: 50% 50%;</span><br><span class="line">	background-attachment: fixed;</span><br><span class="line">  color: var(--text-color);</span><br><span class="line">  font-family: &#x27;Lato&#x27;, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif;</span><br><span class="line">  font-size: 1em;</span><br><span class="line">  line-height: 2;</span><br><span class="line">&#125;</span><br><span class="line">  </span><br></pre></td></tr></table></figure>
+<ul>
+<li>设置看板娘</li>
+</ul>
+<ul>
+<li>1.安装插件<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install --save hexo-helper-live2d</span><br></pre></td></tr></table></figure></li>
+<li>2.选择你想要的看板娘模型，安装，在这里我使用的是koharu<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install live2d-widget-model-koharu</span><br></pre></td></tr></table></figure></li>
+<li>3.在站点配置文件加入如下字段<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">live2d:</span><br><span class="line">  enable: true</span><br><span class="line">  scriptFrom: local</span><br><span class="line">  pluginRootPath: live2dw/</span><br><span class="line">  pluginJsPath: lib/</span><br><span class="line">  pluginModelPath: assets/</span><br><span class="line">  tagMode: false</span><br><span class="line">  debug: false</span><br><span class="line">  model:</span><br><span class="line">    use: live2d-widget-model-koharu</span><br><span class="line">  display:</span><br><span class="line">    position: left</span><br><span class="line">    width: 175</span><br><span class="line">    height: 350</span><br><span class="line">  mobile:</span><br><span class="line">    show: true</span><br></pre></td></tr></table></figure></li>
+</ul>
 ]]></content>
   </entry>
   <entry>
