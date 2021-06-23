@@ -130,7 +130,7 @@
   </li>
         <li class="menu-item menu-item-about">
 
-    <a href="/abouts/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
 
   </li>
         <li class="menu-item menu-item-tags">
@@ -851,7 +851,7 @@ GIT BASH 指令：env|grep -i proxy 两次
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-19 22:44:07" itemprop="dateModified" datetime="2021-06-19T22:44:07+08:00">2021-06-19</time>
+                <time title="修改时间：2021-06-21 10:40:23" itemprop="dateModified" datetime="2021-06-21T10:40:23+08:00">2021-06-21</time>
               </span>
 
           
@@ -1213,7 +1213,7 @@ GIT BASH 指令：env|grep -i proxy 两次
 <li>4、父子组件传递数据</li>
 </ul>
 <p>​      a、父组件页面向子组件传递数据通过标签<strong>属性</strong>的值方式传递</p>
-<p>​            i、在子组件上进行接收;</p>
+<p>​            i、在C:\Users\李悦\Desktop\vue-all-project\黑马商城案例\pages\goods_lists\goods_lists.wxml C:\Users\李悦\Desktop\vue-all-project\黑马商城案例\pages\goods_lists\goods_lists.js C:\Users\李悦\Desktop\vue-all-project\黑马商城案例\components\Tabs\Tabs.wxml C:\Users\李悦\Desktop\vue-all-project\黑马商城案例\components\Tabs\Tabs.js子组件上进行接收;</p>
 <p>​            ii、把这个数据当成是data中的数据直接使用即可;</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">父组件.wxml</span><br><span class="line">&lt;componentName pName=&quot;&#123;&#123;pArr&#125;&#125;&quot; bindItemChange=&quot;handleItemChange&quot;&gt;&lt;/componentName&gt;</span><br></pre></td></tr></table></figure>
 
@@ -1468,7 +1468,67 @@ GIT BASH 指令：env|grep -i proxy 两次
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Cannot read property &#x27;mark&#x27; of undefined</span><br><span class="line">TypeError: Cannot read property ‘mark’ of undefined</span><br></pre></td></tr></table></figure>
 
 <p>微信小程序开发工具 开发项目配置中勾选  增强编译  即可。</p>
-<h4 id="5-7-商品列表页面"><a href="#5-7-商品列表页面" class="headerlink" title="5.7 商品列表页面"></a>5.7 商品列表页面</h4>
+<h4 id="5-7-商品列表页面"><a href="#5-7-商品列表页面" class="headerlink" title="5.7 商品列表页面"></a>5.7 商品列表页面</h4><p>弹性布局 display:flex;</p>
+<table>
+<thead>
+<tr>
+<th>容器属性</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>flex-direction</td>
+<td>row(默认值)：主轴为水平方向，起点在左端 ;row-reverse;column：主轴为垂直方向;column-reverse</td>
+</tr>
+<tr>
+<td>flex-wrap</td>
+<td>nowrap ：不换行；wrap：换行，第一行在上方；wrap-reverse：换行，第一行在下方</td>
+</tr>
+<tr>
+<td>flex-flow</td>
+<td>前两个属性缩写，默认值为row nowrap</td>
+</tr>
+<tr>
+<td>justify-content</td>
+<td>flex-start(默认值)：左对齐；fex-end：右对齐；center；space-between：两端对齐；space-around</td>
+</tr>
+<tr>
+<td>align-items</td>
+<td>flex-start；flex-end；center；baseline；stretch</td>
+</tr>
+<tr>
+<td>align-content</td>
+<td>flex-start；flex-end；center；space-between；space-around；stretch(默认值)</td>
+</tr>
+</tbody></table>
+<p>商品描述超出两行就转换成省略号显示的样式设置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">view &#123;</span><br><span class="line"> display: -webkit-box;</span><br><span class="line"> overflow: hidden;</span><br><span class="line"> -webkit-box-orient: vertical;</span><br><span class="line"> -webkit-line-clamp: 2;//两行</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>补充：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">web中单行文本超出部分显示省略号</span><br><span class="line">div&#123;</span><br><span class="line">  overflow:hidden;</span><br><span class="line">  text-overflow: ellipsis;</span><br><span class="line">  white-space: nowrap;</span><br><span class="line">&#125;</span><br><span class="line">多行文本超出部分省略号</span><br><span class="line">div&#123;</span><br><span class="line">  white-space: normal;</span><br><span class="line">  overflow: hidden;</span><br><span class="line">  text-overflow: ellipsis;</span><br><span class="line">  display: -webkit-box;</span><br><span class="line">  -webkit-box-orient: vertical;</span><br><span class="line">  -webkit-line-clamp: 2;</span><br><span class="line">  word-break: break-all;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>word-break值</p>
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>normal</td>
+<td>使用浏览器默认换行规则</td>
+</tr>
+<tr>
+<td>break-all</td>
+<td>允许在单词内换行</td>
+</tr>
+<tr>
+<td>keep-all</td>
+<td>只能在半角空格或连字符出换行</td>
+</tr>
+</tbody></table>
+
       
     </div>
 
