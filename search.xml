@@ -36,7 +36,7 @@
 SSL_read: Connection was reset, errno 10054
 GIT BASH 指令：env|grep -i proxy 两次
 </code></pre>
-<h4 id="1-2-git指令快速查询"><a href="#1-2-git指令快速查询" class="headerlink" title="1.2 git指令快速查询"></a>1.2 git指令快速查询</h4><p>!(Git常用指令)[<a href="https://ftp.bmp.ovh/imgs/2021/06/b497e51ad83299f6.jpg]">https://ftp.bmp.ovh/imgs/2021/06/b497e51ad83299f6.jpg]</a></p>
+<h4 id="1-2-git指令快速查询"><a href="#1-2-git指令快速查询" class="headerlink" title="1.2 git指令快速查询"></a>1.2 git指令快速查询</h4><p><img src="C:\Users\李悦\Desktop\vue-all-project\git-next-blog\source\images\Git常用命令.jpg" alt="Git常用指令"></p>
 <h3 id="2-博客-使用-next-主题"><a href="#2-博客-使用-next-主题" class="headerlink" title="2. 博客 使用 next 主题"></a>2. 博客 使用 next 主题</h3><ul>
 <li>下载next主题文件夹<ul>
 <li>安装next主题到博客目录主题文件夹下<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$  git clone https://github.com/theme-next/hexo-theme-next themes/next</span><br></pre></td></tr></table></figure></li>
