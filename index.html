@@ -217,6 +217,82 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/08/08/http/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="李泼泼">
+      <meta itemprop="description" content="向着目标奔跑！！！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lucky Girl">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/08/http/" class="post-title-link" itemprop="url">计网</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-08-08 20:06:08" itemprop="dateCreated datePublished" datetime="2020-08-08T20:06:08+08:00">2020-08-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-06-07 18:21:31" itemprop="dateModified" datetime="2021-06-07T18:21:31+08:00">2021-06-07</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="计算机网络基础"><a href="#计算机网络基础" class="headerlink" title="计算机网络基础"></a>计算机网络基础</h3><p>一、书籍推荐：《图解HTTPS》《HTTP权威指南》<br>二、HTTP缓存<br>   HTTP缓存分为强缓存和协商缓存：<br>   先通过Cache-control验证强缓存是否可用，可用就直接读取缓存，否则进入协商缓存阶段，发起http请求，服务器通过<br>   请求头是否有If-Modified-Since 和 If-None-Match 条件请求字段检查资源是否更新：<br>   如果资源更新，那么就返回资源和200状态码；<br>   如果资源未更新，那么告诉浏览器直接使用缓存获取资源。<br>三、http常用状态码以及使用场景<br>  1xx: 表示当前是协议的中间态，还需要后续请求<br>  2xx:表示请求成功<br>  3xx:表示重定向状态<br>  4XX:表示请求报文出错<br>  5xx: 表示服务器错误</p>
+<p>  常用状态码：<br>  101: 切换请求协议，从http切换到websocket<br>  200: 请求成功<br>  301 永久重定向：会缓存<br>  302 临时重定向：不会缓存<br>  304 协商缓存命中<br>  403 服务器禁止访问<br>  404 资源未找到<br>  400 请求错误<br>  500 服务端错误</p>
+<p>  遇到302状态码的某些场景：<br>  302表示临时重定向，这个资源只是暂时不能被访问，但是之后过一段时间还是可以继续访问，一般是访问某个<br>  网站的资源需要权限时，会需要用户登录，跳转到登录页面之后还可以继续访问。</p>
+<p>  301是永久重定向，跳转到一个新网站，但是301代表这个被访问的地质资源被永久移除了，以后都不会访问这个地址，<br>  搜索引擎抓取的时候也会使用新的地址替换这个旧地址。可以在响应的location首部去获取到返回的地址。<br>四、 HTTP常用请求方式<br> http/1.1 规定的请求方式：<br> 1.GET: 获取数据，参数在url上<br> 2.POST: 提交数据，比如登录页面登录用户信息时使用<br> 3.PUT:修改数据<br> 4.HEAD: 获取资源的元信息<br> 5.DELETE: 删除数据<br> 6.CONNECT: 建立连接通道，用在代理服务器<br> 7.OPTIONS: 列出可对资源实行的请求方法，常用于跨域<br> 8.TRACE: 追踪请求-响应的传输路径</p>
+<p>五、 网络分层<br> OSI体系结构： 7.应用层 6.表示层 5.会话层 4.传输层 3.网络层 2.链路层 1.物理层<br> TCP/IP结构： 4.应用层(FTP) 3. 运输层(TCP,UDP) 2.网络层（IP、ICMP、IGMP) 1.网络接口层<br> 五层体系结构： 5.应用层 4.运输层 3.网络层 2.链路层 1.物理层</p>
+<p>六、 HTTPS？<br>    HTTPS是在HTTP和TCP之间建立的一个安全层，HTTP与TCP通信时必须经过一个安全层，对数据进行加密，然后将加密后的数据包传给TCP，<br>    相应的TCP必须将数据包解密，才能传给上面的HTTP.<br>    浏览器传输一个client_random和加密方法列表，服务器收到后给浏览器传一个server_random、加密方法列表和数字证书（包含公钥），<br>    然后浏览器对数字证书进行验证，如果验证通过，则生成一个pre_random,然后用公钥加密传给服务器，服务器用client_random、server_random和pre_random,<br>    使用公钥加密生成secret，之后的传输就使用secret作为密钥来进行数据的加解密。</p>
+<p>七、三次握手<br>   <img src="../images/ws.png" alt="三次握手图解"><br>     第一次握手：一开始都处于CLOSED状态，客户端主动发起连接请求，发送syn包（seq=j）到服务器，并进入SYN_SENT状态（syn:同步序列编号）<br>     第二次握手：服务器收到syn包，确认客户端的ACK(ack=j+1),同时发送一个SYN包（seq=k），即SYN+ACK包，而后进入SYN_RECV状态；<br>     第三次握手：客户端收到服务器的ACK+SYN包，向服务器发送确认包ACK（ack=k+1）,进入ESTABLISHED（TCP连接成功）状态，完成三次握手，客户端与服务端开始传输数据。<br>     <code>SYN需要对端确认，所以ACK的序列化要加一，凡是需要对端确认的，要消耗TCP报文的序列化</code><br>八、四次挥手<br>  <img src="../images/hs.png" alt="四次挥手图解"><br>   一开始都处于ESTABLISHED状态，客户端发送报文FIN=1和seq=x,进入FIN_WAIT_1状态；服务端收到报文后，发送确认报文ack=x+1，seq=y,ACK=1，然后进入CLOSE_WAIT状态；<br>   客户端收到服务端的确认报文之后进入FIN_WAIT_2状态；而后服务端再次发送seq=z，FIN=1，ack=x+1,进入LAST-ACK状态,等待客户端确认；客户端收到后发出确认ACK=1，ack=z+1,seq=x+1,进入TIME_WAIT状态，经过2MSL(最长报文段寿命)事件后，才进入CLOSED状态，<br>   然后发送ACK给服务端，服务端收到后进入CLOSED状态。</p>
+<p>   为什么要等待2MSL？<br>    2MSL是两倍的MSL(Maximum Segment Lifetime),MSL是一个片段在网络中最大的存活时间，2MSL就是一个发送和一个回复所要的最大时间，如果直到2MSL客户端都没收到FIN，就推断ACK已被成功接收，结束TCP连接。</p>
+<p>   在交互过程中如果数据传送完了，如果不想断开两端连接可以在HTTP的响应体的Connection字段指定为keep-alive</p>
+<p>九、TCP滑动窗口（分为发送窗口和接收窗口）</p>
+<pre><code>在TCP连接中，对于发送端和接收端，TCP需要把发送的数据放到发送缓存区，将接收的数据放到接收缓存区。经常会发生发送端发送过多而接收端无法接收的情况，所以需要流量控制，也就是根据接收缓存区的大小来控制发送端的发送。如果接收缓存区已经满了，此时发送端就不需要继续发送数据了。
+</code></pre>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2020/08/08/problem/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -295,82 +371,6 @@ GIT BASH 指令：env|grep -i proxy 两次
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/08/08/http/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="李泼泼">
-      <meta itemprop="description" content="向着目标奔跑！！！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lucky Girl">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/08/http/" class="post-title-link" itemprop="url">计网</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-08-08 20:06:08" itemprop="dateCreated datePublished" datetime="2020-08-08T20:06:08+08:00">2020-08-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-07 18:21:31" itemprop="dateModified" datetime="2021-06-07T18:21:31+08:00">2021-06-07</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="计算机网络基础"><a href="#计算机网络基础" class="headerlink" title="计算机网络基础"></a>计算机网络基础</h3><p>一、书籍推荐：《图解HTTPS》《HTTP权威指南》<br>二、HTTP缓存<br>   HTTP缓存分为强缓存和协商缓存：<br>   先通过Cache-control验证强缓存是否可用，可用就直接读取缓存，否则进入协商缓存阶段，发起http请求，服务器通过<br>   请求头是否有If-Modified-Since 和 If-None-Match 条件请求字段检查资源是否更新：<br>   如果资源更新，那么就返回资源和200状态码；<br>   如果资源未更新，那么告诉浏览器直接使用缓存获取资源。<br>三、http常用状态码以及使用场景<br>  1xx: 表示当前是协议的中间态，还需要后续请求<br>  2xx:表示请求成功<br>  3xx:表示重定向状态<br>  4XX:表示请求报文出错<br>  5xx: 表示服务器错误</p>
-<p>  常用状态码：<br>  101: 切换请求协议，从http切换到websocket<br>  200: 请求成功<br>  301 永久重定向：会缓存<br>  302 临时重定向：不会缓存<br>  304 协商缓存命中<br>  403 服务器禁止访问<br>  404 资源未找到<br>  400 请求错误<br>  500 服务端错误</p>
-<p>  遇到302状态码的某些场景：<br>  302表示临时重定向，这个资源只是暂时不能被访问，但是之后过一段时间还是可以继续访问，一般是访问某个<br>  网站的资源需要权限时，会需要用户登录，跳转到登录页面之后还可以继续访问。</p>
-<p>  301是永久重定向，跳转到一个新网站，但是301代表这个被访问的地质资源被永久移除了，以后都不会访问这个地址，<br>  搜索引擎抓取的时候也会使用新的地址替换这个旧地址。可以在响应的location首部去获取到返回的地址。<br>四、 HTTP常用请求方式<br> http/1.1 规定的请求方式：<br> 1.GET: 获取数据，参数在url上<br> 2.POST: 提交数据，比如登录页面登录用户信息时使用<br> 3.PUT:修改数据<br> 4.HEAD: 获取资源的元信息<br> 5.DELETE: 删除数据<br> 6.CONNECT: 建立连接通道，用在代理服务器<br> 7.OPTIONS: 列出可对资源实行的请求方法，常用于跨域<br> 8.TRACE: 追踪请求-响应的传输路径</p>
-<p>五、 网络分层<br> OSI体系结构： 7.应用层 6.表示层 5.会话层 4.传输层 3.网络层 2.链路层 1.物理层<br> TCP/IP结构： 4.应用层(FTP) 3. 运输层(TCP,UDP) 2.网络层（IP、ICMP、IGMP) 1.网络接口层<br> 五层体系结构： 5.应用层 4.运输层 3.网络层 2.链路层 1.物理层</p>
-<p>六、 HTTPS？<br>    HTTPS是在HTTP和TCP之间建立的一个安全层，HTTP与TCP通信时必须经过一个安全层，对数据进行加密，然后将加密后的数据包传给TCP，<br>    相应的TCP必须将数据包解密，才能传给上面的HTTP.<br>    浏览器传输一个client_random和加密方法列表，服务器收到后给浏览器传一个server_random、加密方法列表和数字证书（包含公钥），<br>    然后浏览器对数字证书进行验证，如果验证通过，则生成一个pre_random,然后用公钥加密传给服务器，服务器用client_random、server_random和pre_random,<br>    使用公钥加密生成secret，之后的传输就使用secret作为密钥来进行数据的加解密。</p>
-<p>七、三次握手<br>   <img src="../images/ws.png" alt="三次握手图解"><br>     第一次握手：一开始都处于CLOSED状态，客户端主动发起连接请求，发送syn包（seq=j）到服务器，并进入SYN_SENT状态（syn:同步序列编号）<br>     第二次握手：服务器收到syn包，确认客户端的ACK(ack=j+1),同时发送一个SYN包（seq=k），即SYN+ACK包，而后进入SYN_RECV状态；<br>     第三次握手：客户端收到服务器的ACK+SYN包，向服务器发送确认包ACK（ack=k+1）,进入ESTABLISHED（TCP连接成功）状态，完成三次握手，客户端与服务端开始传输数据。<br>     <code>SYN需要对端确认，所以ACK的序列化要加一，凡是需要对端确认的，要消耗TCP报文的序列化</code><br>八、四次挥手<br>  <img src="../images/hs.png" alt="四次挥手图解"><br>   一开始都处于ESTABLISHED状态，客户端发送报文FIN=1和seq=x,进入FIN_WAIT_1状态；服务端收到报文后，发送确认报文ack=x+1，seq=y,ACK=1，然后进入CLOSE_WAIT状态；<br>   客户端收到服务端的确认报文之后进入FIN_WAIT_2状态；而后服务端再次发送seq=z，FIN=1，ack=x+1,进入LAST-ACK状态,等待客户端确认；客户端收到后发出确认ACK=1，ack=z+1,seq=x+1,进入TIME_WAIT状态，经过2MSL(最长报文段寿命)事件后，才进入CLOSED状态，<br>   然后发送ACK给服务端，服务端收到后进入CLOSED状态。</p>
-<p>   为什么要等待2MSL？<br>    2MSL是两倍的MSL(Maximum Segment Lifetime),MSL是一个片段在网络中最大的存活时间，2MSL就是一个发送和一个回复所要的最大时间，如果直到2MSL客户端都没收到FIN，就推断ACK已被成功接收，结束TCP连接。</p>
-<p>   在交互过程中如果数据传送完了，如果不想断开两端连接可以在HTTP的响应体的Connection字段指定为keep-alive</p>
-<p>九、TCP滑动窗口（分为发送窗口和接收窗口）</p>
-<pre><code>在TCP连接中，对于发送端和接收端，TCP需要把发送的数据放到发送缓存区，将接收的数据放到接收缓存区。经常会发生发送端发送过多而接收端无法接收的情况，所以需要流量控制，也就是根据接收缓存区的大小来控制发送端的发送。如果接收缓存区已经满了，此时发送端就不需要继续发送数据了。
-</code></pre>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2020/08/08/gitconf/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -402,7 +402,7 @@ GIT BASH 指令：env|grep -i proxy 两次
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-08 11:15:01" itemprop="dateModified" datetime="2021-06-08T11:15:01+08:00">2021-06-08</time>
+                <time title="修改时间：2021-06-30 21:09:56" itemprop="dateModified" datetime="2021-06-30T21:09:56+08:00">2021-06-30</time>
               </span>
 
           
@@ -428,6 +428,7 @@ GIT BASH 指令：env|grep -i proxy 两次
 <li>配置文件 根目录下 _config.yml</li>
 <li>更新blog使用命令 :1.hexo clean 2. hexo g -d</li>
 </ol>
+<h4 id="git指令快速查询"><a href="#git指令快速查询" class="headerlink" title="git指令快速查询"></a>git指令快速查询</h4><p>!(Git常用指令)[<a target="_blank" rel="noopener" href="https://ftp.bmp.ovh/imgs/2021/06/b497e51ad83299f6.jpg]">https://ftp.bmp.ovh/imgs/2021/06/b497e51ad83299f6.jpg]</a></p>
 <h2 id="博客-使用-next-主题"><a href="#博客-使用-next-主题" class="headerlink" title="博客 使用 next 主题"></a>博客 使用 next 主题</h2><ul>
 <li>下载next主题文件夹<ul>
 <li>安装next主题到博客目录主题文件夹下<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$  git clone https://github.com/theme-next/hexo-theme-next themes/next</span><br></pre></td></tr></table></figure></li>
@@ -441,10 +442,13 @@ GIT BASH 指令：env|grep -i proxy 两次
 <li>设置站点统计—-使用不蒜子统计</li>
 </ul>
 <ul>
-<li>1.主题配置文件加入如下字段<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">busuanzi_count:</span><br><span class="line"> # count values only if the other configs are false</span><br><span class="line"> enable: true</span><br><span class="line"> # custom uv span for the whole site</span><br><span class="line"> site_uv: true</span><br><span class="line"> site_uv_header: &lt;i class=&quot;fa fa-user&quot;&gt;&lt;/i&gt; 本站访问数</span><br><span class="line"> site_uv_footer: 人</span><br><span class="line"> # custom pv span for the whole site</span><br><span class="line"> site_pv: true</span><br><span class="line"> site_pv_header: &lt;i class=&quot;fa fa-eye&quot;&gt;&lt;/i&gt; 本站总访问量</span><br><span class="line"> site_pv_footer: 次</span><br><span class="line"> # custom pv span for one page only</span><br><span class="line"> page_pv: false</span><br><span class="line"> page_pv_header: &lt;i class=&quot;fa fa-file-o&quot;&gt;&lt;/i&gt; 本文总阅读量</span><br><span class="line"> page_pv_footer: 次</span><br></pre></td></tr></table></figure></li>
-<li>2.在themes/next/layout/_partials/footer.swig 文件加入</li>
+<li><p>1.主题配置文件加入如下字段</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">busuanzi_count:</span><br><span class="line"> # count values only if the other configs are false</span><br><span class="line"> enable: true</span><br><span class="line"> # custom uv span for the whole site</span><br><span class="line"> site_uv: true</span><br><span class="line"> site_uv_header: &lt;i class=&quot;fa fa-user&quot;&gt;&lt;/i&gt; 本站访问数</span><br><span class="line"> site_uv_footer: 人</span><br><span class="line"> # custom pv span for the whole site</span><br><span class="line"> site_pv: true</span><br><span class="line"> site_pv_header: &lt;i class=&quot;fa fa-eye&quot;&gt;&lt;/i&gt; 本站总访问量</span><br><span class="line"> site_pv_footer: 次</span><br><span class="line"> # custom pv span for one page only</span><br><span class="line"> page_pv: false</span><br><span class="line"> page_pv_header: &lt;i class=&quot;fa fa-file-o&quot;&gt;&lt;/i&gt; 本文总阅读量</span><br><span class="line"> page_pv_footer: 次</span><br></pre></td></tr></table></figure></li>
+<li><p>2.在themes/next/layout/_partials/footer.swig 文件加入</p>
+</li>
 </ul>
  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&#123;% if theme.busuanzi_count.enable %&#125;</span><br><span class="line">&lt;div class=&quot;busuanzi-count&quot;&gt;</span><br><span class="line">  &lt;script async src=&quot;https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js&quot;&gt;</span><br><span class="line">  &lt;/script&gt;</span><br><span class="line">  &#123;% if theme.busuanzi_count.site_uv %&#125;</span><br><span class="line">  &lt;span class=&quot;site-uv&quot;&gt;</span><br><span class="line">   &#123;&#123; theme.busuanzi_count.site_uv_header &#125;&#125;</span><br><span class="line">   &lt;span class=&quot;busuanzi-value&quot; id=&quot;busuanzi_value_site_uv&quot;&gt;&lt;/span&gt;</span><br><span class="line">   &#123;&#123; theme.busuanzi_count.site_uv_footer &#125;&#125;</span><br><span class="line">   &lt;/span&gt;</span><br><span class="line">   &#123;% endif %&#125;</span><br><span class="line">   </span><br><span class="line">   &#123;% if theme.busuanzi_count.site_pv %&#125;</span><br><span class="line">   &lt;span class=&quot;site-pv&quot;&gt;</span><br><span class="line">    &#123;&#123; theme.busuanzi_count.site_pv_header &#125;&#125;</span><br><span class="line">    &lt;span class=&quot;busuanzi-value&quot; id=&quot;busuanzi_value_site_pv&quot;&gt;&lt;/span&gt;</span><br><span class="line">    &#123;&#123; theme.busuanzi_count.site_pv_footer &#125;&#125;</span><br><span class="line">    &lt;/span&gt;</span><br><span class="line">    &#123;% endif %&#125;</span><br><span class="line">   &lt;/div&gt;</span><br><span class="line">&#123;% endif %&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 <ul>
 <li>3.加入本站运行时间,在上面文件最后加入如下代码即可<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;span&gt;</span><br><span class="line">  &lt;span class=&quot;post-meta-divider&quot;&gt;|&lt;/span&gt;</span><br><span class="line">  本站已运行</span><br><span class="line">  &lt;span id=&quot;showDays&quot;&gt;&lt;/span&gt;</span><br><span class="line">&lt;/span&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  var seconds = 1000;</span><br><span class="line">  var minutes = seconds * 60;</span><br><span class="line">  var hours = minutes * 60;</span><br><span class="line">  var days = hours * 24;</span><br><span class="line">  var years = days * 365;</span><br><span class="line">  var birthDay = Date.UTC(2019,01,20,14,00,00); // 这里设置建站时间</span><br><span class="line">  setInterval(function() &#123;</span><br><span class="line">    var today = new Date();</span><br><span class="line">    var todayYear = today.getFullYear();</span><br><span class="line">    var todayMonth = today.getMonth()+1;</span><br><span class="line">    var todayDate = today.getDate();</span><br><span class="line">    var todayHour = today.getHours();</span><br><span class="line">    var todayMinute = today.getMinutes();</span><br><span class="line">    var todaySecond = today.getSeconds();</span><br><span class="line">    var now = Date.UTC(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond);</span><br><span class="line">    var diff = now - birthDay;</span><br><span class="line">    var diffYears = Math.floor(diff/years);</span><br><span class="line">    var diffDays = Math.floor((diff/days)-diffYears*365);</span><br><span class="line">    var diffHours = Math.floor((diff-(diffYears*365+diffDays)*days)/hours);</span><br><span class="line">    var diffMinutes = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours)/minutes);</span><br><span class="line">    var diffSeconds = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours-diffMinutes*minutes)/seconds);</span><br><span class="line">      document.getElementById(&#x27;showDays&#x27;).innerHTML=&quot;&quot;+diffYears+&quot;年&quot;+diffDays+&quot;天&quot;+diffHours+&quot;小时&quot;+diffMinutes+&quot;分钟&quot;+diffSeconds+&quot;秒&quot;;</span><br><span class="line">  &#125;, 1000);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure></li>
 </ul>
@@ -452,6 +456,7 @@ GIT BASH 指令：env|grep -i proxy 两次
 <li>设置头像、背景图片等</li>
 </ul>
  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"># 主题配置文件</span><br><span class="line">avatar:</span><br><span class="line">  # Replace the default image and set the url here.</span><br><span class="line">  # 将头像放到 themes/next/source/images目录</span><br><span class="line">  url: /images/avatar.jpg</span><br><span class="line">  </span><br><span class="line"># 找到themes/next/source/css/main.styl样式文件，设如下自定义样式即可 </span><br><span class="line">// 自定义样式</span><br><span class="line">body &#123;</span><br><span class="line">  background: url(../images/bg.jpg);</span><br><span class="line">	background-repeat: no-repeat;</span><br><span class="line">	background-position: 50% 50%;</span><br><span class="line">	background-attachment: fixed;</span><br><span class="line">  color: var(--text-color);</span><br><span class="line">  font-family: &#x27;Lato&#x27;, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif;</span><br><span class="line">  font-size: 1em;</span><br><span class="line">  line-height: 2;</span><br><span class="line">&#125;</span><br><span class="line">  </span><br></pre></td></tr></table></figure>
+
 <ul>
 <li>设置看板娘</li>
 </ul>
@@ -851,7 +856,7 @@ GIT BASH 指令：env|grep -i proxy 两次
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-21 10:40:23" itemprop="dateModified" datetime="2021-06-21T10:40:23+08:00">2021-06-21</time>
+                <time title="修改时间：2021-06-30 20:09:28" itemprop="dateModified" datetime="2021-06-30T20:09:28+08:00">2021-06-30</time>
               </span>
 
           
@@ -1023,7 +1028,7 @@ GIT BASH 指令：env|grep -i proxy 两次
 </tr>
 </tbody></table>
 <p>7、rich-text富文本标签</p>
-<p>nodes属性来实现，接收标签字符串或者数组对象</p>
+<p>nodes属性来实现，接收<strong>标签字符串</strong>或者数组对象</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&lt;rich-text nodes=&quot;&#123;&#123;html&#125;&#125;&quot;&gt;&lt;/rich-text&gt;</span><br><span class="line"></span><br><span class="line">.js中</span><br><span class="line">data:&#123;</span><br><span class="line">// 1、标签字符串</span><br><span class="line">// html:`&lt;div class=&quot;context&quot;&gt;&lt;span&gt;odod&lt;/span&gt;jhfd&lt;/div&gt;`;</span><br><span class="line">// 2、数组对象</span><br><span class="line"> html:[</span><br><span class="line"> &#123;</span><br><span class="line"> name:&quot;div&quot;,</span><br><span class="line"> attrs:&#123;</span><br><span class="line">   class:&quot;mydiv&quot;,</span><br><span class="line">   style:&quot;color:white&quot;</span><br><span class="line"> &#125;,</span><br><span class="line"> children:[</span><br><span class="line">    &#123;</span><br><span class="line">    name:&#x27;span&#x27;,</span><br><span class="line">    attrs:&#123;&#125;,</span><br><span class="line">    children:[</span><br><span class="line">       &#123;</span><br><span class="line">         type:&#x27;text&#x27;,</span><br><span class="line">         text:&#x27;hello&#x27;</span><br><span class="line">       &#125;</span><br><span class="line">    ]</span><br><span class="line">    &#125;</span><br><span class="line"> ]</span><br><span class="line"> &#125;</span><br><span class="line"> ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>7、button</p>
@@ -1468,8 +1473,7 @@ GIT BASH 指令：env|grep -i proxy 两次
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Cannot read property &#x27;mark&#x27; of undefined</span><br><span class="line">TypeError: Cannot read property ‘mark’ of undefined</span><br></pre></td></tr></table></figure>
 
 <p>微信小程序开发工具 开发项目配置中勾选  增强编译  即可。</p>
-<h4 id="5-7-商品列表页面"><a href="#5-7-商品列表页面" class="headerlink" title="5.7 商品列表页面"></a>5.7 商品列表页面</h4><p>弹性布局 display:flex;</p>
-<table>
+<h4 id="5-7-商品列表页面"><a href="#5-7-商品列表页面" class="headerlink" title="5.7 商品列表页面"></a>5.7 商品列表页面</h4><h6 id="5-7-1弹性布局-display-flex"><a href="#5-7-1弹性布局-display-flex" class="headerlink" title="5.7.1弹性布局 display:flex;"></a>5.7.1弹性布局 display:flex;</h6><table>
 <thead>
 <tr>
 <th>容器属性</th>
@@ -1501,8 +1505,7 @@ GIT BASH 指令：env|grep -i proxy 两次
 <td>flex-start；flex-end；center；space-between；space-around；stretch(默认值)</td>
 </tr>
 </tbody></table>
-<p>商品描述超出两行就转换成省略号显示的样式设置</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">view &#123;</span><br><span class="line"> display: -webkit-box;</span><br><span class="line"> overflow: hidden;</span><br><span class="line"> -webkit-box-orient: vertical;</span><br><span class="line"> -webkit-line-clamp: 2;//两行</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="5-7-2商品描述超出两行就转换成省略号显示的样式设置"><a href="#5-7-2商品描述超出两行就转换成省略号显示的样式设置" class="headerlink" title="5.7.2商品描述超出两行就转换成省略号显示的样式设置"></a>5.7.2商品描述超出两行就转换成省略号显示的样式设置</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">view &#123;</span><br><span class="line"> display: -webkit-box;</span><br><span class="line"> overflow: hidden;</span><br><span class="line"> -webkit-box-orient: vertical;</span><br><span class="line"> -webkit-line-clamp: 2;//两行</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>补充：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">web中单行文本超出部分显示省略号</span><br><span class="line">div&#123;</span><br><span class="line">  overflow:hidden;</span><br><span class="line">  text-overflow: ellipsis;</span><br><span class="line">  white-space: nowrap;</span><br><span class="line">&#125;</span><br><span class="line">多行文本超出部分省略号</span><br><span class="line">div&#123;</span><br><span class="line">  white-space: normal;</span><br><span class="line">  overflow: hidden;</span><br><span class="line">  text-overflow: ellipsis;</span><br><span class="line">  display: -webkit-box;</span><br><span class="line">  -webkit-box-orient: vertical;</span><br><span class="line">  -webkit-line-clamp: 2;</span><br><span class="line">  word-break: break-all;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -1528,6 +1531,29 @@ GIT BASH 指令：env|grep -i proxy 两次
 <td>只能在半角空格或连字符出换行</td>
 </tr>
 </tbody></table>
+<h6 id="5-7-3页面触底刷新数据"><a href="#5-7-3页面触底刷新数据" class="headerlink" title="5.7.3页面触底刷新数据"></a>5.7.3页面触底刷新数据</h6><p>1、使用页面上拉触底事件的处理函数onReachBottom</p>
+<p>2、判断页面数据是否有下一页，通过获取数据总页数和当前页码数来判断</p>
+<p>3、页码数++，重新发送请求获取数据。</p>
+<p>4、拿到请求回来的数据不是进行替换而是进行数据拼接</p>
+<p>数据下拉刷新</p>
+<p>1、触发下拉刷新需要在页面的JSON文件中开启一个配置项</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">&quot;enablePullDownRefresh&quot;:true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2、监听用户下拉刷新事件onPullDownRefresh()</p>
+<h6 id="5-7-3-图片放大预览效果"><a href="#5-7-3-图片放大预览效果" class="headerlink" title="5.7.3 图片放大预览效果"></a>5.7.3 图片放大预览效果</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">给图片绑定点击事件，事件内使用</span><br><span class="line">wx.previewImage(&#123;</span><br><span class="line">  current: &#x27;&#x27;, // 当前显示图片的http链接</span><br><span class="line">  urls: [] // 需要预览的图片http链接列表</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h5 id="5-8-购物车页面"><a href="#5-8-购物车页面" class="headerlink" title="5.8 购物车页面"></a>5.8 购物车页面</h5><h6 id="5-8-1获取用户收获地址"><a href="#5-8-1获取用户收获地址" class="headerlink" title="5.8.1获取用户收获地址"></a>5.8.1获取用户收获地址</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">wx.chooseAddress(&#123;</span><br><span class="line">  success (res) &#123;</span><br><span class="line">    console.log(res.userName)</span><br><span class="line">    console.log(res.postalCode)</span><br><span class="line">    console.log(res.provinceName)</span><br><span class="line">    console.log(res.cityName)</span><br><span class="line">    console.log(res.countyName)</span><br><span class="line">    console.log(res.detailInfo)</span><br><span class="line">    console.log(res.nationalCode)</span><br><span class="line">    console.log(res.telNumber)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> wx.getSetting(&#123;</span><br><span class="line">        success: (result) =&gt; &#123;</span><br><span class="line">          const scopeAddress = result.authSetting[&quot;scope.address&quot;];</span><br><span class="line">          if(scopeAddress===true || scopeAddress===undefined)&#123;</span><br><span class="line">              wx.chooseAddress(&#123;</span><br><span class="line">                success: (res) =&gt; &#123;</span><br><span class="line">                  console.log(res)</span><br><span class="line">                &#125;</span><br><span class="line">              &#125;);</span><br><span class="line">          &#125;else&#123;</span><br><span class="line">               wx.openSetting(&#123;</span><br><span class="line">                 success: (result2) =&gt; &#123;</span><br><span class="line">                   wx.chooseAddress(&#123;</span><br><span class="line">                     success: (result3) =&gt; &#123;</span><br><span class="line">                         console.log(result3);</span><br><span class="line">                     &#125;</span><br><span class="line">                   &#125;);</span><br><span class="line">                     </span><br><span class="line">                 &#125;,</span><br><span class="line">               &#125;);</span><br><span class="line">                 </span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;);</span><br></pre></td></tr></table></figure>
+
+<p>但是需要注意：</p>
+<p>   需要先获取用户对小程序授权（wx.getSetting）获取用户地址信息状态 scope</p>
+<p>  * 1.如果用户点击获取地址提示框确定 authSetting scope.address</p>
+<p>​         scope值 true</p>
+<p>  * 2. 用户点击取消 </p>
+<p>​       scope值 false   诱导用户打开授权设置界面(wx.openSetting) 重新获取地址授权权限</p>
+<p>  * 3.用户没有点击过获取地址的API</p>
+<p>​       scope值 undefined</p>
+<h6 id="5-8-2微信支付功能"><a href="#5-8-2微信支付功能" class="headerlink" title="5.8.2微信支付功能"></a>5.8.2微信支付功能</h6><p>需要企业账号</p>
+<p>支付流程： 创建订单 —-》 准备预支付 —-》发起微信支付 —-》查询订单</p>
 
       
     </div>
