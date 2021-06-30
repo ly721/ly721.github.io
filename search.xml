@@ -20,7 +20,7 @@
   <entry>
     <title>hexo &amp; next主题</title>
     <url>/2020/08/08/gitconf/</url>
-    <content><![CDATA[<h2 id="git-guide"><a href="#git-guide" class="headerlink" title="git guide"></a>git guide</h2><ol>
+    <content><![CDATA[<h2 id="1-git-guide"><a href="#1-git-guide" class="headerlink" title="1. git guide"></a>1. git guide</h2><ol>
 <li>npm i -g hexo 安装全局hexo</li>
 <li>在一个空目录 hexo init 初始化博客系统</li>
 <li>hexodir\source_posts 下的 .md 文档就是博客文档</li>
@@ -32,8 +32,12 @@
 <li>配置文件 根目录下 _config.yml</li>
 <li>更新blog使用命令 :1.hexo clean 2. hexo g -d</li>
 </ol>
-<h4 id="git指令快速查询"><a href="#git指令快速查询" class="headerlink" title="git指令快速查询"></a>git指令快速查询</h4><p>!(Git常用指令)[<a href="https://ftp.bmp.ovh/imgs/2021/06/b497e51ad83299f6.jpg]">https://ftp.bmp.ovh/imgs/2021/06/b497e51ad83299f6.jpg]</a></p>
-<h2 id="博客-使用-next-主题"><a href="#博客-使用-next-主题" class="headerlink" title="博客 使用 next 主题"></a>博客 使用 next 主题</h2><ul>
+<h4 id="1-1-更新blog到github上出现如下错误"><a href="#1-1-更新blog到github上出现如下错误" class="headerlink" title="1.1 更新blog到github上出现如下错误"></a>1.1 更新blog到github上出现如下错误</h4><pre><code>ERROR: fatal: unable to access &#39;https://github.com/ly721/ly721.github.io.git/&#39;: OpenSSL
+SSL_read: Connection was reset, errno 10054
+GIT BASH 指令：env|grep -i proxy 两次
+</code></pre>
+<h4 id="1-2-git指令快速查询"><a href="#1-2-git指令快速查询" class="headerlink" title="1.2 git指令快速查询"></a>1.2 git指令快速查询</h4><p>!(Git常用指令)[<a href="https://ftp.bmp.ovh/imgs/2021/06/b497e51ad83299f6.jpg]">https://ftp.bmp.ovh/imgs/2021/06/b497e51ad83299f6.jpg]</a></p>
+<h3 id="2-博客-使用-next-主题"><a href="#2-博客-使用-next-主题" class="headerlink" title="2. 博客 使用 next 主题"></a>2. 博客 使用 next 主题</h3><ul>
 <li>下载next主题文件夹<ul>
 <li>安装next主题到博客目录主题文件夹下<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$  git clone https://github.com/theme-next/hexo-theme-next themes/next</span><br></pre></td></tr></table></figure></li>
 </ul>
@@ -84,10 +88,6 @@
 <li>注意：在使用cdn加载elementui时，public/index.html一定要先加载vue.js再加载element-ui.js要不然组件就会无效！！</li>
 <li>error<br><img src="../images/mainerr.png" alt="error"><br>遇到图上错误是因为next-util的package.json中的入口文件index.js丢失，我们可以点击<a href="https://github.com/theme-next/next-util/">这里</a><br>找到对应的index.js下载到我们node_modules/next-util文件夹中即可。</li>
 </ol>
-<h3 id="更新blog到github上出现如下错误"><a href="#更新blog到github上出现如下错误" class="headerlink" title="更新blog到github上出现如下错误"></a>更新blog到github上出现如下错误</h3><pre><code>ERROR: fatal: unable to access &#39;https://github.com/ly721/ly721.github.io.git/&#39;: OpenSSL
-SSL_read: Connection was reset, errno 10054
-GIT BASH 指令：env|grep -i proxy 两次
-</code></pre>
 ]]></content>
   </entry>
   <entry>
