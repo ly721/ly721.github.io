@@ -20,6 +20,7 @@ SSL_read: Connection was reset, errno 10054
 GIT BASH 指令：env|grep -i proxy 两次
 </code></pre>
 <h4 id="1-2-git指令快速查询"><a href="#1-2-git指令快速查询" class="headerlink" title="1.2 git指令快速查询"></a>1.2 git指令快速查询</h4><p><img src="'./images/Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4.jpg'" alt="Git常用指令"></p>
+<h4 id="1-3-github教程文章网址"><a href="#1-3-github教程文章网址" class="headerlink" title="1.3 github教程文章网址"></a>1.3 github教程文章网址</h4><p><a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/">廖雪峰-Git教程</a></p>
 <h3 id="2-博客-使用-next-主题"><a href="#2-博客-使用-next-主题" class="headerlink" title="2. 博客 使用 next 主题"></a>2. 博客 使用 next 主题</h3><ul>
 <li>下载next主题文件夹<ul>
 <li>安装next主题到博客目录主题文件夹下<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$  git clone https://github.com/theme-next/hexo-theme-next themes/next</span><br></pre></td></tr></table></figure></li>
@@ -546,8 +547,7 @@ GIT BASH 指令：env|grep -i proxy 两次
 
 <p>3、选择器</p>
 <p>  a、不支持通配符 *</p>
-<h5 id="3-1、标签"><a href="#3-1、标签" class="headerlink" title="3.1、标签"></a>3.1、标签</h5><p>4、image标签</p>
-<ul>
+<h5 id="3-1、标签"><a href="#3-1、标签" class="headerlink" title="3.1、标签"></a>3.1、标签</h5><h6 id="3-1-1image标签"><a href="#3-1-1image标签" class="headerlink" title="3.1.1image标签"></a>3.1.1image标签</h6><ul>
 <li><p>微信小程序资源上传有大小限制，所以需要使用网图，可以将本地图片通过<a href="https://imgurl.org/">在线图片转换</a>将图片变成网图在放到src属性</p>
 </li>
 <li><p>默认图片大小宽320px高240px</p>
@@ -562,8 +562,7 @@ GIT BASH 指令：env|grep -i proxy 两次
 <p>a、lazy-load 会自己判断当图片出现在视口上下三屏的高度之内的时候开始加载图片</p>
 </li>
 </ul>
-<p>5、swiper标签</p>
-<p>a、是微信内置轮播图组件,  要与swiper-item（每一个轮播项）一起用</p>
+<h6 id="3-1-2swiper标签"><a href="#3-1-2swiper标签" class="headerlink" title="3.1.2swiper标签"></a>3.1.2swiper标签</h6><p>a、是微信内置轮播图组件,  要与swiper-item（每一个轮播项）一起用</p>
 <p>b、默认样式 </p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mode=&quot;widthFix&quot;</span><br><span class="line">&#123;</span><br><span class="line">  width: 100%;</span><br><span class="line">  height: 150px;//高度无法实现内容撑开，可计算比例</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -614,8 +613,7 @@ GIT BASH 指令：env|grep -i proxy 两次
 <td>选中指示器的颜色</td>
 </tr>
 </tbody></table>
-<p>6、navigator标签</p>
-<p>a、是块级元素  会自动换行，相关属性如下</p>
+<h6 id="3-1-3navigator标签"><a href="#3-1-3navigator标签" class="headerlink" title="3.1.3navigator标签"></a>3.1.3navigator标签</h6><p>a、是块级元素  会自动换行，相关属性如下</p>
 <table>
 <thead>
 <tr>
@@ -665,12 +663,10 @@ GIT BASH 指令：env|grep -i proxy 两次
 <td>退出小程序，target=”miniProgram”时</td>
 </tr>
 </tbody></table>
-<p>7、rich-text富文本标签</p>
-<p>nodes属性来实现，接收<strong>标签字符串</strong>或者数组对象</p>
+<h6 id="3-1-4-rich-text富文本标签"><a href="#3-1-4-rich-text富文本标签" class="headerlink" title="3.1.4 rich-text富文本标签"></a>3.1.4 rich-text富文本标签</h6><p>nodes属性来实现，接收<strong>标签字符串</strong>或者数组对象</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;rich-text nodes=&quot;&#123;&#123;html&#125;&#125;&quot;&gt;&lt;/rich-text&gt;</span><br><span class="line"></span><br><span class="line">.js中</span><br><span class="line">data:&#123;</span><br><span class="line">// 1、标签字符串</span><br><span class="line">// html:`&lt;div class=&quot;context&quot;&gt;&lt;span&gt;odod&lt;/span&gt;jhfd&lt;/div&gt;`;</span><br><span class="line">// 2、数组对象</span><br><span class="line"> html:[</span><br><span class="line"> &#123;</span><br><span class="line"> name:&quot;div&quot;,</span><br><span class="line"> attrs:&#123;</span><br><span class="line">   class:&quot;mydiv&quot;,</span><br><span class="line">   style:&quot;color:white&quot;</span><br><span class="line"> &#125;,</span><br><span class="line"> children:[</span><br><span class="line">    &#123;</span><br><span class="line">    name:&#x27;span&#x27;,</span><br><span class="line">    attrs:&#123;&#125;,</span><br><span class="line">    children:[</span><br><span class="line">       &#123;</span><br><span class="line">         type:&#x27;text&#x27;,</span><br><span class="line">         text:&#x27;hello&#x27;</span><br><span class="line">       &#125;</span><br><span class="line">    ]</span><br><span class="line">    &#125;</span><br><span class="line"> ]</span><br><span class="line"> &#125;</span><br><span class="line"> ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>7、button</p>
-<p>a、外观属性</p>
+<h6 id="3-1-5-button标签"><a href="#3-1-5-button标签" class="headerlink" title="3.1.5 button标签"></a>3.1.5 button标签</h6><p>a、外观属性</p>
 <table>
 <thead>
 <tr>
@@ -723,7 +719,7 @@ GIT BASH 指令：env|grep -i proxy 两次
 <td></td>
 </tr>
 </tbody></table>
-<p>open-type值</p>
+<p>b、<strong>open-type属性值</strong></p>
 <table>
 <thead>
 <tr>
@@ -760,14 +756,12 @@ GIT BASH 指令：env|grep -i proxy 两次
 <td>打开小程序内置的意见反馈页面                                                1、只能通过真机调试打开</td>
 </tr>
 </tbody></table>
-<p>open-type的contact实现流程</p>
+<p>c、open-type的contact实现流程</p>
 <p>1、将小程序的appid由测试号改为自己的appid</p>
 <p>2、登录<a href="https://mp.weixin.qq.com/wxamp/home/guide?lang=zh_CN&token=812759988">微信小程序官网</a>，左侧选择客服—-添加</p>
-<p>8、icon</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;icon type=&quot;success&quot; color=&quot;red&quot; size=&quot;10&quot;&gt;&lt;/icon&gt;</span><br></pre></td></tr></table></figure>
+<h6 id="3-1-6-icon标签"><a href="#3-1-6-icon标签" class="headerlink" title="3.1.6 icon标签"></a>3.1.6 icon标签</h6><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;icon type=&quot;success&quot; color=&quot;red&quot; size=&quot;10&quot;&gt;&lt;/icon&gt;</span><br></pre></td></tr></table></figure>
 
-<p>9、radio（可以通过color属性修改颜色）</p>
-<p>a、必须与父元素radio-group使用</p>
+<h6 id="3-1-7-radio（可以通过color属性修改颜色）"><a href="#3-1-7-radio（可以通过color属性修改颜色）" class="headerlink" title="3.1.7 radio（可以通过color属性修改颜色）"></a>3.1.7 radio（可以通过color属性修改颜色）</h6><p>a、必须与父元素radio-group使用</p>
 <p>b、value属性  选中单选框的值</p>
 <p>c、需要给radio-group绑定change事件</p>
 <p>d、获取选中值e.detail.value</p>
@@ -869,7 +863,39 @@ GIT BASH 指令：env|grep -i proxy 两次
 
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">父组件.js</span><br><span class="line">//接收子组件传递的参数</span><br><span class="line">handleItemChange(e)&#123;</span><br><span class="line">  const &#123;index&#125; = e.detail.dataset</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h4 id="4、小程序生命周期"><a href="#4、小程序生命周期" class="headerlink" title="4、小程序生命周期"></a>4、小程序生命周期</h4><p>分为<strong>应用生命周期</strong>和<strong>页面生命周期</strong></p>
+<h5 id="3-3api"><a href="#3-3api" class="headerlink" title="3.3api"></a>3.3api</h5><h6 id="3-3-1路由api"><a href="#3-3-1路由api" class="headerlink" title="3.3.1路由api"></a>3.3.1路由api</h6><table>
+<thead>
+<tr>
+<th>api</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>wx.switchTab()</td>
+<td>跳转到tabBar页面，并关闭其他所有非TabBar页面</td>
+</tr>
+<tr>
+<td>wx.relaunch()</td>
+<td>关闭所有页面，打开某个页面</td>
+</tr>
+<tr>
+<td>wx.redirectTo()</td>
+<td>关闭当前页面，跳转到应用某个页面，不允许跳到tabBar页面</td>
+</tr>
+<tr>
+<td>wx.navigateTo()</td>
+<td>保留当前页面，跳转到某个界面（不允许是tabBar页面），使用wx.navigateBack可以返回上一个页面</td>
+</tr>
+<tr>
+<td>wx.navigateBack()</td>
+<td>关闭当前页面，返回上一页面，可通过getCurrentPage获取当前页面栈，选择返回第几层</td>
+</tr>
+<tr>
+<td>EventChannel</td>
+<td>页面间事件通信通道   .emit(事件名，参数) 触发         .on(事件名，回调)监听            .once(事件名，回调) 监听一次               .off(事件名，回调)取消监听</td>
+</tr>
+</tbody></table>
+<h6 id="3-1-2-跳转api"><a href="#3-1-2-跳转api" class="headerlink" title="3.1.2 跳转api"></a>3.1.2 跳转api</h6><h4 id="4、小程序生命周期"><a href="#4、小程序生命周期" class="headerlink" title="4、小程序生命周期"></a>4、小程序生命周期</h4><p>分为<strong>应用生命周期</strong>和<strong>页面生命周期</strong></p>
 <h5 id="4-1、应用生命周期"><a href="#4-1、应用生命周期" class="headerlink" title="4.1、应用生命周期"></a>4.1、<a href="https://developers.weixin.qq.com/miniprogram/dev/reference/api/App.html">应用生命周期</a></h5><table>
 <thead>
 <tr>
@@ -1192,6 +1218,9 @@ GIT BASH 指令：env|grep -i proxy 两次
 <p>​       scope值 undefined</p>
 <h6 id="5-8-2微信支付功能"><a href="#5-8-2微信支付功能" class="headerlink" title="5.8.2微信支付功能"></a>5.8.2微信支付功能</h6><p>需要企业账号</p>
 <p>支付流程： 创建订单 —-》 准备预支付 —-》发起微信支付 —-》查询订单</p>
+<p>c3高斯模糊</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">filter: blur(10rpx);</span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <categories>
         <category>微信小程序开发</category>
