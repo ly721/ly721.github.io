@@ -519,6 +519,103 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/08/08/problem/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="李泼泼">
+      <meta itemprop="description" content="向着目标奔跑！！！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lucky Girl">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/08/problem/" class="post-title-link" itemprop="url">项目遇到的问题</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-08-08 20:06:08" itemprop="dateCreated datePublished" datetime="2020-08-08T20:06:08+08:00">2020-08-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-09 22:09:58" itemprop="dateModified" datetime="2022-05-09T22:09:58+08:00">2022-05-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%81%87%E5%88%B0%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/" itemprop="url" rel="index"><span itemprop="name">遇到问题汇总</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="一、问题"><a href="#一、问题" class="headerlink" title="一、问题"></a>一、问题</h3><h4 id="1-在-build-项目时-报错-plugins-0-may-only-be-a-two-tuple-or-three-tuple"><a href="#1-在-build-项目时-报错-plugins-0-may-only-be-a-two-tuple-or-three-tuple" class="headerlink" title="1.在 build 项目时,报错 .plugins[0] may only be a two-tuple or three-tuple"></a>1.在 build 项目时,报错 .plugins[0] may only be a two-tuple or three-tuple</h4><p>检查配置文件babel.config.js发现问题</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">	plugins: [</span><br><span class="line">  [</span><br><span class="line">    &#x27;component&#x27;,</span><br><span class="line">    &#123;</span><br><span class="line">      libraryName: &#x27;element-ui&#x27;,</span><br><span class="line">      styleLibraryName: &#x27;theme-chalk&#x27;</span><br><span class="line">    &#125;,</span><br><span class="line">	 ...prodPlugins,</span><br><span class="line">	&#x27;@babel/plugin-syntax-dynamic-import&#x27;</span><br><span class="line">  ]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<pre><code>应该这样配置
+</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">   plugins: [</span><br><span class="line">  [</span><br><span class="line">    &#x27;component&#x27;,</span><br><span class="line">    &#123;</span><br><span class="line">      libraryName: &#x27;element-ui&#x27;,</span><br><span class="line">      styleLibraryName: &#x27;theme-chalk&#x27;</span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">	 ...prodPlugins,</span><br><span class="line">	&#x27;@babel/plugin-syntax-dynamic-import&#x27;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<h4 id="2-注意："><a href="#2-注意：" class="headerlink" title="2. 注意："></a>2. 注意：</h4><p>在使用cdn加载elementui时，public/index.html一定要先加载vue.js再加载element-ui.js要不然组件就会无效！！</p>
+<h4 id="3-error"><a href="#3-error" class="headerlink" title="3. error"></a>3. error</h4><pre><code>![error](../images/mainerr.png)
+遇到图上错误是因为next-util的package.json中的入口文件index.js丢失，我们可以点击&lt;a href=&quot;https://github.com/theme-next/next-util/&quot;&gt;这里&lt;/a&gt;
+找到对应的index.js下载到我们node_modules/next-util文件夹中即可。
+</code></pre>
+<h4 id="4-使用elementUI时间选择范围组件daterange，设置只能选择一个月时间范围设置如下："><a href="#4-使用elementUI时间选择范围组件daterange，设置只能选择一个月时间范围设置如下：" class="headerlink" title="4.使用elementUI时间选择范围组件daterange，设置只能选择一个月时间范围设置如下："></a>4.使用elementUI时间选择范围组件daterange，设置只能选择一个月时间范围设置如下：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;el-date-picker</span><br><span class="line">  v-model=&quot;value1&quot;</span><br><span class="line">  type=&quot;daterange&quot;</span><br><span class="line">  range-separator=&quot;至&quot;</span><br><span class="line">  start-placeholder=&quot;开始日期&quot;</span><br><span class="line">  end-placeholder=&quot;结束日期&quot;</span><br><span class="line">  :picker-options=&quot;pickerOptions&quot;&gt;</span><br><span class="line">&lt;/el-date-picker&gt;</span><br><span class="line">SCRIPT -------------</span><br><span class="line">data()&#123;</span><br><span class="line">  return &#123;</span><br><span class="line">  pickerOptions:&#123;</span><br><span class="line">   onPick(&#123;minDate,maxDate&#125;)&#123;</span><br><span class="line">      if(!maxDate)&#123;</span><br><span class="line">        this.disableDate = function(time)&#123;</span><br><span class="line">            return time.getTime() &gt; minDate.getTime + 31*24*60*60*1000; </span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+<h4 id="5、因为事件没有声明，整个页面不能随之渲染，影响状态改变后的渲染"><a href="#5、因为事件没有声明，整个页面不能随之渲染，影响状态改变后的渲染" class="headerlink" title="5、因为事件没有声明，整个页面不能随之渲染，影响状态改变后的渲染"></a>5、因为事件没有声明，整个页面不能随之渲染，影响状态改变后的渲染</h4><p><img src="../images/vue-pro1.png" alt="error"></p>
+<h4 id="6、vue组件data是函数"><a href="#6、vue组件data是函数" class="headerlink" title="6、vue组件data是函数"></a>6、vue组件data是函数</h4><p>为什么是函数而不是对象呢？因为使用对象的话，每个实例（组件）上使用的data数据是相互影响的，这当然就不是我们想要的了。对象是对于内存地址的引用，直接定义个对象的话组件之间都会使用这个对象，这样会造成组件之间数据相互影响。<br>原因：在某组件中的data()函数写错，错误的写法是data(){},正确的写法是data(){return {}}<br><img src="../images/vue-pro2.png" alt="error"></p>
+<h4 id="7、注册全局组件，在App-vue-使用该全局组件，全局组件位置出现灰字处代码"><a href="#7、注册全局组件，在App-vue-使用该全局组件，全局组件位置出现灰字处代码" class="headerlink" title="7、注册全局组件，在App.vue 使用该全局组件，全局组件位置出现灰字处代码"></a>7、注册全局组件，在App.vue 使用该全局组件，全局组件位置出现灰字处代码</h4><p><img src="../images/vue-pro3.png" alt="error"></p>
+<p>vue编译版本不对,需要引入完整版<br><img src="../images/vue-pro4.png" alt="error"></p>
+<p>原因：vue运行版本不支持template模版渲染，项目使用的是vue运行版：vue-2.6.10.runtime.min.js，</p>
+<p>针对不同解决：</p>
+<p>1.全局vue：  <a href="mailto:&#x76;&#x75;&#x65;&#x40;&#x32;&#x2e;&#x36;&#x2e;&#x31;&#48;&#x2e;&#x6d;&#105;&#110;&#x2e;&#106;&#115;">&#x76;&#x75;&#x65;&#x40;&#x32;&#x2e;&#x36;&#x2e;&#x31;&#48;&#x2e;&#x6d;&#105;&#110;&#x2e;&#106;&#115;</a> 能正确渲染该全局组件。</p>
+<p>2.局部引入import Vue from ‘vue’（默认导入的是vue.runtime.common.js）<br><img src="../images/vue-pro5.png" alt="error"></p>
+<p>a.修改webpack:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">resolve: &#123;</span><br><span class="line">  alias: &#123;</span><br><span class="line">    vue: &#x27;vue/dist/vue.esm.js&#x27;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>b.修改引入方式 ：<br>import Vue from ‘vue/dist/vue.esm.js’;<br>vue运行版 和 vue完整版 区别：<br>（vue运行版 相对于 完整版没有的）<br>不支持从html获取视图<br>不支持template，需通过webpack的vue-loader将组件预编译template模版成render函数<br>没有compiler编译器</p>
+<h4 id="8、运行npm-脚本-‘webpack-dev-server-–mode-development-–config-build-webpack-config-js’-报错："><a href="#8、运行npm-脚本-‘webpack-dev-server-–mode-development-–config-build-webpack-config-js’-报错：" class="headerlink" title="8、运行npm 脚本 ‘webpack-dev-server –mode=development –config ./build/webpack.config.js’ 报错："></a>8、运行npm 脚本 ‘webpack-dev-server –mode=development –config ./build/webpack.config.js’ 报错：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">[webpack-cli] /Users/lyur/Desktop/project/personal-pro/ts_in_action/node_modules/webpack-dev-server/lib/getPort.js:13</span><br><span class="line">const maxPort = 65_535;</span><br><span class="line">                ^^</span><br><span class="line"></span><br><span class="line">SyntaxError: Invalid or unexpected token</span><br><span class="line">    at Module._compile (internal/modules/cjs/loader.js:723:23)</span><br><span class="line">    at Object.Module._extensions..js (internal/modules/cjs/loader.js:789:10)</span><br><span class="line">    at Module.load (internal/modules/cjs/loader.js:653:32)</span><br><span class="line">    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)</span><br><span class="line">    at Function.Module._load (internal/modules/cjs/loader.js:585:3)</span><br><span class="line">    at Module.require (internal/modules/cjs/loader.js:692:17)</span><br><span class="line">    at require (internal/modules/cjs/helpers.js:25:18)</span><br><span class="line">    at Function.getFreePort (/Users/lyur/Desktop/project/personal-pro/ts_in_action/node_modules/webpack-dev-server/lib/Server.js:397:21)</span><br><span class="line">    at Server.start (/Users/lyur/Desktop/project/personal-pro/ts_in_action/node_modules/webpack-dev-server/lib/Server.js:3203:40)</span><br><span class="line">    at process._tickCallback (internal/process/next_tick.js:68:7)</span><br><span class="line">npm ERR! code ELIFECYCLE</span><br><span class="line">npm ERR! errno 2</span><br><span class="line">npm ERR! ts_in_action@1.0.0 start: `webpack-dev-server --mode=development --config ./build/webpack.config.js`</span><br><span class="line">npm ERR! Exit status 2</span><br><span class="line">npm ERR!</span><br><span class="line">npm ERR! Failed at the ts_in_action@1.0.0 start script.</span><br><span class="line">npm ERR! This is probably not a problem with npm. There is likely additional logging output above.</span><br></pre></td></tr></table></figure>
+<p>原因： webpack webpack-dev-server 依赖包版本不对应，安装对应版本即可。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2020/08/08/http/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -644,107 +741,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/08/08/problem/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="李泼泼">
-      <meta itemprop="description" content="向着目标奔跑！！！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lucky Girl">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/08/problem/" class="post-title-link" itemprop="url">项目遇到的问题</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-08-08 20:06:08" itemprop="dateCreated datePublished" datetime="2020-08-08T20:06:08+08:00">2020-08-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-05-08 18:08:39" itemprop="dateModified" datetime="2022-05-08T18:08:39+08:00">2022-05-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/vue/" itemprop="url" rel="index"><span itemprop="name">vue</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/vue/webpack/" itemprop="url" rel="index"><span itemprop="name">webpack</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="一、问题"><a href="#一、问题" class="headerlink" title="一、问题"></a>一、问题</h3><h4 id="1-在-build-项目时-报错-plugins-0-may-only-be-a-two-tuple-or-three-tuple"><a href="#1-在-build-项目时-报错-plugins-0-may-only-be-a-two-tuple-or-three-tuple" class="headerlink" title="1.在 build 项目时,报错 .plugins[0] may only be a two-tuple or three-tuple"></a>1.在 build 项目时,报错 .plugins[0] may only be a two-tuple or three-tuple</h4><p>检查配置文件babel.config.js发现问题</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">	plugins: [</span><br><span class="line">  [</span><br><span class="line">    &#x27;component&#x27;,</span><br><span class="line">    &#123;</span><br><span class="line">      libraryName: &#x27;element-ui&#x27;,</span><br><span class="line">      styleLibraryName: &#x27;theme-chalk&#x27;</span><br><span class="line">    &#125;,</span><br><span class="line">	 ...prodPlugins,</span><br><span class="line">	&#x27;@babel/plugin-syntax-dynamic-import&#x27;</span><br><span class="line">  ]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-<pre><code>应该这样配置
-</code></pre>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">   plugins: [</span><br><span class="line">  [</span><br><span class="line">    &#x27;component&#x27;,</span><br><span class="line">    &#123;</span><br><span class="line">      libraryName: &#x27;element-ui&#x27;,</span><br><span class="line">      styleLibraryName: &#x27;theme-chalk&#x27;</span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">	 ...prodPlugins,</span><br><span class="line">	&#x27;@babel/plugin-syntax-dynamic-import&#x27;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-<h4 id="2-注意："><a href="#2-注意：" class="headerlink" title="2. 注意："></a>2. 注意：</h4><p>在使用cdn加载elementui时，public/index.html一定要先加载vue.js再加载element-ui.js要不然组件就会无效！！</p>
-<h4 id="3-error"><a href="#3-error" class="headerlink" title="3. error"></a>3. error</h4><pre><code>![error](../images/mainerr.png)
-遇到图上错误是因为next-util的package.json中的入口文件index.js丢失，我们可以点击&lt;a href=&quot;https://github.com/theme-next/next-util/&quot;&gt;这里&lt;/a&gt;
-找到对应的index.js下载到我们node_modules/next-util文件夹中即可。
-</code></pre>
-<h4 id="4-使用elementUI时间选择范围组件daterange，设置只能选择一个月时间范围设置如下："><a href="#4-使用elementUI时间选择范围组件daterange，设置只能选择一个月时间范围设置如下：" class="headerlink" title="4.使用elementUI时间选择范围组件daterange，设置只能选择一个月时间范围设置如下："></a>4.使用elementUI时间选择范围组件daterange，设置只能选择一个月时间范围设置如下：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;el-date-picker</span><br><span class="line">  v-model=&quot;value1&quot;</span><br><span class="line">  type=&quot;daterange&quot;</span><br><span class="line">  range-separator=&quot;至&quot;</span><br><span class="line">  start-placeholder=&quot;开始日期&quot;</span><br><span class="line">  end-placeholder=&quot;结束日期&quot;</span><br><span class="line">  :picker-options=&quot;pickerOptions&quot;&gt;</span><br><span class="line">&lt;/el-date-picker&gt;</span><br><span class="line">SCRIPT -------------</span><br><span class="line">data()&#123;</span><br><span class="line">  return &#123;</span><br><span class="line">  pickerOptions:&#123;</span><br><span class="line">   onPick(&#123;minDate,maxDate&#125;)&#123;</span><br><span class="line">      if(!maxDate)&#123;</span><br><span class="line">        this.disableDate = function(time)&#123;</span><br><span class="line">            return time.getTime() &gt; minDate.getTime + 31*24*60*60*1000; </span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
-<h4 id="5、因为事件没有声明，整个页面不能随之渲染，影响状态改变后的渲染"><a href="#5、因为事件没有声明，整个页面不能随之渲染，影响状态改变后的渲染" class="headerlink" title="5、因为事件没有声明，整个页面不能随之渲染，影响状态改变后的渲染"></a>5、因为事件没有声明，整个页面不能随之渲染，影响状态改变后的渲染</h4><p><img src="../images/vue-pro1.png" alt="error"></p>
-<h4 id="6、vue组件data是函数"><a href="#6、vue组件data是函数" class="headerlink" title="6、vue组件data是函数"></a>6、vue组件data是函数</h4><p>为什么是函数而不是对象呢？因为使用对象的话，每个实例（组件）上使用的data数据是相互影响的，这当然就不是我们想要的了。对象是对于内存地址的引用，直接定义个对象的话组件之间都会使用这个对象，这样会造成组件之间数据相互影响。<br>原因：在某组件中的data()函数写错，错误的写法是data(){},正确的写法是data(){return {}}<br><img src="../images/vue-pro2.png" alt="error"></p>
-<h4 id="7、注册全局组件，在App-vue-使用该全局组件，全局组件位置出现灰字处代码"><a href="#7、注册全局组件，在App-vue-使用该全局组件，全局组件位置出现灰字处代码" class="headerlink" title="7、注册全局组件，在App.vue 使用该全局组件，全局组件位置出现灰字处代码"></a>7、注册全局组件，在App.vue 使用该全局组件，全局组件位置出现灰字处代码</h4><p><img src="../images/vue-pro3.png" alt="error"></p>
-<p>vue编译版本不对,需要引入完整版<br><img src="../images/vue-pro4.png" alt="error"></p>
-<p>原因：vue运行版本不支持template模版渲染，项目使用的是vue运行版：vue-2.6.10.runtime.min.js，</p>
-<p>针对不同解决：</p>
-<p>1.全局vue：  <a href="mailto:&#x76;&#x75;&#101;&#64;&#x32;&#46;&#54;&#x2e;&#x31;&#x30;&#46;&#x6d;&#x69;&#110;&#46;&#x6a;&#115;">&#x76;&#x75;&#101;&#64;&#x32;&#46;&#54;&#x2e;&#x31;&#x30;&#46;&#x6d;&#x69;&#110;&#46;&#x6a;&#115;</a> 能正确渲染该全局组件。</p>
-<p>2.局部引入import Vue from ‘vue’（默认导入的是vue.runtime.common.js）<br><img src="../images/vue-pro5.png" alt="error"></p>
-<p>a.修改webpack:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">resolve: &#123;</span><br><span class="line">  alias: &#123;</span><br><span class="line">    vue: &#x27;vue/dist/vue.esm.js&#x27;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>b.修改引入方式 ：<br>import Vue from ‘vue/dist/vue.esm.js’;<br>vue运行版 和 vue完整版 区别：<br>（vue运行版 相对于 完整版没有的）<br>不支持从html获取视图<br>不支持template，需通过webpack的vue-loader将组件预编译template模版成render函数<br>没有compiler编译器</p>
-<h4 id="8、运行npm-脚本-‘webpack-dev-server-–mode-development-–config-build-webpack-config-js’-报错："><a href="#8、运行npm-脚本-‘webpack-dev-server-–mode-development-–config-build-webpack-config-js’-报错：" class="headerlink" title="8、运行npm 脚本 ‘webpack-dev-server –mode=development –config ./build/webpack.config.js’ 报错："></a>8、运行npm 脚本 ‘webpack-dev-server –mode=development –config ./build/webpack.config.js’ 报错：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">[webpack-cli] /Users/lyur/Desktop/project/personal-pro/ts_in_action/node_modules/webpack-dev-server/lib/getPort.js:13</span><br><span class="line">const maxPort = 65_535;</span><br><span class="line">                ^^</span><br><span class="line"></span><br><span class="line">SyntaxError: Invalid or unexpected token</span><br><span class="line">    at Module._compile (internal/modules/cjs/loader.js:723:23)</span><br><span class="line">    at Object.Module._extensions..js (internal/modules/cjs/loader.js:789:10)</span><br><span class="line">    at Module.load (internal/modules/cjs/loader.js:653:32)</span><br><span class="line">    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)</span><br><span class="line">    at Function.Module._load (internal/modules/cjs/loader.js:585:3)</span><br><span class="line">    at Module.require (internal/modules/cjs/loader.js:692:17)</span><br><span class="line">    at require (internal/modules/cjs/helpers.js:25:18)</span><br><span class="line">    at Function.getFreePort (/Users/lyur/Desktop/project/personal-pro/ts_in_action/node_modules/webpack-dev-server/lib/Server.js:397:21)</span><br><span class="line">    at Server.start (/Users/lyur/Desktop/project/personal-pro/ts_in_action/node_modules/webpack-dev-server/lib/Server.js:3203:40)</span><br><span class="line">    at process._tickCallback (internal/process/next_tick.js:68:7)</span><br><span class="line">npm ERR! code ELIFECYCLE</span><br><span class="line">npm ERR! errno 2</span><br><span class="line">npm ERR! ts_in_action@1.0.0 start: `webpack-dev-server --mode=development --config ./build/webpack.config.js`</span><br><span class="line">npm ERR! Exit status 2</span><br><span class="line">npm ERR!</span><br><span class="line">npm ERR! Failed at the ts_in_action@1.0.0 start script.</span><br><span class="line">npm ERR! This is probably not a problem with npm. There is likely additional logging output above.</span><br></pre></td></tr></table></figure>
-<p>原因： webpack webpack-dev-server 依赖包版本不对应，安装对应版本即可。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2020/08/08/Vue%20Router/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -776,7 +772,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-05-08 22:19:02" itemprop="dateModified" datetime="2022-05-08T22:19:02+08:00">2022-05-08</time>
+                <time title="修改时间：2022-05-09 22:08:36" itemprop="dateModified" datetime="2022-05-09T22:08:36+08:00">2022-05-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -784,7 +780,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%A1%86%E6%9E%B6/" itemprop="url" rel="index"><span itemprop="name">框架</span></a>
+                  <a href="/categories/vue/" itemprop="url" rel="index"><span itemprop="name">vue</span></a>
                 </span>
             </span>
 
