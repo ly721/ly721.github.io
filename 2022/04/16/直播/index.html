@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="1、直播原理音视频采集：pc\ios\android端，采集到的是直播流。直播流失败的时候，首先去排查流编码是否有问题将直播流推送到服务器上，视频格式分为：mp4,webm,hls,flv(b站)，兼容性从好到差。播放器分点播和直播。  直播协议： HLS协议：直播借助h5的video播放，HLS协议会给video 一个 M3U8 文件(存放片段索引)，每个索引对应每一个片段.ts文件，每隔9秒浏">
+<meta property="og:type" content="article">
+<meta property="og:title" content="直播相关">
+<meta property="og:url" content="http://example.com/2022/04/16/%E7%9B%B4%E6%92%AD/index.html">
+<meta property="og:site_name" content="Lucky Girl">
+<meta property="og:description" content="1、直播原理音视频采集：pc\ios\android端，采集到的是直播流。直播流失败的时候，首先去排查流编码是否有问题将直播流推送到服务器上，视频格式分为：mp4,webm,hls,flv(b站)，兼容性从好到差。播放器分点播和直播。  直播协议： HLS协议：直播借助h5的video播放，HLS协议会给video 一个 M3U8 文件(存放片段索引)，每个索引对应每一个片段.ts文件，每隔9秒浏">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-04-16T09:15:08.000Z">
+<meta property="article:modified_time" content="2022-05-08T14:05:18.320Z">
+<meta property="article:author" content="李泼泼">
+<meta property="article:tag" content="播放器">
+<meta property="article:tag" content="ffmpeg">
+<meta property="article:tag" content="直播协议">
+<meta property="article:tag" content="video标签">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2022/04/16/%E7%9B%B4%E6%92%AD/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>直播相关 | Lucky Girl</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?41fc030db57d5570dd22f78997dc4a7e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+	<script src="/live2d-widget/autoload.js"></script>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Lucky Girl</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Yur's Garden</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404.html" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/16/%E7%9B%B4%E6%92%AD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="李泼泼">
+      <meta itemprop="description" content="向着目标奔跑！！！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lucky Girl">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          直播相关
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-04-16 17:15:08" itemprop="dateCreated datePublished" datetime="2022-04-16T17:15:08+08:00">2022-04-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-08 22:05:18" itemprop="dateModified" datetime="2022-05-08T22:05:18+08:00">2022-05-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%9B%B4%E6%92%AD/" itemprop="url" rel="index"><span itemprop="name">直播</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="1、直播原理"><a href="#1、直播原理" class="headerlink" title="1、直播原理"></a>1、直播原理</h2><p>音视频采集：pc\ios\android端，采集到的是直播流。<br>直播流失败的时候，首先去排查流编码是否有问题<br>将直播流推送到服务器上，视频格式分为：mp4,webm,hls,flv(b站)，兼容性从好到差。<br>播放器分点播和直播。</p>
+<ul>
+<li>直播协议：<ol>
+<li>HLS协议：<br>直播借助h5的video播放，HLS协议会给video 一个 M3U8 文件(存放片段索引)，每个索引对应每一个片段.ts文件，每隔9秒浏览器自动刷新M3U8文件。<br>M3U8文件可能是ts文件也可能是M3U8文件。所以这可能会遇到浏览器兼容问题。<br>解析流程：先找PAT的包，在找PMT的包，然后PMT指出那个是解析音频，那个解析视频<br>总结：好用，但是有延时</li>
+<li>RTMP协议<br>实时消息传递协议，基于TCP协议<br>总结：实时，但是使用麻烦</li>
+<li>HTTP_FLV协议<br>cdn源与端通过http请求<br>优点：<br>a.可以一定程度上避免防火墙干扰<br>b.可以很好兼容HTTP302跳转<br>c.可以使用HTTPS作为加密通道<br>d.很好的支持移动端<br>总结：结合前两种协议优点，但是格式是<br>不同场景使用的协议：<br>对于客户端采集，使用RTMP协议<br>低延时场景，使用RTMP 或者 HTTP_FLV<br>直播播放都使用HLS协议</li>
+</ol>
+</li>
+</ul>
+<h2 id="2、video详解"><a href="#2、video详解" class="headerlink" title="2、video详解"></a>2、video详解</h2><h3 id="2-1-属性："><a href="#2-1-属性：" class="headerlink" title="2.1 属性："></a>2.1 属性：</h3><p>基础用法：</p>
+<ul>
+<li>controls 属性： 控制栏</li>
+<li>controlslist 属性： 对控制栏进行限制，比如不让用户下载该视频、不允许全屏</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;video src=&quot;./xxx.mp4&quot; controls controlslist=&#x27;nodownload nofullscreen noremoteplayback&#x27; poster=&#x27;imgurl&#x27;&gt;&lt;/video&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>贴图：poster（贴图） 属性：通过一张预览封面图了解视频大概内容，没有这个属性，是视频的第一帧</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;video src=&quot;./xxx.mp4&quot; controls poster=&#x27;imgurl&#x27;&gt;&lt;/video&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>自动播放：autoplay 属性</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;video src=&quot;./xxx.mp4&quot; controls autoplay&gt;&lt;/video&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>静音：muted 属性移动端非静音视频是不允许自动播放的</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;video src=&quot;./xxx.mp4&quot; muted controls autoplay&gt;&lt;/video&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>循环播放：loop 属性</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;video src=&quot;./xxx.mp4&quot; muted loop controls autoplay&gt;&lt;/video&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>预加载：preload 属性</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;video src=&quot;./xxx.mp4&quot; muted loop preload controls autoplay&gt;&lt;/video&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>音量设置：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;video src=&quot;./xxx.mp4&quot; id=&#x27;video&#x27; controls volume=&#x27;0.5&#x27;&gt;&lt;/video&gt; 音量设置不生效</span><br><span class="line">需要在js中控制</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    const dom = document.getElementById(&#x27;video&#x27;);</span><br><span class="line">    dom.volume = 0.5;</span><br><span class="line">    dom.currentTime = 1; // 单位： 秒 播放时间控制：</span><br><span class="line">    dom.src=&#x27;&#x27;; //改变视频地址</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>备用地址：<br>第一个视频找不到会播放第二个</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;video controls  poster=&#x27;./poster.png&#x27; &gt;</span><br><span class="line">    &lt;source src=&quot;./test2.mp4&quot; type=&#x27;video/mp4&#x27;&gt;</span><br><span class="line">    &lt;source src=&quot;./test1.mp4&quot; type=&#x27;video/mp4&#x27;&gt;</span><br><span class="line">&lt;/video&gt;</span><br></pre></td></tr></table></figure>
+<p>此时获取 src值为空，使用currentSrc拿到当前播放地址。</p>
+<h3 id="2-2-事件"><a href="#2-2-事件" class="headerlink" title="2.2 事件"></a>2.2 事件</h3><h4 id="2-2-1-loadstart-开始加载"><a href="#2-2-1-loadstart-开始加载" class="headerlink" title="2.2.1 loadstart 开始加载"></a>2.2.1 loadstart 开始加载</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">v.addEventListener(&#x27;loadstart&#x27;,function()&#123;&#125;)</span><br></pre></td></tr></table></figure>
+<h4 id="2-2-2-durationchange-时长改变"><a href="#2-2-2-durationchange-时长改变" class="headerlink" title="2.2.2 durationchange 时长改变"></a>2.2.2 durationchange 时长改变</h4><p>video初始化的时候拿不到时长信息，时长是NaN；<br>视频加载完毕的时候，拿到时长信息，会触发duration change事件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">console.log(v.duration); //NaN</span><br><span class="line">v.addEventListener(&#x27;durationchange&#x27;,function(e)&#123;console.log(v.duration);&#125;) // （触发多次）拿到的不一定是总时长，因为加载源视频都是一段段的</span><br></pre></td></tr></table></figure>
+<h4 id="2-2-3-loadedmetadata"><a href="#2-2-3-loadedmetadata" class="headerlink" title="2.2.3 loadedmetadata"></a>2.2.3 loadedmetadata</h4><p>源数据加载完成<br>v.addEventListener(‘loadedmetadata’, function() {<br>  console.log(‘loadedmetadata’);<br>});<br>源数据加载完毕会触发 durationchange  和 loadedmetadata 事件，但是要注意顺序，先触发前者。</p>
+<h4 id="2-2-4-loadeddata"><a href="#2-2-4-loadeddata" class="headerlink" title="2.2.4 loadeddata"></a>2.2.4 loadeddata</h4><p>没有足够音视频帧去播放</p>
+<h4 id="2-2-5-progress"><a href="#2-2-5-progress" class="headerlink" title="2.2.5 progress"></a>2.2.5 progress</h4><p>加载数据</p>
+<h4 id="2-2-6-canplay"><a href="#2-2-6-canplay" class="headerlink" title="2.2.6 canplay"></a>2.2.6 canplay</h4><p>通知浏览器可以播放视频<br>在这里可以使用video.play()</p>
+<h4 id="2-2-7-canplaythrough"><a href="#2-2-7-canplaythrough" class="headerlink" title="2.2.7 canplaythrough"></a>2.2.7 canplaythrough</h4><p>可以流畅播放</p>
+<h4 id="2-2-8-play-播放"><a href="#2-2-8-play-播放" class="headerlink" title="2.2.8 play 播放"></a>2.2.8 play 播放</h4><p>视频播放就会触发</p>
+<h4 id="2-2-9-pause-暂停"><a href="#2-2-9-pause-暂停" class="headerlink" title="2.2.9 pause 暂停"></a>2.2.9 pause 暂停</h4><h4 id="2-2-10-监听控制条时长"><a href="#2-2-10-监听控制条时长" class="headerlink" title="2.2.10 监听控制条时长"></a>2.2.10 监听控制条时长</h4><p>1、seeking<br>2、seeked</p>
+<h4 id="2-2-11-waiting"><a href="#2-2-11-waiting" class="headerlink" title="2.2.11 waiting"></a>2.2.11 waiting</h4><h4 id="2-2-12-playing"><a href="#2-2-12-playing" class="headerlink" title="2.2.12 playing"></a>2.2.12 playing</h4><h4 id="2-2-13-timeupdate"><a href="#2-2-13-timeupdate" class="headerlink" title="2.2.13 timeupdate"></a>2.2.13 timeupdate</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 播放时间更新事件</span><br><span class="line">v.addEventListener(&#x27;timeupdate&#x27;, function()&#123;</span><br><span class="line">    </span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h4 id="2-2-14ended"><a href="#2-2-14ended" class="headerlink" title="2.2.14ended"></a>2.2.14ended</h4><p>1、监听播放结束事件，2、插入一段广告</p>
+<h4 id="2-2-15-error"><a href="#2-2-15-error" class="headerlink" title="2.2.15 error"></a>2.2.15 error</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">v.addEventListener(&#x27;error&#x27;, function()&#123;</span><br><span class="line">    console.log(e); // 视频加载出错error 对象有code 属性以及对应错误信息</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>浏览器自带 加载失败 重试机制。<br>程序控制播放：<br>需要监听 canplay 或者 canplaythrough 事件 控制播放</p>
+<h2 id="3、直播源的制作"><a href="#3、直播源的制作" class="headerlink" title="3、直播源的制作"></a>3、直播源的制作</h2><h3 id="3-1-方法-nginx-ffmpeg"><a href="#3-1-方法-nginx-ffmpeg" class="headerlink" title="3.1 方法 nginx + ffmpeg"></a>3.1 方法 nginx + ffmpeg</h3><h4 id="3-1-1-安装nginx"><a href="#3-1-1-安装nginx" class="headerlink" title="3.1.1 安装nginx"></a>3.1.1 安装nginx</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">brew tap homebrew/nginx</span><br><span class="line">brew install nginx-full --with-rtmp-module(安装这个模块)</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+<h4 id="3-1-2-查看nginx安装位置"><a href="#3-1-2-查看nginx安装位置" class="headerlink" title="3.1.2 查看nginx安装位置"></a>3.1.2 查看nginx安装位置</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">brew info nginx-full</span><br><span class="line"></span><br><span class="line">/opt/homebrew/opt/nginx-full/bin/nginx  安装位置</span><br><span class="line">/opt/homebrew/var/www  服务器根目录所在位置</span><br><span class="line">/opt/homebrew/etc/nginx/nginx.conf 配置文件所在目录</span><br></pre></td></tr></table></figure>
+<h4 id="3-1-3-安装-ffmpeg"><a href="#3-1-3-安装-ffmpeg" class="headerlink" title="3.1.3 安装 ffmpeg"></a>3.1.3 安装 ffmpeg</h4><p><a target="_blank" rel="noopener" href="http://ffmpeg.org/download.html">http://ffmpeg.org/download.html</a></p>
+<p>安装方法1:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install ffmpeg 下载出错 404</span><br></pre></td></tr></table></figure>
+
+<p>安装方法2: </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1 拉取源码 git clone https://git.ffmpeg.org/ffmpeg.git ffmpeg</span><br><span class="line">2 进入ffmpeg文件进行编译  ./configure --prefix=/Users/lyur/ffmpeg（安装目录） --enable-gpl --enable-nonfree --enable-libfdk-aac --enable-libx264 --enable-libx265 --enable-filter=delogo --enable-debug --disable-optimizations --enable-libspeex --enable-videotoolbox --enable-shared --enable-pthreads --enable-version3 --enable-hardcoded-tables --cc=clang --host-cflags= --host-ldflags=</span><br><span class="line">3 安装 sudo make install</span><br><span class="line">安装成功检验：</span><br><span class="line">$ ffmepg </span><br><span class="line">输出相应配置信息</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-1-4-配置-nginx-conf"><a href="#3-1-4-配置-nginx-conf" class="headerlink" title="3.1.4 配置 nginx.conf"></a>3.1.4 配置 nginx.conf</h4><p>使用vscode 打开 nginx.conf</p>
+<ul>
+<li>1、vs code：commond+shift+p 输入 shell commond: Install ‘code’ command in PATH</li>
+<li>2、bash： code xx/nginx.conf</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">http &#123;</span><br><span class="line">    server &#123;</span><br><span class="line">        ...</span><br><span class="line">        location /hls &#123;</span><br><span class="line">          types &#123;</span><br><span class="line">            application/vnd.apple.mpegurl m3u8;</span><br><span class="line">            video/mp2t ts;</span><br><span class="line">          &#125;</span><br><span class="line">          root /Users/lyur/www;（存放m3u8文件的上一级）</span><br><span class="line">          add_header Cache-Control no-cache;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"># rtmp 协议配置</span><br><span class="line">rtmp &#123;</span><br><span class="line">    server &#123;</span><br><span class="line">        listen 1935;</span><br><span class="line">        # rtmp直播流配置</span><br><span class="line">        application rtmplive &#123;</span><br><span class="line">            live on;</span><br><span class="line">        &#125;</span><br><span class="line">        # hls 直播流配置</span><br><span class="line">        application hls &#123;</span><br><span class="line">            live on;</span><br><span class="line">            hls on;</span><br><span class="line">            hls_path /Users/lyur/www/hls;（注意nginx在该目录是否有写入权限）</span><br><span class="line">            hls_fragment 5s;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>说明：<br>rtmp 协议名<br>server 说明内部是服务器相关配置<br>listen 该协议监听的端口号<br>application 访问的应用路径<br>live on 开启实时</p>
+<p>后续推流访问：<br>rtmp://localhost:1935/rtmplive/xxx<br>保存 nginx配置文件之后需执行 （重要）</p>
+<p>nginx -s reload<br>否则会出现访问拒绝问题：</p>
+<p>nginx.conf新增<br>pid /opt/homebrew/etc/nginx/logs/nginx.pid;</p>
+<p>这是因为nginx.pid 文件启动才生成</p>
+<h4 id="3-1-5-推流"><a href="#3-1-5-推流" class="headerlink" title="3.1.5 推流"></a>3.1.5 推流</h4><p>1、rtmp推流：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -re -i xx.mp4(视频绝对路径) -vcodec libx264 -acodec aac -f flv rtmp://localhost:1935/rtmplive/rtmp(rtmp 随便写)</span><br></pre></td></tr></table></figure>
+
+<p>2、hls推流：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -re -i xx.mp4(视频绝对路径) -vcodec libx264 -acodec aac -f flv rtmp://localhost:1935/hls/stream 推流成功</span><br></pre></td></tr></table></figure>
+<p>但是使用Safari 查看视频 404 <a target="_blank" rel="noopener" href="http://localhost:8080/hls/stream.m3u8">http://localhost:8080/hls/stream.m3u8</a>    </p>
+<p>查找存放m3u8文件夹，发现里面没有ts和m3u8文件，原因 在/usr/local/var/www/hls目录，没有写入文件权限，更换存放路径/Users/lyur/www/hls<br>修改读取文件路径为/Users/lyur/www，nginx访问成功。</p>
+<h4 id="3-1-6-安装-VLC-播放器"><a href="#3-1-6-安装-VLC-播放器" class="headerlink" title="3.1.6 安装 VLC 播放器"></a>3.1.6 安装 VLC 播放器</h4><p><a target="_blank" rel="noopener" href="https://www.videolan.org/index.zh.html">https://www.videolan.org/index.zh.html</a></p>
+<p>1.6.1 rtmp推流访问视频：<br>安装之后 打开 file –&gt; open network –&gt; 输入推流的地址</p>
+<p>1.7 nginx 配置stat 统计<br>使用 brew install nginx-full，自带统计页面存放位置。</p>
+<p>nginx.conf 中配置访问stat页面访问路由</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">location /stat &#123;    </span><br><span class="line">    rtmp_stat all;</span><br><span class="line">    rtmp_stat_stylesheet stat.xsl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">location /stat.xsl &#123; </span><br><span class="line">    root /opt/homebrew/opt/rtmp-nginx-module/share/rtmp-nginx-module;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>重启nginx可以查看我们推流是否成功。</p>
+<p>2 方法二 集成服务（没有现成服务 没有进行验证）<br>1、推流命令</p>
+<p>ffmpeg -re -i xx.mp4(视频绝对路径) -c copy -f flv rtmp://localhost:1935/live/movie<br>2、验证地址</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">RTMP: rtmp://localhost:1935/live/movie</span><br><span class="line">FLV:  http://127.0.0.1:7001/live/movie.flv</span><br><span class="line">HLS:  http://127.0.0.1:7002/live/movie.m3u8</span><br></pre></td></tr></table></figure>
+<p>方法二无法灵活配置流地址和端口，方法一可以，但是方法一需要熟悉nginx的配置</p>
+<p>2.1 下载服务<br>2.2 安装服务<br>2.3准备源视频<br>2.4开启服务<br>2.5利用ffmpeg推流</p>
+<h2 id="4、h5直播演练"><a href="#4、h5直播演练" class="headerlink" title="4、h5直播演练"></a>4、h5直播演练</h2><h3 id="4-1-播放器"><a href="#4-1-播放器" class="headerlink" title="4.1 播放器"></a>4.1 播放器</h3><h4 id="1、videojs"><a href="#1、videojs" class="headerlink" title="1、videojs"></a>1、videojs</h4><p>优点：很多插件和自定义ui,内部使用hls实现</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/videojs/video.js%E3%80%82">https://github.com/videojs/video.js。</a> 使用文档<a target="_blank" rel="noopener" href="https://videojs.com/">https://videojs.com/</a></p>
+<p>基础使用：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// 引入videojs的css js</span><br><span class="line">&lt;link href=&quot;https://cdnjs.cloudflare.com/ajax/libs/video.js/7.10.2/video-js.min.css&quot; rel=&quot;stylesheet&quot;/&gt;</span><br><span class="line">&lt;video id=&#x27;my-player&#x27;&gt;</span><br><span class="line">   &lt;source src=&#x27;test.mp4&#x27; type=&#x27;video/mp4&#x27;&gt;</span><br><span class="line">&lt;/video&gt;</span><br><span class="line">&lt;script src=&#x27;https://cdnjs.cloudflare.com/ajax/libs/video.js/7.10.2/video.min.js&#x27;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">var player = videojs(&#x27;my-player&#x27;, opstions);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>使用ffmpeg 推流， videojs进行播放m3u8文件 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">推流：ffmpeg -re -i -vcodec libx264 -acodec aac -f flv rtmp://localhost:1935/hls/stream</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">引入videojs的css js</span><br><span class="line">&lt;link href=&quot;https://cdnjs.cloudflare.com/ajax/libs/video.js/7.10.2/video-js.min.css&quot; rel=&quot;stylesheet&quot;/&gt;</span><br><span class="line">&lt;video id=&#x27;my-player&#x27;&gt;</span><br><span class="line">   &lt;source src=&#x27;http://localhost:8080/hls/stream.m3u8&#x27; type=&#x27;application/vnd.apple.mpegurl&#x27;&gt;</span><br><span class="line">&lt;/video&gt;</span><br><span class="line">&lt;script src=&#x27;https://cdnjs.cloudflare.com/ajax/libs/video.js/7.10.2/video.min.js&#x27;&gt;&lt;/script&gt;</span><br><span class="line">//支持hls协议</span><br><span class="line">  &lt;script src=&quot;https://unpkg.com/videojs-contrib-hls/dist/videojs-contrib-hls.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">var myPlayer = videojs.getPalyer(&#x27;my-player&#x27;, opstions);</span><br><span class="line"> //需要监听视频加载完成进行播放控制 否则不会加载m3u8文件</span><br><span class="line">      videojs(&quot;my-video&quot;).ready(function()&#123;</span><br><span class="line">        var myPlayer = this;</span><br><span class="line">        myPlayer.play();</span><br><span class="line">      &#125;);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>m3u8文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">#EXTM3U</span><br><span class="line">#EXT-X-VERSION:3</span><br><span class="line">#EXT-X-MEDIA-SEQUENCE:90</span><br><span class="line">#EXT-X-TARGETDURATION:10</span><br><span class="line">#EXTINF:9.426,</span><br><span class="line">stream-90.ts</span><br><span class="line">#EXTINF:8.695,</span><br><span class="line">stream-91.ts</span><br><span class="line">#EXTINF:9.983,</span><br><span class="line">stream-92.ts</span><br><span class="line">#EXT-X-DISCONTINUITY</span><br><span class="line">#EXTINF:9.997,</span><br><span class="line">stream-93.ts</span><br><span class="line">#EXTINF:3.215,</span><br><span class="line">stream-94.ts</span><br><span class="line">#EXT-X-DISCONTINUITY</span><br><span class="line">#EXTINF:9.913,</span><br><span class="line">stream-95.ts</span><br></pre></td></tr></table></figure>
+<h4 id="2、hlsjs"><a href="#2、hlsjs" class="headerlink" title="2、hlsjs"></a>2、hlsjs</h4><p>适合使用hls协议的直播 <a target="_blank" rel="noopener" href="https://github.com/video-dev/hls.js">https://github.com/video-dev/hls.js</a><br>hls demo m3u8文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#EXTM3U</span><br><span class="line">#EXT-X-VERSION:3</span><br><span class="line">#EXT-X-PLAYLIST-TYPE:VOD // 代表这是点播，或者是点播是有进度条拖动，而直播是没有的</span><br><span class="line">#EXT-X-TARGETDURATION:11</span><br><span class="line">#EXTINF:10.000,</span><br><span class="line">url_462/193039199_mp4_h264_aac_hd_7.ts</span><br><span class="line">#EXTINF:10.000,</span><br><span class="line">url_463/193039199_mp4_h264_aac_hd_7.ts</span><br><span class="line">#EXTINF:10.000,</span><br><span class="line">url_464/193039199_mp4_h264_aac_hd_7.ts</span><br><span class="line">#EXT-X-ENDLIST</span><br></pre></td></tr></table></figure>
+<p>hls点播demo</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;video id=&#x27;video&#x27; controls width=&#x27;400&#x27;&gt;&lt;/video&gt;</span><br><span class="line">&lt;script src=&#x27;https://cdn.jsdelivr.net/npm/hls.js@latest&#x27;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var video = document.getElementById(&#x27;video&#x27;);</span><br><span class="line">    var videoSrc=&#x27;https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8&#x27;;</span><br><span class="line">    if(Hls.isSupported())&#123;</span><br><span class="line">        var hls = new Hls();</span><br><span class="line">        hls.loadSource(videoSrc);</span><br><span class="line">        hls.attachMedia(video);</span><br><span class="line">    &#125;else if(video.canplayType(&#x27;application/vnd.apple.mpegurl&#x27;))&#123;</span><br><span class="line">        video.src = videoSrc;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>自定义UI 样式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;player&quot; id=&quot;player&quot;&gt;</span><br><span class="line">  &lt;video id=&quot;video&quot; pause&gt;&lt;/video&gt;</span><br><span class="line">  &lt;div class=&quot;btn&quot;&gt;&lt;/div&gt;</span><br><span class="line">  &lt;span class=&quot;onlive&quot;&gt;正在直播&lt;/span&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;script src=&quot;https://cdn.jsdelivr.net/npm/hls.js@latest&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  var video = document.getElementById(&#x27;video&#x27;);</span><br><span class="line">var player = document.getElementById(&#x27;player&#x27;);</span><br><span class="line">var onlive = document.getElementsByClassName(&#x27;onlive&#x27;)[0];</span><br><span class="line">var btn = document.getElementsByClassName(&#x27;btn&#x27;)[0];</span><br><span class="line">var videoSrc = &#x27;http://localhost:8080/hls/stream.m3u8&#x27;; //&#x27;https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8&#x27;//</span><br><span class="line">if (Hls.isSupported()) &#123;</span><br><span class="line">  var hls = new Hls();</span><br><span class="line">  hls.loadSource(videoSrc);</span><br><span class="line">  hls.attachMedia(video);</span><br><span class="line">  video.play()</span><br><span class="line">&#125;</span><br><span class="line">else if (video.canPlayType(&#x27;application/vnd.apple.mpegurl&#x27;)) &#123;</span><br><span class="line">  video.src = videoSrc;</span><br><span class="line">&#125;</span><br><span class="line">btn.addEventListener(&#x27;click&#x27;, function()&#123;</span><br><span class="line">  if(video.paused)&#123;</span><br><span class="line">    video.play();</span><br><span class="line">  &#125;else&#123;</span><br><span class="line">    video.pause();</span><br><span class="line">  &#125; // 实际开发还要注意 ended事件</span><br><span class="line">&#125;);</span><br><span class="line">video.addEventListener(&#x27;play&#x27;, function()&#123;</span><br><span class="line">  player.className = &#x27;player&#x27;;</span><br><span class="line">  onlive.className = &#x27;onlive&#x27;;</span><br><span class="line">&#125;);</span><br><span class="line">video.addEventListener(&#x27;pause&#x27;, function()&#123;</span><br><span class="line">  player.className = &#x27;player pause&#x27;;</span><br><span class="line">  onlive.className = &#x27;onlive pause&#x27;;</span><br><span class="line">&#125;);</span><br><span class="line">video.addEventListener(&#x27;click&#x27;, function()&#123;</span><br><span class="line">  if(video.paused)&#123;</span><br><span class="line">    video.play();</span><br><span class="line">  &#125;else&#123;</span><br><span class="line">    video.pause();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>css:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">.player&#123;</span><br><span class="line">  width: 450px;</span><br><span class="line">  height: 230px;</span><br><span class="line">  position: relative;</span><br><span class="line">&#125;</span><br><span class="line">.player video &#123;</span><br><span class="line">  width: 100%;</span><br><span class="line">  height: 100%;</span><br><span class="line">&#125;</span><br><span class="line">.player .btn &#123;</span><br><span class="line">  display: none;</span><br><span class="line">  width: 40px;</span><br><span class="line">  height: 40px;</span><br><span class="line">  box-sizing: border-box;</span><br><span class="line">  background: rgba(0, 0, 0, .5);</span><br><span class="line">  border-radius: 50%;</span><br><span class="line">  margin: -20px auto auto -20px;</span><br><span class="line">  position: absolute;</span><br><span class="line">  left: 50%;</span><br><span class="line">  top: 50%;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br><span class="line">.player .btn:hover&#123;</span><br><span class="line">  background-color: rgba(0,0,0,.3);</span><br><span class="line">&#125;</span><br><span class="line">.player .btn::before &#123;</span><br><span class="line">  content: &#x27;&#x27;;</span><br><span class="line">  display: block;</span><br><span class="line">  height: 0;</span><br><span class="line">  width: 0;</span><br><span class="line">  margin-left: 14px;</span><br><span class="line">  margin-top: 4px;</span><br><span class="line">  border: 16px solid transparent; </span><br><span class="line">  border-left: 16px solid #ddd;</span><br><span class="line">&#125;</span><br><span class="line">.player .btn::before:hover &#123;</span><br><span class="line">  border-left-color: #fff;</span><br><span class="line">&#125; </span><br><span class="line">.player.pause .btn&#123;</span><br><span class="line">  display: block;</span><br><span class="line">&#125;</span><br><span class="line">.onlive&#123;</span><br><span class="line">  position: absolute;</span><br><span class="line">  left: 40px;</span><br><span class="line">  color: #ccc;</span><br><span class="line">  bottom: 20px;</span><br><span class="line">  display: block;</span><br><span class="line">&#125;</span><br><span class="line">.onlive.pause&#123;</span><br><span class="line">  display: none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>hlsjs 比 videojs 比较：<br>后者体积大，前者比较灵活，没有videojs那么多功能，<br>UI方面：hls可以自定义，而videojs有基本UI封装，如果需要修改样式，需要自定义插件或者使用UI样式进行覆盖</p>
+<h4 id="3、flvjs"><a href="#3、flvjs" class="headerlink" title="3、flvjs"></a>3、flvjs</h4><p>flv推流服务 未成功启动，所以没有进行demo</p>
+<h2 id="5、微信小程序演练"><a href="#5、微信小程序演练" class="headerlink" title="5、微信小程序演练"></a>5、微信小程序演练</h2><p>微信小程序实时播放流组件  <live-player />  注意：不支持hls协议的直播源，支持flv、rtmp</p>
+<ul>
+<li>1、使用 ffmpeg + nginx 实现 rtmp推流: </li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -re -i test.mp4 -vcodec libx264 -acodec aac -f flv rtmp://localhost:1935/rtmplive/rtmpdemo</span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li>2、微信小程序内使用播放直播流组件：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;live-player src=&quot;rtmp://localhost:1935/rtmplive/rtmpdemo&quot;</span><br><span class="line"> mode=&quot;RTC&quot; autoplay bindstatechange=&quot;statechange&quot; binderror=&quot;error&quot; style=&quot;width: 300px; height: 225px;&quot; /&gt;</span><br></pre></td></tr></table></figure>
+
+<p>需要真机调试，这里需要注意我们直播流地址localhost对应的是我们电脑的127.0.0.1 但是进行真机调试需要是的手机和电脑出在同一个局域网，直播源ip使用的是电脑的ip：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">src=&quot;rtmp://10.4.12.237:1935/rtmplive/rtmpdemo&quot;</span><br></pre></td></tr></table></figure>
+<p>配置之后发现无法报错：live-player报渲染失败：insertLivePlayer:fail jsapi has no permission<br>修改小程序管理后台权限 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/wxamp/categoryapi/index?token=683321573&amp;lang=zh_CN">https://mp.weixin.qq.com/wxamp/categoryapi/index?token=683321573&amp;lang=zh_CN</a> （开发管理 -&gt; 接口设置 -&gt; 实时播放音视频流打开）</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>李泼泼
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2022/04/16/%E7%9B%B4%E6%92%AD/" title="直播相关">http://example.com/2022/04/16/直播/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%92%AD%E6%94%BE%E5%99%A8/" rel="tag"># 播放器</a>
+              <a href="/tags/ffmpeg/" rel="tag"># ffmpeg</a>
+              <a href="/tags/%E7%9B%B4%E6%92%AD%E5%8D%8F%E8%AE%AE/" rel="tag"># 直播协议</a>
+              <a href="/tags/video%E6%A0%87%E7%AD%BE/" rel="tag"># video标签</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/08/08/http/" rel="prev" title="计网">
+      <i class="fa fa-chevron-left"></i> 计网
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/04/16/css/" rel="next" title="css">
+      css <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E7%9B%B4%E6%92%AD%E5%8E%9F%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">1、直播原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81video%E8%AF%A6%E8%A7%A3"><span class="nav-number">2.</span> <span class="nav-text">2、video详解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E5%B1%9E%E6%80%A7%EF%BC%9A"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 属性：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E4%BA%8B%E4%BB%B6"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 事件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-1-loadstart-%E5%BC%80%E5%A7%8B%E5%8A%A0%E8%BD%BD"><span class="nav-number">2.2.1.</span> <span class="nav-text">2.2.1 loadstart 开始加载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-2-durationchange-%E6%97%B6%E9%95%BF%E6%94%B9%E5%8F%98"><span class="nav-number">2.2.2.</span> <span class="nav-text">2.2.2 durationchange 时长改变</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-3-loadedmetadata"><span class="nav-number">2.2.3.</span> <span class="nav-text">2.2.3 loadedmetadata</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-4-loadeddata"><span class="nav-number">2.2.4.</span> <span class="nav-text">2.2.4 loadeddata</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-5-progress"><span class="nav-number">2.2.5.</span> <span class="nav-text">2.2.5 progress</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-6-canplay"><span class="nav-number">2.2.6.</span> <span class="nav-text">2.2.6 canplay</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-7-canplaythrough"><span class="nav-number">2.2.7.</span> <span class="nav-text">2.2.7 canplaythrough</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-8-play-%E6%92%AD%E6%94%BE"><span class="nav-number">2.2.8.</span> <span class="nav-text">2.2.8 play 播放</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-9-pause-%E6%9A%82%E5%81%9C"><span class="nav-number">2.2.9.</span> <span class="nav-text">2.2.9 pause 暂停</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-10-%E7%9B%91%E5%90%AC%E6%8E%A7%E5%88%B6%E6%9D%A1%E6%97%B6%E9%95%BF"><span class="nav-number">2.2.10.</span> <span class="nav-text">2.2.10 监听控制条时长</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-11-waiting"><span class="nav-number">2.2.11.</span> <span class="nav-text">2.2.11 waiting</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-12-playing"><span class="nav-number">2.2.12.</span> <span class="nav-text">2.2.12 playing</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-13-timeupdate"><span class="nav-number">2.2.13.</span> <span class="nav-text">2.2.13 timeupdate</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-14ended"><span class="nav-number">2.2.14.</span> <span class="nav-text">2.2.14ended</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-15-error"><span class="nav-number">2.2.15.</span> <span class="nav-text">2.2.15 error</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81%E7%9B%B4%E6%92%AD%E6%BA%90%E7%9A%84%E5%88%B6%E4%BD%9C"><span class="nav-number">3.</span> <span class="nav-text">3、直播源的制作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E6%96%B9%E6%B3%95-nginx-ffmpeg"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 方法 nginx + ffmpeg</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-1-%E5%AE%89%E8%A3%85nginx"><span class="nav-number">3.1.1.</span> <span class="nav-text">3.1.1 安装nginx</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-2-%E6%9F%A5%E7%9C%8Bnginx%E5%AE%89%E8%A3%85%E4%BD%8D%E7%BD%AE"><span class="nav-number">3.1.2.</span> <span class="nav-text">3.1.2 查看nginx安装位置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-3-%E5%AE%89%E8%A3%85-ffmpeg"><span class="nav-number">3.1.3.</span> <span class="nav-text">3.1.3 安装 ffmpeg</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-4-%E9%85%8D%E7%BD%AE-nginx-conf"><span class="nav-number">3.1.4.</span> <span class="nav-text">3.1.4 配置 nginx.conf</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-5-%E6%8E%A8%E6%B5%81"><span class="nav-number">3.1.5.</span> <span class="nav-text">3.1.5 推流</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-6-%E5%AE%89%E8%A3%85-VLC-%E6%92%AD%E6%94%BE%E5%99%A8"><span class="nav-number">3.1.6.</span> <span class="nav-text">3.1.6 安装 VLC 播放器</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4%E3%80%81h5%E7%9B%B4%E6%92%AD%E6%BC%94%E7%BB%83"><span class="nav-number">4.</span> <span class="nav-text">4、h5直播演练</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-%E6%92%AD%E6%94%BE%E5%99%A8"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 播放器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1%E3%80%81videojs"><span class="nav-number">4.1.1.</span> <span class="nav-text">1、videojs</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2%E3%80%81hlsjs"><span class="nav-number">4.1.2.</span> <span class="nav-text">2、hlsjs</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3%E3%80%81flvjs"><span class="nav-number">4.1.3.</span> <span class="nav-text">3、flvjs</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5%E3%80%81%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%BC%94%E7%BB%83"><span class="nav-number">5.</span> <span class="nav-text">5、微信小程序演练</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="李泼泼"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">李泼泼</p>
+  <div class="site-description" itemprop="description">向着目标奔跑！！！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ly721" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ly721" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1037442605@qq.com" title="E-Mail → mailto:1037442605@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2019 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">李泼泼</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+  
+  <span class="site-uv">
+   <i class="fa fa-user"></i> 本站访问数
+   <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+   人
+   </span>
+   
+   
+   
+   <span class="site-pv">
+    <i class="fa fa-eye"></i> 本站总访问量
+    <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    次
+    </span>
+    
+   </div>
+
+
+<span>
+  <span class="post-meta-divider">|</span>
+  本站已运行
+  <span id="showDays"></span>
+</span>
+<script>
+  var seconds = 1000;
+  var minutes = seconds * 60;
+  var hours = minutes * 60;
+  var days = hours * 24;
+  var years = days * 365;
+  var birthDay = Date.UTC(2019,01,20,14,00,00); // 这里设置建站时间
+  setInterval(function() {
+    var today = new Date();
+    var todayYear = today.getFullYear();
+    var todayMonth = today.getMonth()+1;
+    var todayDate = today.getDate();
+    var todayHour = today.getHours();
+    var todayMinute = today.getMinutes();
+    var todaySecond = today.getSeconds();
+    var now = Date.UTC(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond);
+    var diff = now - birthDay;
+    var diffYears = Math.floor(diff/years);
+    var diffDays = Math.floor((diff/days)-diffYears*365);
+    var diffHours = Math.floor((diff-(diffYears*365+diffDays)*days)/hours);
+    var diffMinutes = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours)/minutes);
+    var diffSeconds = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours-diffMinutes*minutes)/seconds);
+      document.getElementById('showDays').innerHTML=""+diffYears+"年"+diffDays+"天"+diffHours+"小时"+diffMinutes+"分钟"+diffSeconds+"秒";
+  }, 1000);
+</script>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":175,"height":350},"mobile":{"show":true},"log":false});</script></body>
+</html>

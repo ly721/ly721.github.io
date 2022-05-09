@@ -1,6 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Vue Router</title>
+    <url>/2020/08/08/Vue%20Router/</url>
+    <content><![CDATA[<h1 id="Vue-Router"><a href="#Vue-Router" class="headerlink" title="Vue Router"></a>Vue Router</h1><h2 id="1-简单列子"><a href="#1-简单列子" class="headerlink" title="1 简单列子"></a>1 简单列子</h2><p>mian.js</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import Vue from &#x27;vue&#x27;;</span><br><span class="line">import VueRouter from &#x27;vue-router&#x27;;</span><br><span class="line">Vue.use(VueRouter);</span><br><span class="line">const foo = &#123; template: &#x27;&lt;div&gt;foo&lt;/div&gt;&#x27; &#125;;</span><br><span class="line">const bar = &#123; template: &#x27;&lt;div&gt;bar&lt;/div&gt;&#x27; &#125;;</span><br><span class="line">const routes = [</span><br><span class="line">    &#123; path: &#x27;/foo&#x27;, component: foo &#125;,</span><br><span class="line">    &#123; path: &#x27;/bar&#x27;, component: bar &#125;</span><br><span class="line">];</span><br><span class="line">const router = new VueRouter(&#123; routes &#125;);</span><br><span class="line">new Vue(&#123;</span><br><span class="line">    el: &#x27;#app&#x27;,</span><br><span class="line">    router,</span><br><span class="line">    render: h =&gt; h(App)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>App.vue</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;router-link to=&#x27;/foo&#x27;&gt;foo&lt;/router-link&gt;</span><br><span class="line">&lt;router-link to=&#x27;/bar&#x27;&gt;bar&lt;/router-link&gt;</span><br><span class="line">// 路由出口 匹配的组件将在这里渲染</span><br><span class="line">&lt;router-view&gt;&lt;/router-view&gt;</span><br></pre></td></tr></table></figure>
+
+<p>路由注册之后，可以在通过 this.$router 获取当前路由器，通过 this.$route 获取当前路由</p>
+<h2 id="2-动态路由配置"><a href="#2-动态路由配置" class="headerlink" title="2 动态路由配置"></a>2 动态路由配置</h2><p>当我们需要根据不同id去判断组件渲染的时候，可以在路由路径中使用动态参数实现：<br>route.js</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">const routes = [</span><br><span class="line"> &#123; path: &#x27;/articleDetail/:articleId&#x27;, component: contentComp &#125;</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
+<p>contentComp.vue</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">组件内可以根据 this.$route.params 拿到articleId</span><br><span class="line">&lt;div&gt;&#123;&#123;$route.params.articleId&#125;&#125;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<p>注意⚠️： 动态路由切换的时候，所用的组件实例会被复用，这意味着组件的生命周期钩子函数不会再被调用。<br>如果想要监听路由变化，可以使用watch监听路由$route 或者 使用beforeRouteUpdate(..)</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1、watch: &#123;</span><br><span class="line">    $route(to,  from)&#123;</span><br><span class="line">    ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">2、</span><br><span class="line">beforeRouteUpdate(to, from, next)&#123;</span><br><span class="line">    ...</span><br><span class="line">    next(); // 一定要调用，不然不会往下走</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果设置了统配路由，那么就放在路由最后面，{ path: “*” },使用了统配路由，可以通过 this.$route.params.pathMatch 获取匹配路由匹配的部分。<br>路由匹配优先级：按照路由定义顺序进行优先匹配。<br>嵌套路由：<br>路由选项 children 参数 可以设置主路由下的嵌套路由</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">例如：/user/bar/baz</span><br><span class="line">var routes = [</span><br><span class="line">    &#123; path: &#x27;/bar&#x27;, component: baz, children: [</span><br><span class="line">        &#123; path: &#x27;baz&#x27;, component: baz &#125;</span><br><span class="line">    ] &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>实现嵌套路由 vue文件也需要 匹配渲染入口嵌套<br><router-view><router-view></p>
+<h2 id="3-编程式导航"><a href="#3-编程式导航" class="headerlink" title="3 编程式导航"></a>3 编程式导航</h2><h3 id="3-1-router-push-location-onComplete-onAbort"><a href="#3-1-router-push-location-onComplete-onAbort" class="headerlink" title="3.1 router.push(location, onComplete?, onAbort?)"></a>3.1 router.push(location, onComplete?, onAbort?)</h3><p>编程式 router.push(…)<br>相当于 声明式<router-link to='...'></router-link></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">router.push(&#x27;foo&#x27;); 这会往history栈添加一个新的记录</span><br><span class="line">router.push(&#123;path: &#x27;foo&#x27;, query: &#123; id: 21323213 &#125;&#125;);</span><br><span class="line">命名路由：</span><br><span class="line">在routes配置中给某个路由设置名称</span><br><span class="line">router.push(&#123;name: &#x27;bar&#x27;, params: &#123; index: 1 &#125;&#125;); // 如果提供path， 那么params 会被忽略 /bar/1</span><br><span class="line">router.push(&#123;path: &#x27;bar&#x27;, params: &#123; index: 1 &#125;&#125;); //bar</span><br><span class="line">const index = 1;</span><br><span class="line">router.push(&#123;path: `/bar/$&#123;index&#125;`&#125;); // bar/1</span><br><span class="line"></span><br><span class="line">### 3.2 router.replace(location, onComplete?, onAbort?)</span><br><span class="line">router.replace(...) 相当于 &lt;router-link to=&#x27;&#x27; replace&gt;</span><br><span class="line">不会向history栈新增路由，会替换当前history记录</span><br><span class="line">### 3.3 router.go(n)</span><br><span class="line">在history栈先前或者后退多少步，类似 window.history.go(n)</span><br><span class="line"></span><br><span class="line">router.go(1) ==&gt; history.forward()</span><br><span class="line">router.go(-1) ==&gt; history.back() </span><br><span class="line"></span><br><span class="line"> 命名视图，可以设置多个入口</span><br><span class="line"> &#123; path: &#x27;/&#x27;, components: &#123; default: foo, aside: bar &#125; &#125;</span><br><span class="line">&lt;router-view&gt;&lt;/router-view&gt;</span><br><span class="line">&lt;router-view name=&#x27;aside&#x27;&gt;&lt;/router-view&gt;</span><br><span class="line"></span><br><span class="line">路由重定向</span><br><span class="line">&#123; path: &#x27;/&#x27;, redirect: &#x27;/foo&#x27; || &#123; name: &#x27;foo&#x27; &#125; || to =&gt; &#123; return 字符串路径/路径对象  &#125; &#125;</span><br><span class="line"> 对于包含命名视图的路由，必须为每一个命名视图添加 ‘props’ 选项</span><br><span class="line"> &#123; path: &#x27;/&#x27;, components: &#123; default: foo, aside: bar &#125;，props: &#123; default: true, aside: true &#125; &#125;</span><br></pre></td></tr></table></figure>
+
+<p>那么命名路由参数就会是我们的 组件属性 ···</p>
+<h3 id="3-4-HTML5history模式"><a href="#3-4-HTML5history模式" class="headerlink" title="3.4 HTML5history模式"></a>3.4 HTML5history模式</h3><p>vue-router  默认使用 hash模式<br>可以创建vueRouter实例的时候声明模式 </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">var router = new VueRouter(&#123;</span><br><span class="line">    mode: &#x27;history&#x27;,</span><br><span class="line">    routes</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="4-导航守卫"><a href="#4-导航守卫" class="headerlink" title="4 导航守卫"></a>4 导航守卫</h2><h3 id="4-1-全局前置守卫"><a href="#4-1-全局前置守卫" class="headerlink" title="4.1 全局前置守卫"></a>4.1 全局前置守卫</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">router.beforeEach((to, from, next) =&gt; &#123; // 确保next()执行一次 &#125;)</span><br></pre></td></tr></table></figure>
+<p>to: 将要去的route对象<br>from: 当前正要离开的route对象</p>
+<h3 id="4-2-全局后置钩子"><a href="#4-2-全局后置钩子" class="headerlink" title="4.2 全局后置钩子"></a>4.2 全局后置钩子</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">router.afterEach((to, from) =&gt; &#123; ... &#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="4-3-路由独享守卫"><a href="#4-3-路由独享守卫" class="headerlink" title="4.3 路由独享守卫"></a>4.3 路由独享守卫</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">var routes = [</span><br><span class="line">    &#123; path: &#x27;/foo&#x27;, component: Foo, beforeEnter: (to, from. next) =&gt; &#123;&#125; &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<h3 id="4-4-组件内的守卫"><a href="#4-4-组件内的守卫" class="headerlink" title="4.4 组件内的守卫"></a>4.4 组件内的守卫</h3><ul>
+<li><p>1、beforeRouteEnter， 只有它支持给 next传递回调</p>
+</li>
+<li><p>2、beforeRouteUpdate</p>
+</li>
+<li><p>3、beforeRouteLeave</p>
+</li>
+<li><p>``<br>var myComp = {<br>  template: ‘’,<br>  beforeRouteEnter: (to, from, next) =&gt; {</p>
+<pre><code>  // 当前不能获取组件实例
+  // 不过可以使用给next传递回调来访问，
+  next(vm =&gt; &#123;
+      // 通过vm访问组件实例
+  &#125;)
+</code></pre>
+<p>  },<br>  brforeRouteUpdate: (to, from, next) =&gt; {</p>
+<pre><code>  // 可以获取当前组件实例
+  //同时 可以监听动态路由参数的变化
+</code></pre>
+<p>  }，<br>  beforeRouteLeave: (to, from, next) =&gt; {</p>
+<pre><code>  // 可以获取当前组件实例
+</code></pre>
+<p>  }<br>}<br>``<br>路由元信息 meta字段 通过 遍历$route.matched数据检查路由中的meta字段。</p>
+</li>
+<li><p>路由切换时，我们需要获取数据进行页面渲染，获取数据有两种方式：</p>
+</li>
+</ul>
+<ul>
+<li>1、导航完成之后获取：先完成导航，然后在组件生命周期获取数据，给页面加上loading状态</li>
+<li>2、导航完成之前获取：在路由进入守卫之前获取数据，获取数据完毕之后跳转路由，注意，这里获取数据还保留在当前页面，也需要加进度条显示正加载页面。<br>路由懒加载：只有访问到该路由，再去加载对应组件</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">var routes = [</span><br><span class="line">    &#123;path: &#x27;/foo&#x27;, component: () =&gt; import(&#x27;./foo.vue&#x27;)&#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>框架</category>
+      </categories>
+      <tags>
+        <tag>Vue</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>css</title>
+    <url>/2022/04/16/css/</url>
+    <content><![CDATA[<h3 id="一、display-flex布局"><a href="#一、display-flex布局" class="headerlink" title="一、display:flex布局"></a>一、display:flex布局</h3><p>主轴：项目排列方向，交叉轴：与主轴垂直轴</p>
+<h4 id="1、容器属性6属性-display-flex-样式的元素就是我们的容器，这个容器里面包裹的元素就是我们的项目"><a href="#1、容器属性6属性-display-flex-样式的元素就是我们的容器，这个容器里面包裹的元素就是我们的项目" class="headerlink" title="1、容器属性6属性(display:flex;样式的元素就是我们的容器，这个容器里面包裹的元素就是我们的项目)"></a>1、容器属性6属性(display:flex;样式的元素就是我们的容器，这个容器里面包裹的元素就是我们的项目)</h4><p>| 属性 | 作用 | 值 ｜</p>
+<p>｜align-items    ｜ 项目在与交叉轴的对齐方式    ｜ flex-start:轴起点对齐；flex-end：轴终点对齐；center：轴中点对齐；baseline：项目第一行文字基线对齐；stretch：如果项目未设置高度或者值为auto，那么项目将占满整个容器高度（default ｜</p>
+<p>｜justify-content｜    项目在主轴方向的对齐方式    ｜ center：与主轴中心点对齐；space-between：两端对齐，项目间间隔相等，两端项目与容器无间隔；space-around:每个项目间歌相等，两端项目与容器有间隔，小于项目间间隔；flex-end：右对齐；flex-start:左对齐；（default ｜</p>
+<p>｜align-content｜    项目有多根轴线情况下的对齐方式，例如使用了换行 ｜ flex-start: 与交叉轴起点对齐；flex-end：与交叉轴终点对齐；center：与交叉轴中心点对齐；stretch：占满（default；space-between：与交叉轴两端对齐，项目间隔相等，与容器无间隔；space-around：与交叉轴两端对齐，项目间隔相等，与容器间隔小于项目间隔｜</p>
+<p>｜flex-direction｜    项目排列方向,主轴方向     ｜row:水平方向（起点左边；default；row-reverse：水平方向（起点右边；column:垂直方向（起点在上边；column-reverse:垂直方向（起点在下边；｜</p>
+<p>｜flex-wrap｜    项目在容器内一行放不下是否换行    ｜nowrap:不换；wrap:换行，第一行在上；wrap-reverse:换行，第一行在下 ｜</p>
+<p>｜flex-flow ｜    flex-direction 与 flex-wrap 的缩写    ｜ 默认值：row nowrap ｜</p>
+<h4 id="2、容器内项目6属性"><a href="#2、容器内项目6属性" class="headerlink" title="2、容器内项目6属性"></a>2、容器内项目6属性</h4><p>| 属性 | 作用 | 值 ｜</p>
+<p>| flex-grow | 定义项目放大比例，默认0，也就是容器还有剩余空间也不放大 | int:0、1、2…. ｜<br>| flex-shrink | 定义项目缩小比例，默认1，容器空间不足，该项目将缩小 | 0（不缩小） ｜<br>| flex-basis | 定义在分配容器多余空间前，项目占据的主轴空间。 | 默认auto，项目本来大小;100px,项目占据固定空间 ｜<br>| flex | 是flex-grow、flex-shrink、flex-basis的简写 | 值 ｜ 默认值0 1 auto<br>| oder | 定义项目排列顺序，值越小越靠前。默认0 | int:0、1、2…. ｜<br>| align-self | 允许单个项目有和其他项目不一样的对齐方式，可覆盖align-items |    默认值：auto，表示继承父元素align-items属性，也就是默认stretch；flex-start、flex-end、center、baseline、stretch同容器属性align-items ｜</p>
+<h4 id="3、一些伪类选择器样式"><a href="#3、一些伪类选择器样式" class="headerlink" title="3、一些伪类选择器样式"></a>3、一些伪类选择器样式</h4><p>1、输入框 placeholder 居中：<br>:: - webkit - input - placeholder {<br>  text-align: center;<br>}</p>
+<p>2、滚动条输入框隐藏<br>:: - webkit - scrollbar {<br>  display: none;<br>}</p>
+<p>实现容器水平垂直居中快方法：</p>
+<p>父容器：display: flex;</p>
+<p>容器本身：margin: auto;</p>
+]]></content>
+      <categories>
+        <category>css基础</category>
+      </categories>
+      <tags>
+        <tag>flex布局</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>hexo &amp; next主题</title>
     <url>/2020/08/08/gitconf/</url>
     <content><![CDATA[<h2 id="1-git-guide"><a href="#1-git-guide" class="headerlink" title="1. git guide"></a>1. git guide</h2><ol>
@@ -61,25 +153,68 @@ GIT BASH 指令：env|grep -i proxy 两次
       <categories>
         <category>前端开发</category>
       </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
   </entry>
   <entry>
     <title>计网</title>
     <url>/2020/08/08/http/</url>
-    <content><![CDATA[<h3 id="计算机网络基础"><a href="#计算机网络基础" class="headerlink" title="计算机网络基础"></a>计算机网络基础</h3><p>一、书籍推荐：《图解HTTPS》《HTTP权威指南》<br>二、HTTP缓存<br>   HTTP缓存分为强缓存和协商缓存：<br>   先通过Cache-control验证强缓存是否可用，可用就直接读取缓存，否则进入协商缓存阶段，发起http请求，服务器通过<br>   请求头是否有If-Modified-Since 和 If-None-Match 条件请求字段检查资源是否更新：<br>   如果资源更新，那么就返回资源和200状态码；<br>   如果资源未更新，那么告诉浏览器直接使用缓存获取资源。<br>三、http常用状态码以及使用场景<br>  1xx: 表示当前是协议的中间态，还需要后续请求<br>  2xx:表示请求成功<br>  3xx:表示重定向状态<br>  4XX:表示请求报文出错<br>  5xx: 表示服务器错误</p>
-<p>  常用状态码：<br>  101: 切换请求协议，从http切换到websocket<br>  200: 请求成功<br>  301 永久重定向：会缓存<br>  302 临时重定向：不会缓存<br>  304 协商缓存命中<br>  403 服务器禁止访问<br>  404 资源未找到<br>  400 请求错误<br>  500 服务端错误</p>
-<p>  遇到302状态码的某些场景：<br>  302表示临时重定向，这个资源只是暂时不能被访问，但是之后过一段时间还是可以继续访问，一般是访问某个<br>  网站的资源需要权限时，会需要用户登录，跳转到登录页面之后还可以继续访问。</p>
-<p>  301是永久重定向，跳转到一个新网站，但是301代表这个被访问的地质资源被永久移除了，以后都不会访问这个地址，<br>  搜索引擎抓取的时候也会使用新的地址替换这个旧地址。可以在响应的location首部去获取到返回的地址。<br>四、 HTTP常用请求方式<br> http/1.1 规定的请求方式：<br> 1.GET: 获取数据，参数在url上<br> 2.POST: 提交数据，比如登录页面登录用户信息时使用<br> 3.PUT:修改数据<br> 4.HEAD: 获取资源的元信息<br> 5.DELETE: 删除数据<br> 6.CONNECT: 建立连接通道，用在代理服务器<br> 7.OPTIONS: 列出可对资源实行的请求方法，常用于跨域<br> 8.TRACE: 追踪请求-响应的传输路径</p>
-<p>五、 网络分层<br> OSI体系结构： 7.应用层 6.表示层 5.会话层 4.传输层 3.网络层 2.链路层 1.物理层<br> TCP/IP结构： 4.应用层(FTP) 3. 运输层(TCP,UDP) 2.网络层（IP、ICMP、IGMP) 1.网络接口层<br> 五层体系结构： 5.应用层 4.运输层 3.网络层 2.链路层 1.物理层</p>
-<p>六、 HTTPS？<br>    HTTPS是在HTTP和TCP之间建立的一个安全层，HTTP与TCP通信时必须经过一个安全层，对数据进行加密，然后将加密后的数据包传给TCP，<br>    相应的TCP必须将数据包解密，才能传给上面的HTTP.<br>    浏览器传输一个client_random和加密方法列表，服务器收到后给浏览器传一个server_random、加密方法列表和数字证书（包含公钥），<br>    然后浏览器对数字证书进行验证，如果验证通过，则生成一个pre_random,然后用公钥加密传给服务器，服务器用client_random、server_random和pre_random,<br>    使用公钥加密生成secret，之后的传输就使用secret作为密钥来进行数据的加解密。</p>
-<p>七、三次握手<br>   <img src="../images/ws.png" alt="三次握手图解"><br>     第一次握手：一开始都处于CLOSED状态，客户端主动发起连接请求，发送syn包（seq=j）到服务器，并进入SYN_SENT状态（syn:同步序列编号）<br>     第二次握手：服务器收到syn包，确认客户端的ACK(ack=j+1),同时发送一个SYN包（seq=k），即SYN+ACK包，而后进入SYN_RECV状态；<br>     第三次握手：客户端收到服务器的ACK+SYN包，向服务器发送确认包ACK（ack=k+1）,进入ESTABLISHED（TCP连接成功）状态，完成三次握手，客户端与服务端开始传输数据。<br>     <code>SYN需要对端确认，所以ACK的序列化要加一，凡是需要对端确认的，要消耗TCP报文的序列化</code><br>八、四次挥手<br>  <img src="../images/hs.png" alt="四次挥手图解"><br>   一开始都处于ESTABLISHED状态，客户端发送报文FIN=1和seq=x,进入FIN_WAIT_1状态；服务端收到报文后，发送确认报文ack=x+1，seq=y,ACK=1，然后进入CLOSE_WAIT状态；<br>   客户端收到服务端的确认报文之后进入FIN_WAIT_2状态；而后服务端再次发送seq=z，FIN=1，ack=x+1,进入LAST-ACK状态,等待客户端确认；客户端收到后发出确认ACK=1，ack=z+1,seq=x+1,进入TIME_WAIT状态，经过2MSL(最长报文段寿命)事件后，才进入CLOSED状态，<br>   然后发送ACK给服务端，服务端收到后进入CLOSED状态。</p>
+    <content><![CDATA[<h2 id="计算机网络基础"><a href="#计算机网络基础" class="headerlink" title="计算机网络基础"></a>计算机网络基础</h2><h3 id="一、书籍推荐：《图解HTTPS》《HTTP权威指南》"><a href="#一、书籍推荐：《图解HTTPS》《HTTP权威指南》" class="headerlink" title="一、书籍推荐：《图解HTTPS》《HTTP权威指南》"></a>一、书籍推荐：《图解HTTPS》《HTTP权威指南》</h3><h3 id="二、HTTP缓存"><a href="#二、HTTP缓存" class="headerlink" title="二、HTTP缓存"></a>二、HTTP缓存</h3><p>   HTTP缓存分为强缓存和协商缓存：<br>   先通过Cache-control验证强缓存是否可用，可用就直接读取缓存，否则进入协商缓存阶段，发起http请求，服务器通过<br>   请求头是否有If-Modified-Since 和 If-None-Match 条件请求字段检查资源是否更新：<br>   如果资源更新，那么就返回资源和200状态码；<br>   如果资源未更新，那么告诉浏览器直接使用缓存获取资源。</p>
+<h3 id="三、http常用状态码以及使用场景"><a href="#三、http常用状态码以及使用场景" class="headerlink" title="三、http常用状态码以及使用场景"></a>三、http常用状态码以及使用场景</h3><ul>
+<li>1xx: 表示当前是协议的中间态，还需要后续请求</li>
+<li>2xx:表示请求成功</li>
+<li>3xx:表示重定向状态</li>
+<li>4XX:表示请求报文出错</li>
+<li>5xx: 表示服务器错误</li>
+</ul>
+<ul>
+<li>常用状态码：</li>
+</ul>
+<ul>
+<li>101: 切换请求协议，从http切换到websocket</li>
+<li>200: 请求成功</li>
+<li>301 永久重定向：会缓存</li>
+<li>302 临时重定向：不会缓存</li>
+<li>304 协商缓存命中</li>
+<li>403 服务器禁止访问</li>
+<li>404 资源未找到</li>
+<li>400 请求错误</li>
+<li>500 服务端错误</li>
+</ul>
+<p>  遇到302状态码的某些场景：</p>
+<ol>
+<li><p>302表示临时重定向，这个资源只是暂时不能被访问，但是之后过一段时间还是可以继续访问，一般是访问某个网站的资源需要权限时，会需要用户登录，跳转到登录页面之后还可以继续访问。</p>
+</li>
+<li><p>301是永久重定向，跳转到一个新网站，但是301代表这个被访问的地质资源被永久移除了，以后都不会访问这个地址，搜索引擎抓取的时候也会使用新的地址替换这个旧地址。可以在响应的location首部去获取到返回的地址。</p>
+</li>
+</ol>
+<h3 id="四、-HTTP常用请求方式"><a href="#四、-HTTP常用请求方式" class="headerlink" title="四、 HTTP常用请求方式"></a>四、 HTTP常用请求方式</h3><p> http/1.1 规定的请求方式：</p>
+<ol>
+<li>GET: 获取数据，参数在url上</li>
+<li>POST: 提交数据，比如登录页面登录用户信息时使用</li>
+<li>PUT:修改数据</li>
+<li>HEAD: 获取资源的元信息</li>
+<li>DELETE: 删除数据</li>
+<li>CONNECT: 建立连接通道，用在代理服务器</li>
+<li>OPTIONS: 列出可对资源实行的请求方法，常用于跨域</li>
+<li>TRACE: 追踪请求-响应的传输路径</li>
+</ol>
+<h3 id="五、-网络分层"><a href="#五、-网络分层" class="headerlink" title="五、 网络分层"></a>五、 网络分层</h3><ul>
+<li>OSI体系结构： 7.应用层 6.表示层 5.会话层 4.传输层 3.网络层 2.链路层 1.物理层</li>
+<li>TCP/IP结构： 4.应用层(FTP) 3. 运输层(TCP,UDP) 2.网络层（IP、ICMP、IGMP) 1.网络接口层</li>
+<li>五层体系结构： 5.应用层 4.运输层 3.网络层 2.链路层 1.物理层</li>
+</ul>
+<h3 id="六、-HTTPS"><a href="#六、-HTTPS" class="headerlink" title="六、 HTTPS"></a>六、 HTTPS</h3><p>HTTPS是在HTTP和TCP之间建立的一个安全层，HTTP与TCP通信时必须经过一个安全层，对数据进行加密，然后将加密后的数据包传给TCP，相应的TCP必须将数据包解密，才能传给上面的HTTP。浏览器传输一个client_random和加密方法列表，服务器收到后给浏览器传一个server_random、加密方法列表和数字证书（包含公钥），然后浏览器对数字证书进行验证，如果验证通过，则生成一个pre_random,然后用公钥加密传给服务器，服务器用client_random、server_random和pre_random,使用公钥加密生成secret，之后的传输就使用secret作为密钥来进行数据的加解密。</p>
+<h3 id="七、三次握手"><a href="#七、三次握手" class="headerlink" title="七、三次握手"></a>七、三次握手</h3><p>   <img src="../images/ws.png" alt="三次握手图解"><br>     第一次握手：一开始都处于CLOSED状态，客户端主动发起连接请求，发送syn包（seq=j）到服务器，并进入SYN_SENT状态（syn:同步序列编号）<br>     第二次握手：服务器收到syn包，确认客户端的ACK(ack=j+1),同时发送一个SYN包（seq=k），即SYN+ACK包，而后进入SYN_RECV状态；<br>     第三次握手：客户端收到服务器的ACK+SYN包，向服务器发送确认包ACK（ack=k+1）,进入ESTABLISHED（TCP连接成功）状态，完成三次握手，客户端与服务端开始传输数据。<br>     <code>SYN需要对端确认，所以ACK的序列化要加一，凡是需要对端确认的，要消耗TCP报文的序列化</code></p>
+<h3 id="八、四次挥手"><a href="#八、四次挥手" class="headerlink" title="八、四次挥手"></a>八、四次挥手</h3><p>  <img src="../images/hs.png" alt="四次挥手图解"><br>   一开始都处于ESTABLISHED状态，客户端发送报文FIN=1和seq=x,进入FIN_WAIT_1状态；服务端收到报文后，发送确认报文ack=x+1，seq=y,ACK=1，然后进入CLOSE_WAIT状态；<br>   客户端收到服务端的确认报文之后进入FIN_WAIT_2状态；而后服务端再次发送seq=z，FIN=1，ack=x+1,进入LAST-ACK状态,等待客户端确认；客户端收到后发出确认ACK=1，ack=z+1,seq=x+1,进入TIME_WAIT状态，经过2MSL(最长报文段寿命)事件后，才进入CLOSED状态，<br>   然后发送ACK给服务端，服务端收到后进入CLOSED状态。</p>
 <p>   为什么要等待2MSL？<br>    2MSL是两倍的MSL(Maximum Segment Lifetime),MSL是一个片段在网络中最大的存活时间，2MSL就是一个发送和一个回复所要的最大时间，如果直到2MSL客户端都没收到FIN，就推断ACK已被成功接收，结束TCP连接。</p>
 <p>   在交互过程中如果数据传送完了，如果不想断开两端连接可以在HTTP的响应体的Connection字段指定为keep-alive</p>
-<p>九、TCP滑动窗口（分为发送窗口和接收窗口）</p>
-<pre><code>在TCP连接中，对于发送端和接收端，TCP需要把发送的数据放到发送缓存区，将接收的数据放到接收缓存区。经常会发生发送端发送过多而接收端无法接收的情况，所以需要流量控制，也就是根据接收缓存区的大小来控制发送端的发送。如果接收缓存区已经满了，此时发送端就不需要继续发送数据了。
+<h3 id="九、TCP滑动窗口（分为发送窗口和接收窗口）"><a href="#九、TCP滑动窗口（分为发送窗口和接收窗口）" class="headerlink" title="九、TCP滑动窗口（分为发送窗口和接收窗口）"></a>九、TCP滑动窗口（分为发送窗口和接收窗口）</h3><pre><code>在TCP连接中，对于发送端和接收端，TCP需要把发送的数据放到发送缓存区，将接收的数据放到接收缓存区。经常会发生发送端发送过多而接收端无法接收的情况，所以需要流量控制，也就是根据接收缓存区的大小来控制发送端的发送。如果接收缓存区已经满了，此时发送端就不需要继续发送数据了。
 </code></pre>
 ]]></content>
       <categories>
-        <category>前端开发</category>
+        <category>基础知识</category>
       </categories>
       <tags>
         <tag>计算机网络基础</tag>
@@ -88,27 +223,190 @@ GIT BASH 指令：env|grep -i proxy 两次
   <entry>
     <title>项目遇到的问题</title>
     <url>/2020/08/08/problem/</url>
-    <content><![CDATA[<h3 id="一、问题"><a href="#一、问题" class="headerlink" title="一、问题"></a>一、问题</h3><pre><code>1.在 build 项目时,报错 .plugins[0] may only be a two-tuple or three-tuple 检查配置文件babel.config.js发现问题
-</code></pre>
+    <content><![CDATA[<h3 id="一、问题"><a href="#一、问题" class="headerlink" title="一、问题"></a>一、问题</h3><h4 id="1-在-build-项目时-报错-plugins-0-may-only-be-a-two-tuple-or-three-tuple"><a href="#1-在-build-项目时-报错-plugins-0-may-only-be-a-two-tuple-or-three-tuple" class="headerlink" title="1.在 build 项目时,报错 .plugins[0] may only be a two-tuple or three-tuple"></a>1.在 build 项目时,报错 .plugins[0] may only be a two-tuple or three-tuple</h4><p>检查配置文件babel.config.js发现问题</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">	plugins: [</span><br><span class="line">  [</span><br><span class="line">    &#x27;component&#x27;,</span><br><span class="line">    &#123;</span><br><span class="line">      libraryName: &#x27;element-ui&#x27;,</span><br><span class="line">      styleLibraryName: &#x27;theme-chalk&#x27;</span><br><span class="line">    &#125;,</span><br><span class="line">	 ...prodPlugins,</span><br><span class="line">	&#x27;@babel/plugin-syntax-dynamic-import&#x27;</span><br><span class="line">  ]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
 <pre><code>应该这样配置
 </code></pre>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">   plugins: [</span><br><span class="line">  [</span><br><span class="line">    &#x27;component&#x27;,</span><br><span class="line">    &#123;</span><br><span class="line">      libraryName: &#x27;element-ui&#x27;,</span><br><span class="line">      styleLibraryName: &#x27;theme-chalk&#x27;</span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">	 ...prodPlugins,</span><br><span class="line">	&#x27;@babel/plugin-syntax-dynamic-import&#x27;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li>注意：在使用cdn加载elementui时，public/index.html一定要先加载vue.js再加载element-ui.js要不然组件就会无效！！</li>
-<li>error</li>
-</ol>
-<pre><code>![error](../images/mainerr.png)
+<h4 id="2-注意："><a href="#2-注意：" class="headerlink" title="2. 注意："></a>2. 注意：</h4><p>在使用cdn加载elementui时，public/index.html一定要先加载vue.js再加载element-ui.js要不然组件就会无效！！</p>
+<h4 id="3-error"><a href="#3-error" class="headerlink" title="3. error"></a>3. error</h4><pre><code>![error](../images/mainerr.png)
 遇到图上错误是因为next-util的package.json中的入口文件index.js丢失，我们可以点击&lt;a href=&quot;https://github.com/theme-next/next-util/&quot;&gt;这里&lt;/a&gt;
 找到对应的index.js下载到我们node_modules/next-util文件夹中即可。
 </code></pre>
-<p>3.使用elementUI时间选择范围组件daterange，设置只能选择一个月时间范围设置如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;el-date-picker</span><br><span class="line">  v-model=&quot;value1&quot;</span><br><span class="line">  type=&quot;daterange&quot;</span><br><span class="line">  range-separator=&quot;至&quot;</span><br><span class="line">  start-placeholder=&quot;开始日期&quot;</span><br><span class="line">  end-placeholder=&quot;结束日期&quot;</span><br><span class="line">  :picker-options=&quot;pickerOptions&quot;&gt;</span><br><span class="line">&lt;/el-date-picker&gt;</span><br><span class="line">SCRIPT -------------</span><br><span class="line">data()&#123;</span><br><span class="line">  return &#123;</span><br><span class="line">  pickerOptions:&#123;</span><br><span class="line">   onPick(&#123;minDate,maxDate&#125;)&#123;</span><br><span class="line">      if(!maxDate)&#123;</span><br><span class="line">        this.disableDate = function(time)&#123;</span><br><span class="line">            return time.getTime() &gt; minDate.getTime + 31*24*60*60*1000; </span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
-
+<h4 id="4-使用elementUI时间选择范围组件daterange，设置只能选择一个月时间范围设置如下："><a href="#4-使用elementUI时间选择范围组件daterange，设置只能选择一个月时间范围设置如下：" class="headerlink" title="4.使用elementUI时间选择范围组件daterange，设置只能选择一个月时间范围设置如下："></a>4.使用elementUI时间选择范围组件daterange，设置只能选择一个月时间范围设置如下：</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;el-date-picker</span><br><span class="line">  v-model=&quot;value1&quot;</span><br><span class="line">  type=&quot;daterange&quot;</span><br><span class="line">  range-separator=&quot;至&quot;</span><br><span class="line">  start-placeholder=&quot;开始日期&quot;</span><br><span class="line">  end-placeholder=&quot;结束日期&quot;</span><br><span class="line">  :picker-options=&quot;pickerOptions&quot;&gt;</span><br><span class="line">&lt;/el-date-picker&gt;</span><br><span class="line">SCRIPT -------------</span><br><span class="line">data()&#123;</span><br><span class="line">  return &#123;</span><br><span class="line">  pickerOptions:&#123;</span><br><span class="line">   onPick(&#123;minDate,maxDate&#125;)&#123;</span><br><span class="line">      if(!maxDate)&#123;</span><br><span class="line">        this.disableDate = function(time)&#123;</span><br><span class="line">            return time.getTime() &gt; minDate.getTime + 31*24*60*60*1000; </span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+<h4 id="5、因为事件没有声明，整个页面不能随之渲染，影响状态改变后的渲染"><a href="#5、因为事件没有声明，整个页面不能随之渲染，影响状态改变后的渲染" class="headerlink" title="5、因为事件没有声明，整个页面不能随之渲染，影响状态改变后的渲染"></a>5、因为事件没有声明，整个页面不能随之渲染，影响状态改变后的渲染</h4><p><img src="../images/vue-pro1.png" alt="error"></p>
+<h4 id="6、vue组件data是函数"><a href="#6、vue组件data是函数" class="headerlink" title="6、vue组件data是函数"></a>6、vue组件data是函数</h4><p>为什么是函数而不是对象呢？因为使用对象的话，每个实例（组件）上使用的data数据是相互影响的，这当然就不是我们想要的了。对象是对于内存地址的引用，直接定义个对象的话组件之间都会使用这个对象，这样会造成组件之间数据相互影响。<br>原因：在某组件中的data()函数写错，错误的写法是data(){},正确的写法是data(){return {}}<br><img src="../images/vue-pro2.png" alt="error"></p>
+<h4 id="7、注册全局组件，在App-vue-使用该全局组件，全局组件位置出现灰字处代码"><a href="#7、注册全局组件，在App-vue-使用该全局组件，全局组件位置出现灰字处代码" class="headerlink" title="7、注册全局组件，在App.vue 使用该全局组件，全局组件位置出现灰字处代码"></a>7、注册全局组件，在App.vue 使用该全局组件，全局组件位置出现灰字处代码</h4><p><img src="../images/vue-pro3.png" alt="error"></p>
+<p>vue编译版本不对,需要引入完整版<br><img src="../images/vue-pro4.png" alt="error"></p>
+<p>原因：vue运行版本不支持template模版渲染，项目使用的是vue运行版：vue-2.6.10.runtime.min.js，</p>
+<p>针对不同解决：</p>
+<p>1.全局vue：  <a href="mailto:&#118;&#117;&#101;&#64;&#50;&#x2e;&#54;&#x2e;&#49;&#x30;&#46;&#109;&#x69;&#110;&#46;&#x6a;&#115;">&#118;&#117;&#101;&#64;&#50;&#x2e;&#54;&#x2e;&#49;&#x30;&#46;&#109;&#x69;&#110;&#46;&#x6a;&#115;</a> 能正确渲染该全局组件。</p>
+<p>2.局部引入import Vue from ‘vue’（默认导入的是vue.runtime.common.js）<br><img src="../images/vue-pro5.png" alt="error"></p>
+<p>a.修改webpack:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">resolve: &#123;</span><br><span class="line">  alias: &#123;</span><br><span class="line">    vue: &#x27;vue/dist/vue.esm.js&#x27;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>b.修改引入方式 ：<br>import Vue from ‘vue/dist/vue.esm.js’;<br>vue运行版 和 vue完整版 区别：<br>（vue运行版 相对于 完整版没有的）<br>不支持从html获取视图<br>不支持template，需通过webpack的vue-loader将组件预编译template模版成render函数<br>没有compiler编译器</p>
+<h4 id="8、运行npm-脚本-‘webpack-dev-server-–mode-development-–config-build-webpack-config-js’-报错："><a href="#8、运行npm-脚本-‘webpack-dev-server-–mode-development-–config-build-webpack-config-js’-报错：" class="headerlink" title="8、运行npm 脚本 ‘webpack-dev-server –mode=development –config ./build/webpack.config.js’ 报错："></a>8、运行npm 脚本 ‘webpack-dev-server –mode=development –config ./build/webpack.config.js’ 报错：</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[webpack-cli] /Users/lyur/Desktop/project/personal-pro/ts_in_action/node_modules/webpack-dev-server/lib/getPort.js:13</span><br><span class="line">const maxPort = 65_535;</span><br><span class="line">                ^^</span><br><span class="line"></span><br><span class="line">SyntaxError: Invalid or unexpected token</span><br><span class="line">    at Module._compile (internal/modules/cjs/loader.js:723:23)</span><br><span class="line">    at Object.Module._extensions..js (internal/modules/cjs/loader.js:789:10)</span><br><span class="line">    at Module.load (internal/modules/cjs/loader.js:653:32)</span><br><span class="line">    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)</span><br><span class="line">    at Function.Module._load (internal/modules/cjs/loader.js:585:3)</span><br><span class="line">    at Module.require (internal/modules/cjs/loader.js:692:17)</span><br><span class="line">    at require (internal/modules/cjs/helpers.js:25:18)</span><br><span class="line">    at Function.getFreePort (/Users/lyur/Desktop/project/personal-pro/ts_in_action/node_modules/webpack-dev-server/lib/Server.js:397:21)</span><br><span class="line">    at Server.start (/Users/lyur/Desktop/project/personal-pro/ts_in_action/node_modules/webpack-dev-server/lib/Server.js:3203:40)</span><br><span class="line">    at process._tickCallback (internal/process/next_tick.js:68:7)</span><br><span class="line">npm ERR! code ELIFECYCLE</span><br><span class="line">npm ERR! errno 2</span><br><span class="line">npm ERR! ts_in_action@1.0.0 start: `webpack-dev-server --mode=development --config ./build/webpack.config.js`</span><br><span class="line">npm ERR! Exit status 2</span><br><span class="line">npm ERR!</span><br><span class="line">npm ERR! Failed at the ts_in_action@1.0.0 start script.</span><br><span class="line">npm ERR! This is probably not a problem with npm. There is likely additional logging output above.</span><br></pre></td></tr></table></figure>
+<p>原因： webpack webpack-dev-server 依赖包版本不对应，安装对应版本即可。</p>
 ]]></content>
       <categories>
-        <category>前端开发</category>
+        <category>vue</category>
+        <category>webpack</category>
       </categories>
+  </entry>
+  <entry>
+    <title>直播相关</title>
+    <url>/2022/04/16/%E7%9B%B4%E6%92%AD/</url>
+    <content><![CDATA[<h2 id="1、直播原理"><a href="#1、直播原理" class="headerlink" title="1、直播原理"></a>1、直播原理</h2><p>音视频采集：pc\ios\android端，采集到的是直播流。<br>直播流失败的时候，首先去排查流编码是否有问题<br>将直播流推送到服务器上，视频格式分为：mp4,webm,hls,flv(b站)，兼容性从好到差。<br>播放器分点播和直播。</p>
+<ul>
+<li>直播协议：<ol>
+<li>HLS协议：<br>直播借助h5的video播放，HLS协议会给video 一个 M3U8 文件(存放片段索引)，每个索引对应每一个片段.ts文件，每隔9秒浏览器自动刷新M3U8文件。<br>M3U8文件可能是ts文件也可能是M3U8文件。所以这可能会遇到浏览器兼容问题。<br>解析流程：先找PAT的包，在找PMT的包，然后PMT指出那个是解析音频，那个解析视频<br>总结：好用，但是有延时</li>
+<li>RTMP协议<br>实时消息传递协议，基于TCP协议<br>总结：实时，但是使用麻烦</li>
+<li>HTTP_FLV协议<br>cdn源与端通过http请求<br>优点：<br>a.可以一定程度上避免防火墙干扰<br>b.可以很好兼容HTTP302跳转<br>c.可以使用HTTPS作为加密通道<br>d.很好的支持移动端<br>总结：结合前两种协议优点，但是格式是<br>不同场景使用的协议：<br>对于客户端采集，使用RTMP协议<br>低延时场景，使用RTMP 或者 HTTP_FLV<br>直播播放都使用HLS协议</li>
+</ol>
+</li>
+</ul>
+<h2 id="2、video详解"><a href="#2、video详解" class="headerlink" title="2、video详解"></a>2、video详解</h2><h3 id="2-1-属性："><a href="#2-1-属性：" class="headerlink" title="2.1 属性："></a>2.1 属性：</h3><p>基础用法：</p>
+<ul>
+<li>controls 属性： 控制栏</li>
+<li>controlslist 属性： 对控制栏进行限制，比如不让用户下载该视频、不允许全屏</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;video src=&quot;./xxx.mp4&quot; controls controlslist=&#x27;nodownload nofullscreen noremoteplayback&#x27; poster=&#x27;imgurl&#x27;&gt;&lt;/video&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>贴图：poster（贴图） 属性：通过一张预览封面图了解视频大概内容，没有这个属性，是视频的第一帧</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;video src=&quot;./xxx.mp4&quot; controls poster=&#x27;imgurl&#x27;&gt;&lt;/video&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>自动播放：autoplay 属性</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;video src=&quot;./xxx.mp4&quot; controls autoplay&gt;&lt;/video&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>静音：muted 属性移动端非静音视频是不允许自动播放的</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;video src=&quot;./xxx.mp4&quot; muted controls autoplay&gt;&lt;/video&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>循环播放：loop 属性</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;video src=&quot;./xxx.mp4&quot; muted loop controls autoplay&gt;&lt;/video&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>预加载：preload 属性</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;video src=&quot;./xxx.mp4&quot; muted loop preload controls autoplay&gt;&lt;/video&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>音量设置：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;video src=&quot;./xxx.mp4&quot; id=&#x27;video&#x27; controls volume=&#x27;0.5&#x27;&gt;&lt;/video&gt; 音量设置不生效</span><br><span class="line">需要在js中控制</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    const dom = document.getElementById(&#x27;video&#x27;);</span><br><span class="line">    dom.volume = 0.5;</span><br><span class="line">    dom.currentTime = 1; // 单位： 秒 播放时间控制：</span><br><span class="line">    dom.src=&#x27;&#x27;; //改变视频地址</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>备用地址：<br>第一个视频找不到会播放第二个</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;video controls  poster=&#x27;./poster.png&#x27; &gt;</span><br><span class="line">    &lt;source src=&quot;./test2.mp4&quot; type=&#x27;video/mp4&#x27;&gt;</span><br><span class="line">    &lt;source src=&quot;./test1.mp4&quot; type=&#x27;video/mp4&#x27;&gt;</span><br><span class="line">&lt;/video&gt;</span><br></pre></td></tr></table></figure>
+<p>此时获取 src值为空，使用currentSrc拿到当前播放地址。</p>
+<h3 id="2-2-事件"><a href="#2-2-事件" class="headerlink" title="2.2 事件"></a>2.2 事件</h3><h4 id="2-2-1-loadstart-开始加载"><a href="#2-2-1-loadstart-开始加载" class="headerlink" title="2.2.1 loadstart 开始加载"></a>2.2.1 loadstart 开始加载</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">v.addEventListener(&#x27;loadstart&#x27;,function()&#123;&#125;)</span><br></pre></td></tr></table></figure>
+<h4 id="2-2-2-durationchange-时长改变"><a href="#2-2-2-durationchange-时长改变" class="headerlink" title="2.2.2 durationchange 时长改变"></a>2.2.2 durationchange 时长改变</h4><p>video初始化的时候拿不到时长信息，时长是NaN；<br>视频加载完毕的时候，拿到时长信息，会触发duration change事件</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">console.log(v.duration); //NaN</span><br><span class="line">v.addEventListener(&#x27;durationchange&#x27;,function(e)&#123;console.log(v.duration);&#125;) // （触发多次）拿到的不一定是总时长，因为加载源视频都是一段段的</span><br></pre></td></tr></table></figure>
+<h4 id="2-2-3-loadedmetadata"><a href="#2-2-3-loadedmetadata" class="headerlink" title="2.2.3 loadedmetadata"></a>2.2.3 loadedmetadata</h4><p>源数据加载完成<br>v.addEventListener(‘loadedmetadata’, function() {<br>  console.log(‘loadedmetadata’);<br>});<br>源数据加载完毕会触发 durationchange  和 loadedmetadata 事件，但是要注意顺序，先触发前者。</p>
+<h4 id="2-2-4-loadeddata"><a href="#2-2-4-loadeddata" class="headerlink" title="2.2.4 loadeddata"></a>2.2.4 loadeddata</h4><p>没有足够音视频帧去播放</p>
+<h4 id="2-2-5-progress"><a href="#2-2-5-progress" class="headerlink" title="2.2.5 progress"></a>2.2.5 progress</h4><p>加载数据</p>
+<h4 id="2-2-6-canplay"><a href="#2-2-6-canplay" class="headerlink" title="2.2.6 canplay"></a>2.2.6 canplay</h4><p>通知浏览器可以播放视频<br>在这里可以使用video.play()</p>
+<h4 id="2-2-7-canplaythrough"><a href="#2-2-7-canplaythrough" class="headerlink" title="2.2.7 canplaythrough"></a>2.2.7 canplaythrough</h4><p>可以流畅播放</p>
+<h4 id="2-2-8-play-播放"><a href="#2-2-8-play-播放" class="headerlink" title="2.2.8 play 播放"></a>2.2.8 play 播放</h4><p>视频播放就会触发</p>
+<h4 id="2-2-9-pause-暂停"><a href="#2-2-9-pause-暂停" class="headerlink" title="2.2.9 pause 暂停"></a>2.2.9 pause 暂停</h4><h4 id="2-2-10-监听控制条时长"><a href="#2-2-10-监听控制条时长" class="headerlink" title="2.2.10 监听控制条时长"></a>2.2.10 监听控制条时长</h4><p>1、seeking<br>2、seeked</p>
+<h4 id="2-2-11-waiting"><a href="#2-2-11-waiting" class="headerlink" title="2.2.11 waiting"></a>2.2.11 waiting</h4><h4 id="2-2-12-playing"><a href="#2-2-12-playing" class="headerlink" title="2.2.12 playing"></a>2.2.12 playing</h4><h4 id="2-2-13-timeupdate"><a href="#2-2-13-timeupdate" class="headerlink" title="2.2.13 timeupdate"></a>2.2.13 timeupdate</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 播放时间更新事件</span><br><span class="line">v.addEventListener(&#x27;timeupdate&#x27;, function()&#123;</span><br><span class="line">    </span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h4 id="2-2-14ended"><a href="#2-2-14ended" class="headerlink" title="2.2.14ended"></a>2.2.14ended</h4><p>1、监听播放结束事件，2、插入一段广告</p>
+<h4 id="2-2-15-error"><a href="#2-2-15-error" class="headerlink" title="2.2.15 error"></a>2.2.15 error</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">v.addEventListener(&#x27;error&#x27;, function()&#123;</span><br><span class="line">    console.log(e); // 视频加载出错error 对象有code 属性以及对应错误信息</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>浏览器自带 加载失败 重试机制。<br>程序控制播放：<br>需要监听 canplay 或者 canplaythrough 事件 控制播放</p>
+<h2 id="3、直播源的制作"><a href="#3、直播源的制作" class="headerlink" title="3、直播源的制作"></a>3、直播源的制作</h2><h3 id="3-1-方法-nginx-ffmpeg"><a href="#3-1-方法-nginx-ffmpeg" class="headerlink" title="3.1 方法 nginx + ffmpeg"></a>3.1 方法 nginx + ffmpeg</h3><h4 id="3-1-1-安装nginx"><a href="#3-1-1-安装nginx" class="headerlink" title="3.1.1 安装nginx"></a>3.1.1 安装nginx</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">brew tap homebrew/nginx</span><br><span class="line">brew install nginx-full --with-rtmp-module(安装这个模块)</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+<h4 id="3-1-2-查看nginx安装位置"><a href="#3-1-2-查看nginx安装位置" class="headerlink" title="3.1.2 查看nginx安装位置"></a>3.1.2 查看nginx安装位置</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">brew info nginx-full</span><br><span class="line"></span><br><span class="line">/opt/homebrew/opt/nginx-full/bin/nginx  安装位置</span><br><span class="line">/opt/homebrew/var/www  服务器根目录所在位置</span><br><span class="line">/opt/homebrew/etc/nginx/nginx.conf 配置文件所在目录</span><br></pre></td></tr></table></figure>
+<h4 id="3-1-3-安装-ffmpeg"><a href="#3-1-3-安装-ffmpeg" class="headerlink" title="3.1.3 安装 ffmpeg"></a>3.1.3 安装 ffmpeg</h4><p><a href="http://ffmpeg.org/download.html">http://ffmpeg.org/download.html</a></p>
+<p>安装方法1:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">brew install ffmpeg 下载出错 404</span><br></pre></td></tr></table></figure>
+
+<p>安装方法2: </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1 拉取源码 git clone https://git.ffmpeg.org/ffmpeg.git ffmpeg</span><br><span class="line">2 进入ffmpeg文件进行编译  ./configure --prefix=/Users/lyur/ffmpeg（安装目录） --enable-gpl --enable-nonfree --enable-libfdk-aac --enable-libx264 --enable-libx265 --enable-filter=delogo --enable-debug --disable-optimizations --enable-libspeex --enable-videotoolbox --enable-shared --enable-pthreads --enable-version3 --enable-hardcoded-tables --cc=clang --host-cflags= --host-ldflags=</span><br><span class="line">3 安装 sudo make install</span><br><span class="line">安装成功检验：</span><br><span class="line">$ ffmepg </span><br><span class="line">输出相应配置信息</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-1-4-配置-nginx-conf"><a href="#3-1-4-配置-nginx-conf" class="headerlink" title="3.1.4 配置 nginx.conf"></a>3.1.4 配置 nginx.conf</h4><p>使用vscode 打开 nginx.conf</p>
+<ul>
+<li>1、vs code：commond+shift+p 输入 shell commond: Install ‘code’ command in PATH</li>
+<li>2、bash： code xx/nginx.conf</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http &#123;</span><br><span class="line">    server &#123;</span><br><span class="line">        ...</span><br><span class="line">        location /hls &#123;</span><br><span class="line">          types &#123;</span><br><span class="line">            application/vnd.apple.mpegurl m3u8;</span><br><span class="line">            video/mp2t ts;</span><br><span class="line">          &#125;</span><br><span class="line">          root /Users/lyur/www;（存放m3u8文件的上一级）</span><br><span class="line">          add_header Cache-Control no-cache;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"># rtmp 协议配置</span><br><span class="line">rtmp &#123;</span><br><span class="line">    server &#123;</span><br><span class="line">        listen 1935;</span><br><span class="line">        # rtmp直播流配置</span><br><span class="line">        application rtmplive &#123;</span><br><span class="line">            live on;</span><br><span class="line">        &#125;</span><br><span class="line">        # hls 直播流配置</span><br><span class="line">        application hls &#123;</span><br><span class="line">            live on;</span><br><span class="line">            hls on;</span><br><span class="line">            hls_path /Users/lyur/www/hls;（注意nginx在该目录是否有写入权限）</span><br><span class="line">            hls_fragment 5s;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>说明：<br>rtmp 协议名<br>server 说明内部是服务器相关配置<br>listen 该协议监听的端口号<br>application 访问的应用路径<br>live on 开启实时</p>
+<p>后续推流访问：<br>rtmp://localhost:1935/rtmplive/xxx<br>保存 nginx配置文件之后需执行 （重要）</p>
+<p>nginx -s reload<br>否则会出现访问拒绝问题：</p>
+<p>nginx.conf新增<br>pid /opt/homebrew/etc/nginx/logs/nginx.pid;</p>
+<p>这是因为nginx.pid 文件启动才生成</p>
+<h4 id="3-1-5-推流"><a href="#3-1-5-推流" class="headerlink" title="3.1.5 推流"></a>3.1.5 推流</h4><p>1、rtmp推流：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ffmpeg -re -i xx.mp4(视频绝对路径) -vcodec libx264 -acodec aac -f flv rtmp://localhost:1935/rtmplive/rtmp(rtmp 随便写)</span><br></pre></td></tr></table></figure>
+
+<p>2、hls推流：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ffmpeg -re -i xx.mp4(视频绝对路径) -vcodec libx264 -acodec aac -f flv rtmp://localhost:1935/hls/stream 推流成功</span><br></pre></td></tr></table></figure>
+<p>但是使用Safari 查看视频 404 <a href="http://localhost:8080/hls/stream.m3u8">http://localhost:8080/hls/stream.m3u8</a>    </p>
+<p>查找存放m3u8文件夹，发现里面没有ts和m3u8文件，原因 在/usr/local/var/www/hls目录，没有写入文件权限，更换存放路径/Users/lyur/www/hls<br>修改读取文件路径为/Users/lyur/www，nginx访问成功。</p>
+<h4 id="3-1-6-安装-VLC-播放器"><a href="#3-1-6-安装-VLC-播放器" class="headerlink" title="3.1.6 安装 VLC 播放器"></a>3.1.6 安装 VLC 播放器</h4><p><a href="https://www.videolan.org/index.zh.html">https://www.videolan.org/index.zh.html</a></p>
+<p>1.6.1 rtmp推流访问视频：<br>安装之后 打开 file –&gt; open network –&gt; 输入推流的地址</p>
+<p>1.7 nginx 配置stat 统计<br>使用 brew install nginx-full，自带统计页面存放位置。</p>
+<p>nginx.conf 中配置访问stat页面访问路由</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">location /stat &#123;    </span><br><span class="line">    rtmp_stat all;</span><br><span class="line">    rtmp_stat_stylesheet stat.xsl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">location /stat.xsl &#123; </span><br><span class="line">    root /opt/homebrew/opt/rtmp-nginx-module/share/rtmp-nginx-module;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>重启nginx可以查看我们推流是否成功。</p>
+<p>2 方法二 集成服务（没有现成服务 没有进行验证）<br>1、推流命令</p>
+<p>ffmpeg -re -i xx.mp4(视频绝对路径) -c copy -f flv rtmp://localhost:1935/live/movie<br>2、验证地址</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">RTMP: rtmp://localhost:1935/live/movie</span><br><span class="line">FLV:  http://127.0.0.1:7001/live/movie.flv</span><br><span class="line">HLS:  http://127.0.0.1:7002/live/movie.m3u8</span><br></pre></td></tr></table></figure>
+<p>方法二无法灵活配置流地址和端口，方法一可以，但是方法一需要熟悉nginx的配置</p>
+<p>2.1 下载服务<br>2.2 安装服务<br>2.3准备源视频<br>2.4开启服务<br>2.5利用ffmpeg推流</p>
+<h2 id="4、h5直播演练"><a href="#4、h5直播演练" class="headerlink" title="4、h5直播演练"></a>4、h5直播演练</h2><h3 id="4-1-播放器"><a href="#4-1-播放器" class="headerlink" title="4.1 播放器"></a>4.1 播放器</h3><h4 id="1、videojs"><a href="#1、videojs" class="headerlink" title="1、videojs"></a>1、videojs</h4><p>优点：很多插件和自定义ui,内部使用hls实现</p>
+<p><a href="https://github.com/videojs/video.js%E3%80%82">https://github.com/videojs/video.js。</a> 使用文档<a href="https://videojs.com/">https://videojs.com/</a></p>
+<p>基础使用：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 引入videojs的css js</span><br><span class="line">&lt;link href=&quot;https://cdnjs.cloudflare.com/ajax/libs/video.js/7.10.2/video-js.min.css&quot; rel=&quot;stylesheet&quot;/&gt;</span><br><span class="line">&lt;video id=&#x27;my-player&#x27;&gt;</span><br><span class="line">   &lt;source src=&#x27;test.mp4&#x27; type=&#x27;video/mp4&#x27;&gt;</span><br><span class="line">&lt;/video&gt;</span><br><span class="line">&lt;script src=&#x27;https://cdnjs.cloudflare.com/ajax/libs/video.js/7.10.2/video.min.js&#x27;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">var player = videojs(&#x27;my-player&#x27;, opstions);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>使用ffmpeg 推流， videojs进行播放m3u8文件 </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">推流：ffmpeg -re -i -vcodec libx264 -acodec aac -f flv rtmp://localhost:1935/hls/stream</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">引入videojs的css js</span><br><span class="line">&lt;link href=&quot;https://cdnjs.cloudflare.com/ajax/libs/video.js/7.10.2/video-js.min.css&quot; rel=&quot;stylesheet&quot;/&gt;</span><br><span class="line">&lt;video id=&#x27;my-player&#x27;&gt;</span><br><span class="line">   &lt;source src=&#x27;http://localhost:8080/hls/stream.m3u8&#x27; type=&#x27;application/vnd.apple.mpegurl&#x27;&gt;</span><br><span class="line">&lt;/video&gt;</span><br><span class="line">&lt;script src=&#x27;https://cdnjs.cloudflare.com/ajax/libs/video.js/7.10.2/video.min.js&#x27;&gt;&lt;/script&gt;</span><br><span class="line">//支持hls协议</span><br><span class="line">  &lt;script src=&quot;https://unpkg.com/videojs-contrib-hls/dist/videojs-contrib-hls.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">var myPlayer = videojs.getPalyer(&#x27;my-player&#x27;, opstions);</span><br><span class="line"> //需要监听视频加载完成进行播放控制 否则不会加载m3u8文件</span><br><span class="line">      videojs(&quot;my-video&quot;).ready(function()&#123;</span><br><span class="line">        var myPlayer = this;</span><br><span class="line">        myPlayer.play();</span><br><span class="line">      &#125;);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>m3u8文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#EXTM3U</span><br><span class="line">#EXT-X-VERSION:3</span><br><span class="line">#EXT-X-MEDIA-SEQUENCE:90</span><br><span class="line">#EXT-X-TARGETDURATION:10</span><br><span class="line">#EXTINF:9.426,</span><br><span class="line">stream-90.ts</span><br><span class="line">#EXTINF:8.695,</span><br><span class="line">stream-91.ts</span><br><span class="line">#EXTINF:9.983,</span><br><span class="line">stream-92.ts</span><br><span class="line">#EXT-X-DISCONTINUITY</span><br><span class="line">#EXTINF:9.997,</span><br><span class="line">stream-93.ts</span><br><span class="line">#EXTINF:3.215,</span><br><span class="line">stream-94.ts</span><br><span class="line">#EXT-X-DISCONTINUITY</span><br><span class="line">#EXTINF:9.913,</span><br><span class="line">stream-95.ts</span><br></pre></td></tr></table></figure>
+<h4 id="2、hlsjs"><a href="#2、hlsjs" class="headerlink" title="2、hlsjs"></a>2、hlsjs</h4><p>适合使用hls协议的直播 <a href="https://github.com/video-dev/hls.js">https://github.com/video-dev/hls.js</a><br>hls demo m3u8文件</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#EXTM3U</span><br><span class="line">#EXT-X-VERSION:3</span><br><span class="line">#EXT-X-PLAYLIST-TYPE:VOD // 代表这是点播，或者是点播是有进度条拖动，而直播是没有的</span><br><span class="line">#EXT-X-TARGETDURATION:11</span><br><span class="line">#EXTINF:10.000,</span><br><span class="line">url_462/193039199_mp4_h264_aac_hd_7.ts</span><br><span class="line">#EXTINF:10.000,</span><br><span class="line">url_463/193039199_mp4_h264_aac_hd_7.ts</span><br><span class="line">#EXTINF:10.000,</span><br><span class="line">url_464/193039199_mp4_h264_aac_hd_7.ts</span><br><span class="line">#EXT-X-ENDLIST</span><br></pre></td></tr></table></figure>
+<p>hls点播demo</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;video id=&#x27;video&#x27; controls width=&#x27;400&#x27;&gt;&lt;/video&gt;</span><br><span class="line">&lt;script src=&#x27;https://cdn.jsdelivr.net/npm/hls.js@latest&#x27;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var video = document.getElementById(&#x27;video&#x27;);</span><br><span class="line">    var videoSrc=&#x27;https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8&#x27;;</span><br><span class="line">    if(Hls.isSupported())&#123;</span><br><span class="line">        var hls = new Hls();</span><br><span class="line">        hls.loadSource(videoSrc);</span><br><span class="line">        hls.attachMedia(video);</span><br><span class="line">    &#125;else if(video.canplayType(&#x27;application/vnd.apple.mpegurl&#x27;))&#123;</span><br><span class="line">        video.src = videoSrc;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>自定义UI 样式：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;div class=&quot;player&quot; id=&quot;player&quot;&gt;</span><br><span class="line">  &lt;video id=&quot;video&quot; pause&gt;&lt;/video&gt;</span><br><span class="line">  &lt;div class=&quot;btn&quot;&gt;&lt;/div&gt;</span><br><span class="line">  &lt;span class=&quot;onlive&quot;&gt;正在直播&lt;/span&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;script src=&quot;https://cdn.jsdelivr.net/npm/hls.js@latest&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  var video = document.getElementById(&#x27;video&#x27;);</span><br><span class="line">var player = document.getElementById(&#x27;player&#x27;);</span><br><span class="line">var onlive = document.getElementsByClassName(&#x27;onlive&#x27;)[0];</span><br><span class="line">var btn = document.getElementsByClassName(&#x27;btn&#x27;)[0];</span><br><span class="line">var videoSrc = &#x27;http://localhost:8080/hls/stream.m3u8&#x27;; //&#x27;https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8&#x27;//</span><br><span class="line">if (Hls.isSupported()) &#123;</span><br><span class="line">  var hls = new Hls();</span><br><span class="line">  hls.loadSource(videoSrc);</span><br><span class="line">  hls.attachMedia(video);</span><br><span class="line">  video.play()</span><br><span class="line">&#125;</span><br><span class="line">else if (video.canPlayType(&#x27;application/vnd.apple.mpegurl&#x27;)) &#123;</span><br><span class="line">  video.src = videoSrc;</span><br><span class="line">&#125;</span><br><span class="line">btn.addEventListener(&#x27;click&#x27;, function()&#123;</span><br><span class="line">  if(video.paused)&#123;</span><br><span class="line">    video.play();</span><br><span class="line">  &#125;else&#123;</span><br><span class="line">    video.pause();</span><br><span class="line">  &#125; // 实际开发还要注意 ended事件</span><br><span class="line">&#125;);</span><br><span class="line">video.addEventListener(&#x27;play&#x27;, function()&#123;</span><br><span class="line">  player.className = &#x27;player&#x27;;</span><br><span class="line">  onlive.className = &#x27;onlive&#x27;;</span><br><span class="line">&#125;);</span><br><span class="line">video.addEventListener(&#x27;pause&#x27;, function()&#123;</span><br><span class="line">  player.className = &#x27;player pause&#x27;;</span><br><span class="line">  onlive.className = &#x27;onlive pause&#x27;;</span><br><span class="line">&#125;);</span><br><span class="line">video.addEventListener(&#x27;click&#x27;, function()&#123;</span><br><span class="line">  if(video.paused)&#123;</span><br><span class="line">    video.play();</span><br><span class="line">  &#125;else&#123;</span><br><span class="line">    video.pause();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>css:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">.player&#123;</span><br><span class="line">  width: 450px;</span><br><span class="line">  height: 230px;</span><br><span class="line">  position: relative;</span><br><span class="line">&#125;</span><br><span class="line">.player video &#123;</span><br><span class="line">  width: 100%;</span><br><span class="line">  height: 100%;</span><br><span class="line">&#125;</span><br><span class="line">.player .btn &#123;</span><br><span class="line">  display: none;</span><br><span class="line">  width: 40px;</span><br><span class="line">  height: 40px;</span><br><span class="line">  box-sizing: border-box;</span><br><span class="line">  background: rgba(0, 0, 0, .5);</span><br><span class="line">  border-radius: 50%;</span><br><span class="line">  margin: -20px auto auto -20px;</span><br><span class="line">  position: absolute;</span><br><span class="line">  left: 50%;</span><br><span class="line">  top: 50%;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br><span class="line">.player .btn:hover&#123;</span><br><span class="line">  background-color: rgba(0,0,0,.3);</span><br><span class="line">&#125;</span><br><span class="line">.player .btn::before &#123;</span><br><span class="line">  content: &#x27;&#x27;;</span><br><span class="line">  display: block;</span><br><span class="line">  height: 0;</span><br><span class="line">  width: 0;</span><br><span class="line">  margin-left: 14px;</span><br><span class="line">  margin-top: 4px;</span><br><span class="line">  border: 16px solid transparent; </span><br><span class="line">  border-left: 16px solid #ddd;</span><br><span class="line">&#125;</span><br><span class="line">.player .btn::before:hover &#123;</span><br><span class="line">  border-left-color: #fff;</span><br><span class="line">&#125; </span><br><span class="line">.player.pause .btn&#123;</span><br><span class="line">  display: block;</span><br><span class="line">&#125;</span><br><span class="line">.onlive&#123;</span><br><span class="line">  position: absolute;</span><br><span class="line">  left: 40px;</span><br><span class="line">  color: #ccc;</span><br><span class="line">  bottom: 20px;</span><br><span class="line">  display: block;</span><br><span class="line">&#125;</span><br><span class="line">.onlive.pause&#123;</span><br><span class="line">  display: none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>hlsjs 比 videojs 比较：<br>后者体积大，前者比较灵活，没有videojs那么多功能，<br>UI方面：hls可以自定义，而videojs有基本UI封装，如果需要修改样式，需要自定义插件或者使用UI样式进行覆盖</p>
+<h4 id="3、flvjs"><a href="#3、flvjs" class="headerlink" title="3、flvjs"></a>3、flvjs</h4><p>flv推流服务 未成功启动，所以没有进行demo</p>
+<h2 id="5、微信小程序演练"><a href="#5、微信小程序演练" class="headerlink" title="5、微信小程序演练"></a>5、微信小程序演练</h2><p>微信小程序实时播放流组件  <live-player />  注意：不支持hls协议的直播源，支持flv、rtmp</p>
+<ul>
+<li>1、使用 ffmpeg + nginx 实现 rtmp推流: </li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ffmpeg -re -i test.mp4 -vcodec libx264 -acodec aac -f flv rtmp://localhost:1935/rtmplive/rtmpdemo</span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li>2、微信小程序内使用播放直播流组件：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;live-player src=&quot;rtmp://localhost:1935/rtmplive/rtmpdemo&quot;</span><br><span class="line"> mode=&quot;RTC&quot; autoplay bindstatechange=&quot;statechange&quot; binderror=&quot;error&quot; style=&quot;width: 300px; height: 225px;&quot; /&gt;</span><br></pre></td></tr></table></figure>
+
+<p>需要真机调试，这里需要注意我们直播流地址localhost对应的是我们电脑的127.0.0.1 但是进行真机调试需要是的手机和电脑出在同一个局域网，直播源ip使用的是电脑的ip：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">src=&quot;rtmp://10.4.12.237:1935/rtmplive/rtmpdemo&quot;</span><br></pre></td></tr></table></figure>
+<p>配置之后发现无法报错：live-player报渲染失败：insertLivePlayer:fail jsapi has no permission<br>修改小程序管理后台权限 <a href="https://mp.weixin.qq.com/wxamp/categoryapi/index?token=683321573&amp;lang=zh_CN">https://mp.weixin.qq.com/wxamp/categoryapi/index?token=683321573&amp;lang=zh_CN</a> （开发管理 -&gt; 接口设置 -&gt; 实时播放音视频流打开）</p>
+]]></content>
+      <categories>
+        <category>直播</category>
+      </categories>
+      <tags>
+        <tag>播放器</tag>
+        <tag>ffmpeg</tag>
+        <tag>直播协议</tag>
+        <tag>video标签</tag>
+      </tags>
   </entry>
   <entry>
     <title>React &amp; Vue</title>
@@ -230,7 +528,7 @@ GIT BASH 指令：env|grep -i proxy 两次
 <li><p>this.setState({}) 不能使用this.state.propName</p>
 </li>
 <li><p> 命令行 hs -c-l -o</p>
-<h3 id="二-VUE"><a href="#二-VUE" class="headerlink" title="二/VUE"></a>二/VUE</h3><h4 id="1-使用vue"><a href="#1-使用vue" class="headerlink" title="1.使用vue"></a>1.使用vue</h4></li>
+<h3 id="二、VUE"><a href="#二、VUE" class="headerlink" title="二、VUE"></a>二、VUE</h3><h4 id="1-使用vue"><a href="#1-使用vue" class="headerlink" title="1.使用vue"></a>1.使用vue</h4></li>
 <li><p>1.引包</p>
 </li>
 <li><p>2.创建vue实例化对象 </p>
@@ -501,7 +799,7 @@ GIT BASH 指令：env|grep -i proxy 两次
 </ul>
 ]]></content>
       <categories>
-        <category>前端开发</category>
+        <category>框架</category>
       </categories>
       <tags>
         <tag>React 语法</tag>
@@ -1226,7 +1524,7 @@ GIT BASH 指令：env|grep -i proxy 两次
 
 ]]></content>
       <categories>
-        <category>微信小程序开发</category>
+        <category>微信小程序</category>
       </categories>
       <tags>
         <tag>微信小程序原生框架</tag>

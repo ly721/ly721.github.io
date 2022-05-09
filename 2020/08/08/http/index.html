@@ -30,7 +30,7 @@
 <meta property="og:image" content="http://example.com/2020/08/08/images/ws.png">
 <meta property="og:image" content="http://example.com/2020/08/08/images/hs.png">
 <meta property="article:published_time" content="2020-08-08T12:06:08.000Z">
-<meta property="article:modified_time" content="2021-07-01T03:50:26.905Z">
+<meta property="article:modified_time" content="2022-05-08T14:13:25.432Z">
 <meta property="article:author" content="李泼泼">
 <meta property="article:tag" content="计算机网络基础">
 <meta name="twitter:card" content="summary">
@@ -254,7 +254,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-07-01 11:50:26" itemprop="dateModified" datetime="2021-07-01T11:50:26+08:00">2021-07-01</time>
+                <time title="修改时间：2022-05-08 22:13:25" itemprop="dateModified" datetime="2022-05-08T22:13:25+08:00">2022-05-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -262,7 +262,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">前端开发</span></a>
+                  <a href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" itemprop="url" rel="index"><span itemprop="name">基础知识</span></a>
                 </span>
             </span>
 
@@ -277,17 +277,57 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="计算机网络基础"><a href="#计算机网络基础" class="headerlink" title="计算机网络基础"></a>计算机网络基础</h3><p>一、书籍推荐：《图解HTTPS》《HTTP权威指南》<br>二、HTTP缓存<br>   HTTP缓存分为强缓存和协商缓存：<br>   先通过Cache-control验证强缓存是否可用，可用就直接读取缓存，否则进入协商缓存阶段，发起http请求，服务器通过<br>   请求头是否有If-Modified-Since 和 If-None-Match 条件请求字段检查资源是否更新：<br>   如果资源更新，那么就返回资源和200状态码；<br>   如果资源未更新，那么告诉浏览器直接使用缓存获取资源。<br>三、http常用状态码以及使用场景<br>  1xx: 表示当前是协议的中间态，还需要后续请求<br>  2xx:表示请求成功<br>  3xx:表示重定向状态<br>  4XX:表示请求报文出错<br>  5xx: 表示服务器错误</p>
-<p>  常用状态码：<br>  101: 切换请求协议，从http切换到websocket<br>  200: 请求成功<br>  301 永久重定向：会缓存<br>  302 临时重定向：不会缓存<br>  304 协商缓存命中<br>  403 服务器禁止访问<br>  404 资源未找到<br>  400 请求错误<br>  500 服务端错误</p>
-<p>  遇到302状态码的某些场景：<br>  302表示临时重定向，这个资源只是暂时不能被访问，但是之后过一段时间还是可以继续访问，一般是访问某个<br>  网站的资源需要权限时，会需要用户登录，跳转到登录页面之后还可以继续访问。</p>
-<p>  301是永久重定向，跳转到一个新网站，但是301代表这个被访问的地质资源被永久移除了，以后都不会访问这个地址，<br>  搜索引擎抓取的时候也会使用新的地址替换这个旧地址。可以在响应的location首部去获取到返回的地址。<br>四、 HTTP常用请求方式<br> http/1.1 规定的请求方式：<br> 1.GET: 获取数据，参数在url上<br> 2.POST: 提交数据，比如登录页面登录用户信息时使用<br> 3.PUT:修改数据<br> 4.HEAD: 获取资源的元信息<br> 5.DELETE: 删除数据<br> 6.CONNECT: 建立连接通道，用在代理服务器<br> 7.OPTIONS: 列出可对资源实行的请求方法，常用于跨域<br> 8.TRACE: 追踪请求-响应的传输路径</p>
-<p>五、 网络分层<br> OSI体系结构： 7.应用层 6.表示层 5.会话层 4.传输层 3.网络层 2.链路层 1.物理层<br> TCP/IP结构： 4.应用层(FTP) 3. 运输层(TCP,UDP) 2.网络层（IP、ICMP、IGMP) 1.网络接口层<br> 五层体系结构： 5.应用层 4.运输层 3.网络层 2.链路层 1.物理层</p>
-<p>六、 HTTPS？<br>    HTTPS是在HTTP和TCP之间建立的一个安全层，HTTP与TCP通信时必须经过一个安全层，对数据进行加密，然后将加密后的数据包传给TCP，<br>    相应的TCP必须将数据包解密，才能传给上面的HTTP.<br>    浏览器传输一个client_random和加密方法列表，服务器收到后给浏览器传一个server_random、加密方法列表和数字证书（包含公钥），<br>    然后浏览器对数字证书进行验证，如果验证通过，则生成一个pre_random,然后用公钥加密传给服务器，服务器用client_random、server_random和pre_random,<br>    使用公钥加密生成secret，之后的传输就使用secret作为密钥来进行数据的加解密。</p>
-<p>七、三次握手<br>   <img src="../images/ws.png" alt="三次握手图解"><br>     第一次握手：一开始都处于CLOSED状态，客户端主动发起连接请求，发送syn包（seq=j）到服务器，并进入SYN_SENT状态（syn:同步序列编号）<br>     第二次握手：服务器收到syn包，确认客户端的ACK(ack=j+1),同时发送一个SYN包（seq=k），即SYN+ACK包，而后进入SYN_RECV状态；<br>     第三次握手：客户端收到服务器的ACK+SYN包，向服务器发送确认包ACK（ack=k+1）,进入ESTABLISHED（TCP连接成功）状态，完成三次握手，客户端与服务端开始传输数据。<br>     <code>SYN需要对端确认，所以ACK的序列化要加一，凡是需要对端确认的，要消耗TCP报文的序列化</code><br>八、四次挥手<br>  <img src="../images/hs.png" alt="四次挥手图解"><br>   一开始都处于ESTABLISHED状态，客户端发送报文FIN=1和seq=x,进入FIN_WAIT_1状态；服务端收到报文后，发送确认报文ack=x+1，seq=y,ACK=1，然后进入CLOSE_WAIT状态；<br>   客户端收到服务端的确认报文之后进入FIN_WAIT_2状态；而后服务端再次发送seq=z，FIN=1，ack=x+1,进入LAST-ACK状态,等待客户端确认；客户端收到后发出确认ACK=1，ack=z+1,seq=x+1,进入TIME_WAIT状态，经过2MSL(最长报文段寿命)事件后，才进入CLOSED状态，<br>   然后发送ACK给服务端，服务端收到后进入CLOSED状态。</p>
+        <h2 id="计算机网络基础"><a href="#计算机网络基础" class="headerlink" title="计算机网络基础"></a>计算机网络基础</h2><h3 id="一、书籍推荐：《图解HTTPS》《HTTP权威指南》"><a href="#一、书籍推荐：《图解HTTPS》《HTTP权威指南》" class="headerlink" title="一、书籍推荐：《图解HTTPS》《HTTP权威指南》"></a>一、书籍推荐：《图解HTTPS》《HTTP权威指南》</h3><h3 id="二、HTTP缓存"><a href="#二、HTTP缓存" class="headerlink" title="二、HTTP缓存"></a>二、HTTP缓存</h3><p>   HTTP缓存分为强缓存和协商缓存：<br>   先通过Cache-control验证强缓存是否可用，可用就直接读取缓存，否则进入协商缓存阶段，发起http请求，服务器通过<br>   请求头是否有If-Modified-Since 和 If-None-Match 条件请求字段检查资源是否更新：<br>   如果资源更新，那么就返回资源和200状态码；<br>   如果资源未更新，那么告诉浏览器直接使用缓存获取资源。</p>
+<h3 id="三、http常用状态码以及使用场景"><a href="#三、http常用状态码以及使用场景" class="headerlink" title="三、http常用状态码以及使用场景"></a>三、http常用状态码以及使用场景</h3><ul>
+<li>1xx: 表示当前是协议的中间态，还需要后续请求</li>
+<li>2xx:表示请求成功</li>
+<li>3xx:表示重定向状态</li>
+<li>4XX:表示请求报文出错</li>
+<li>5xx: 表示服务器错误</li>
+</ul>
+<ul>
+<li>常用状态码：</li>
+</ul>
+<ul>
+<li>101: 切换请求协议，从http切换到websocket</li>
+<li>200: 请求成功</li>
+<li>301 永久重定向：会缓存</li>
+<li>302 临时重定向：不会缓存</li>
+<li>304 协商缓存命中</li>
+<li>403 服务器禁止访问</li>
+<li>404 资源未找到</li>
+<li>400 请求错误</li>
+<li>500 服务端错误</li>
+</ul>
+<p>  遇到302状态码的某些场景：</p>
+<ol>
+<li><p>302表示临时重定向，这个资源只是暂时不能被访问，但是之后过一段时间还是可以继续访问，一般是访问某个网站的资源需要权限时，会需要用户登录，跳转到登录页面之后还可以继续访问。</p>
+</li>
+<li><p>301是永久重定向，跳转到一个新网站，但是301代表这个被访问的地质资源被永久移除了，以后都不会访问这个地址，搜索引擎抓取的时候也会使用新的地址替换这个旧地址。可以在响应的location首部去获取到返回的地址。</p>
+</li>
+</ol>
+<h3 id="四、-HTTP常用请求方式"><a href="#四、-HTTP常用请求方式" class="headerlink" title="四、 HTTP常用请求方式"></a>四、 HTTP常用请求方式</h3><p> http/1.1 规定的请求方式：</p>
+<ol>
+<li>GET: 获取数据，参数在url上</li>
+<li>POST: 提交数据，比如登录页面登录用户信息时使用</li>
+<li>PUT:修改数据</li>
+<li>HEAD: 获取资源的元信息</li>
+<li>DELETE: 删除数据</li>
+<li>CONNECT: 建立连接通道，用在代理服务器</li>
+<li>OPTIONS: 列出可对资源实行的请求方法，常用于跨域</li>
+<li>TRACE: 追踪请求-响应的传输路径</li>
+</ol>
+<h3 id="五、-网络分层"><a href="#五、-网络分层" class="headerlink" title="五、 网络分层"></a>五、 网络分层</h3><ul>
+<li>OSI体系结构： 7.应用层 6.表示层 5.会话层 4.传输层 3.网络层 2.链路层 1.物理层</li>
+<li>TCP/IP结构： 4.应用层(FTP) 3. 运输层(TCP,UDP) 2.网络层（IP、ICMP、IGMP) 1.网络接口层</li>
+<li>五层体系结构： 5.应用层 4.运输层 3.网络层 2.链路层 1.物理层</li>
+</ul>
+<h3 id="六、-HTTPS"><a href="#六、-HTTPS" class="headerlink" title="六、 HTTPS"></a>六、 HTTPS</h3><p>HTTPS是在HTTP和TCP之间建立的一个安全层，HTTP与TCP通信时必须经过一个安全层，对数据进行加密，然后将加密后的数据包传给TCP，相应的TCP必须将数据包解密，才能传给上面的HTTP。浏览器传输一个client_random和加密方法列表，服务器收到后给浏览器传一个server_random、加密方法列表和数字证书（包含公钥），然后浏览器对数字证书进行验证，如果验证通过，则生成一个pre_random,然后用公钥加密传给服务器，服务器用client_random、server_random和pre_random,使用公钥加密生成secret，之后的传输就使用secret作为密钥来进行数据的加解密。</p>
+<h3 id="七、三次握手"><a href="#七、三次握手" class="headerlink" title="七、三次握手"></a>七、三次握手</h3><p>   <img src="../images/ws.png" alt="三次握手图解"><br>     第一次握手：一开始都处于CLOSED状态，客户端主动发起连接请求，发送syn包（seq=j）到服务器，并进入SYN_SENT状态（syn:同步序列编号）<br>     第二次握手：服务器收到syn包，确认客户端的ACK(ack=j+1),同时发送一个SYN包（seq=k），即SYN+ACK包，而后进入SYN_RECV状态；<br>     第三次握手：客户端收到服务器的ACK+SYN包，向服务器发送确认包ACK（ack=k+1）,进入ESTABLISHED（TCP连接成功）状态，完成三次握手，客户端与服务端开始传输数据。<br>     <code>SYN需要对端确认，所以ACK的序列化要加一，凡是需要对端确认的，要消耗TCP报文的序列化</code></p>
+<h3 id="八、四次挥手"><a href="#八、四次挥手" class="headerlink" title="八、四次挥手"></a>八、四次挥手</h3><p>  <img src="../images/hs.png" alt="四次挥手图解"><br>   一开始都处于ESTABLISHED状态，客户端发送报文FIN=1和seq=x,进入FIN_WAIT_1状态；服务端收到报文后，发送确认报文ack=x+1，seq=y,ACK=1，然后进入CLOSE_WAIT状态；<br>   客户端收到服务端的确认报文之后进入FIN_WAIT_2状态；而后服务端再次发送seq=z，FIN=1，ack=x+1,进入LAST-ACK状态,等待客户端确认；客户端收到后发出确认ACK=1，ack=z+1,seq=x+1,进入TIME_WAIT状态，经过2MSL(最长报文段寿命)事件后，才进入CLOSED状态，<br>   然后发送ACK给服务端，服务端收到后进入CLOSED状态。</p>
 <p>   为什么要等待2MSL？<br>    2MSL是两倍的MSL(Maximum Segment Lifetime),MSL是一个片段在网络中最大的存活时间，2MSL就是一个发送和一个回复所要的最大时间，如果直到2MSL客户端都没收到FIN，就推断ACK已被成功接收，结束TCP连接。</p>
 <p>   在交互过程中如果数据传送完了，如果不想断开两端连接可以在HTTP的响应体的Connection字段指定为keep-alive</p>
-<p>九、TCP滑动窗口（分为发送窗口和接收窗口）</p>
-<pre><code>在TCP连接中，对于发送端和接收端，TCP需要把发送的数据放到发送缓存区，将接收的数据放到接收缓存区。经常会发生发送端发送过多而接收端无法接收的情况，所以需要流量控制，也就是根据接收缓存区的大小来控制发送端的发送。如果接收缓存区已经满了，此时发送端就不需要继续发送数据了。
+<h3 id="九、TCP滑动窗口（分为发送窗口和接收窗口）"><a href="#九、TCP滑动窗口（分为发送窗口和接收窗口）" class="headerlink" title="九、TCP滑动窗口（分为发送窗口和接收窗口）"></a>九、TCP滑动窗口（分为发送窗口和接收窗口）</h3><pre><code>在TCP连接中，对于发送端和接收端，TCP需要把发送的数据放到发送缓存区，将接收的数据放到接收缓存区。经常会发生发送端发送过多而接收端无法接收的情况，所以需要流量控制，也就是根据接收缓存区的大小来控制发送端的发送。如果接收缓存区已经满了，此时发送端就不需要继续发送数据了。
 </code></pre>
 
     </div>
@@ -327,7 +367,10 @@
     <a href="/2020/08/08/problem/" rel="prev" title="项目遇到的问题">
       <i class="fa fa-chevron-left"></i> 项目遇到的问题
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2022/04/16/%E7%9B%B4%E6%92%AD/" rel="next" title="直播相关">
+      直播相关 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -386,7 +429,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">计算机网络基础</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">计算机网络基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E4%B9%A6%E7%B1%8D%E6%8E%A8%E8%8D%90%EF%BC%9A%E3%80%8A%E5%9B%BE%E8%A7%A3HTTPS%E3%80%8B%E3%80%8AHTTP%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97%E3%80%8B"><span class="nav-number">1.1.</span> <span class="nav-text">一、书籍推荐：《图解HTTPS》《HTTP权威指南》</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81HTTP%E7%BC%93%E5%AD%98"><span class="nav-number">1.2.</span> <span class="nav-text">二、HTTP缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81http%E5%B8%B8%E7%94%A8%E7%8A%B6%E6%80%81%E7%A0%81%E4%BB%A5%E5%8F%8A%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">1.3.</span> <span class="nav-text">三、http常用状态码以及使用场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E3%80%81-HTTP%E5%B8%B8%E7%94%A8%E8%AF%B7%E6%B1%82%E6%96%B9%E5%BC%8F"><span class="nav-number">1.4.</span> <span class="nav-text">四、 HTTP常用请求方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%94%E3%80%81-%E7%BD%91%E7%BB%9C%E5%88%86%E5%B1%82"><span class="nav-number">1.5.</span> <span class="nav-text">五、 网络分层</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%AD%E3%80%81-HTTPS"><span class="nav-number">1.6.</span> <span class="nav-text">六、 HTTPS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%83%E3%80%81%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B"><span class="nav-number">1.7.</span> <span class="nav-text">七、三次握手</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%AB%E3%80%81%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B"><span class="nav-number">1.8.</span> <span class="nav-text">八、四次挥手</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B9%9D%E3%80%81TCP%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%EF%BC%88%E5%88%86%E4%B8%BA%E5%8F%91%E9%80%81%E7%AA%97%E5%8F%A3%E5%92%8C%E6%8E%A5%E6%94%B6%E7%AA%97%E5%8F%A3%EF%BC%89"><span class="nav-number">1.9.</span> <span class="nav-text">九、TCP滑动窗口（分为发送窗口和接收窗口）</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -402,20 +445,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -450,7 +493,7 @@
 <div class="copyright">
   
   &copy; 2019 – 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
