@@ -70,15 +70,89 @@
     <title>css</title>
     <url>/2022/04/16/css/</url>
     <content><![CDATA[<h3 id="一、display-flex布局"><a href="#一、display-flex布局" class="headerlink" title="一、display:flex布局"></a>一、display:flex布局</h3><p>主轴：项目排列方向，交叉轴：与主轴垂直轴</p>
-<h4 id="1、容器属性6属性-display-flex-样式的元素就是我们的容器，这个容器里面包裹的元素就是我们的项目"><a href="#1、容器属性6属性-display-flex-样式的元素就是我们的容器，这个容器里面包裹的元素就是我们的项目" class="headerlink" title="1、容器属性6属性(display:flex;样式的元素就是我们的容器，这个容器里面包裹的元素就是我们的项目)"></a>1、容器属性6属性(display:flex;样式的元素就是我们的容器，这个容器里面包裹的元素就是我们的项目)</h4><p>| 属性 | 作用 | 值 ｜</p>
-<p>｜align-items    ｜ 项目在与交叉轴的对齐方式    ｜ flex-start:轴起点对齐；flex-end：轴终点对齐；center：轴中点对齐；baseline：项目第一行文字基线对齐；stretch：如果项目未设置高度或者值为auto，那么项目将占满整个容器高度（default ｜</p>
-<p>｜justify-content｜    项目在主轴方向的对齐方式    ｜ center：与主轴中心点对齐；space-between：两端对齐，项目间间隔相等，两端项目与容器无间隔；space-around:每个项目间歌相等，两端项目与容器有间隔，小于项目间间隔；flex-end：右对齐；flex-start:左对齐；（default ｜</p>
-<p>｜align-content｜    项目有多根轴线情况下的对齐方式，例如使用了换行 ｜ flex-start: 与交叉轴起点对齐；flex-end：与交叉轴终点对齐；center：与交叉轴中心点对齐；stretch：占满（default；space-between：与交叉轴两端对齐，项目间隔相等，与容器无间隔；space-around：与交叉轴两端对齐，项目间隔相等，与容器间隔小于项目间隔｜</p>
-<p>｜flex-direction｜    项目排列方向,主轴方向     ｜row:水平方向（起点左边；default；row-reverse：水平方向（起点右边；column:垂直方向（起点在上边；column-reverse:垂直方向（起点在下边；｜</p>
-<p>｜flex-wrap｜    项目在容器内一行放不下是否换行    ｜nowrap:不换；wrap:换行，第一行在上；wrap-reverse:换行，第一行在下 ｜</p>
-<p>｜flex-flow ｜    flex-direction 与 flex-wrap 的缩写    ｜ 默认值：row nowrap ｜</p>
-<h4 id="2、容器内项目6属性"><a href="#2、容器内项目6属性" class="headerlink" title="2、容器内项目6属性"></a>2、容器内项目6属性</h4><p>| 属性 | 作用 | 值 ｜</p>
-<p>| flex-grow | 定义项目放大比例，默认0，也就是容器还有剩余空间也不放大 | int:0、1、2…. ｜<br>| flex-shrink | 定义项目缩小比例，默认1，容器空间不足，该项目将缩小 | 0（不缩小） ｜<br>| flex-basis | 定义在分配容器多余空间前，项目占据的主轴空间。 | 默认auto，项目本来大小;100px,项目占据固定空间 ｜<br>| flex | 是flex-grow、flex-shrink、flex-basis的简写 | 值 ｜ 默认值0 1 auto<br>| oder | 定义项目排列顺序，值越小越靠前。默认0 | int:0、1、2…. ｜<br>| align-self | 允许单个项目有和其他项目不一样的对齐方式，可覆盖align-items |    默认值：auto，表示继承父元素align-items属性，也就是默认stretch；flex-start、flex-end、center、baseline、stretch同容器属性align-items ｜</p>
+<h4 id="1、容器属性6属性-display-flex-样式的元素就是我们的容器，这个容器里面包裹的元素就是我们的项目"><a href="#1、容器属性6属性-display-flex-样式的元素就是我们的容器，这个容器里面包裹的元素就是我们的项目" class="headerlink" title="1、容器属性6属性(display:flex;样式的元素就是我们的容器，这个容器里面包裹的元素就是我们的项目)"></a>1、容器属性6属性(display:flex;样式的元素就是我们的容器，这个容器里面包裹的元素就是我们的项目)</h4><table>
+<thead>
+<tr>
+<th align="center">属性</th>
+<th align="center">作用</th>
+<th align="center">值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">align-items</td>
+<td align="center">项目在与交叉轴的对齐方式</td>
+<td align="center">flex-start:轴起点对齐；flex-end：轴终点对齐；center：轴中点对齐；baseline：项目第一行文字基线对齐；stretch：如果项目未设置高度或者值为auto，那么项目将占满整个容器高度（default</td>
+</tr>
+<tr>
+<td align="center">justify-content</td>
+<td align="center">项目在主轴方向的对齐方式</td>
+<td align="center">center：与主轴中心点对齐；space-between：两端对齐，项目间间隔相等，两端项目与容器无间隔；space-around:每个项目间歌相等，两端项目与容器有间隔，小于项目间间隔；flex-end：右对齐；flex-start:左对齐；（default</td>
+</tr>
+<tr>
+<td align="center">align-content</td>
+<td align="center">项目有多根轴线情况下的对齐方式，例如使用了换行</td>
+<td align="center">flex-start: 与交叉轴起点对齐；flex-end：与交叉轴终点对齐；center：与交叉轴中心点对齐；stretch：占满（default；space-between：与交叉轴两端对齐，项目间隔相等，与容器无间隔；space-around：与交叉轴两端对齐，项目间隔相等，与容器间隔小于项目间隔</td>
+</tr>
+<tr>
+<td align="center">flex-direction</td>
+<td align="center">项目排列方向,主轴方向</td>
+<td align="center">row:水平方向（起点左边；default；row-reverse：水平方向（起点右边；column:垂直方向（起点在上边；column-reverse:垂直方向（起点在下边；</td>
+</tr>
+<tr>
+<td align="center">flex-wrap</td>
+<td align="center">项目在容器内一行放不下是否换行</td>
+<td align="center">nowrap:不换；wrap:换行，第一行在上；wrap-reverse:换行，第一行在下</td>
+</tr>
+<tr>
+<td align="center">flex-flow</td>
+<td align="center">flex-direction 与 flex-wrap 的缩写</td>
+<td align="center">默认值：row nowrap</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<h4 id="2、容器内项目6属性"><a href="#2、容器内项目6属性" class="headerlink" title="2、容器内项目6属性"></a>2、容器内项目6属性</h4><table>
+<thead>
+<tr>
+<th align="center">属性</th>
+<th align="center">作用</th>
+<th align="center">值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">flex-grow</td>
+<td align="center">定义项目放大比例，默认0，也就是容器还有剩余空间也不放大</td>
+<td align="center">0（不缩小）int:0、1、2….</td>
+</tr>
+<tr>
+<td align="center">flex-shrink</td>
+<td align="center">定义项目缩小比例，默认1，容器空间不足，该项目将缩小</td>
+<td align="center">单元格</td>
+</tr>
+<tr>
+<td align="center">flex-basis</td>
+<td align="center">定义在分配容器多余空间前，项目占据的主轴空间</td>
+<td align="center">默认auto，项目本来大小;100px,项目占据固定空间</td>
+</tr>
+<tr>
+<td align="center">flex</td>
+<td align="center">是flex-grow、flex-shrink、flex-basis的简写</td>
+<td align="center">默认值0 1 auto</td>
+</tr>
+<tr>
+<td align="center">oder</td>
+<td align="center">定义项目排列顺序，值越小越靠前。默认0</td>
+<td align="center">int:0、1、2….</td>
+</tr>
+<tr>
+<td align="center">align-self</td>
+<td align="center">允许单个项目有和其他项目不一样的对齐方式，可覆盖align-items</td>
+<td align="center">默认值：auto，表示继承父元素align-items属性，也就是默认stretch；flex-start、flex-end、center、baseline、stretch同容器属性align-items</td>
+</tr>
+</tbody></table>
 <h4 id="3、一些伪类选择器样式"><a href="#3、一些伪类选择器样式" class="headerlink" title="3、一些伪类选择器样式"></a>3、一些伪类选择器样式</h4><p>1、输入框 placeholder 居中：<br>:: - webkit - input - placeholder {<br>  text-align: center;<br>}</p>
 <p>2、滚动条输入框隐藏<br>:: - webkit - scrollbar {<br>  display: none;<br>}</p>
 <p>实现容器水平垂直居中快方法：</p>
@@ -91,6 +165,40 @@
       <tags>
         <tag>flex布局</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>项目遇到的问题</title>
+    <url>/2020/08/08/problem/</url>
+    <content><![CDATA[<h3 id="一、问题"><a href="#一、问题" class="headerlink" title="一、问题"></a>一、问题</h3><h4 id="1-在-build-项目时-报错-plugins-0-may-only-be-a-two-tuple-or-three-tuple"><a href="#1-在-build-项目时-报错-plugins-0-may-only-be-a-two-tuple-or-three-tuple" class="headerlink" title="1.在 build 项目时,报错 .plugins[0] may only be a two-tuple or three-tuple"></a>1.在 build 项目时,报错 .plugins[0] may only be a two-tuple or three-tuple</h4><p>检查配置文件babel.config.js发现问题</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">	plugins: [</span><br><span class="line">  [</span><br><span class="line">    &#x27;component&#x27;,</span><br><span class="line">    &#123;</span><br><span class="line">      libraryName: &#x27;element-ui&#x27;,</span><br><span class="line">      styleLibraryName: &#x27;theme-chalk&#x27;</span><br><span class="line">    &#125;,</span><br><span class="line">	 ...prodPlugins,</span><br><span class="line">	&#x27;@babel/plugin-syntax-dynamic-import&#x27;</span><br><span class="line">  ]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<pre><code>应该这样配置
+</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">   plugins: [</span><br><span class="line">  [</span><br><span class="line">    &#x27;component&#x27;,</span><br><span class="line">    &#123;</span><br><span class="line">      libraryName: &#x27;element-ui&#x27;,</span><br><span class="line">      styleLibraryName: &#x27;theme-chalk&#x27;</span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">	 ...prodPlugins,</span><br><span class="line">	&#x27;@babel/plugin-syntax-dynamic-import&#x27;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<h4 id="2-注意："><a href="#2-注意：" class="headerlink" title="2. 注意："></a>2. 注意：</h4><p>在使用cdn加载elementui时，public/index.html一定要先加载vue.js再加载element-ui.js要不然组件就会无效！！</p>
+<h4 id="3-error"><a href="#3-error" class="headerlink" title="3. error"></a>3. error</h4><pre><code>![error](../images/mainerr.png)
+遇到图上错误是因为next-util的package.json中的入口文件index.js丢失，我们可以点击&lt;a href=&quot;https://github.com/theme-next/next-util/&quot;&gt;这里&lt;/a&gt;
+找到对应的index.js下载到我们node_modules/next-util文件夹中即可。
+</code></pre>
+<h4 id="4-使用elementUI时间选择范围组件daterange，设置只能选择一个月时间范围设置如下："><a href="#4-使用elementUI时间选择范围组件daterange，设置只能选择一个月时间范围设置如下：" class="headerlink" title="4.使用elementUI时间选择范围组件daterange，设置只能选择一个月时间范围设置如下："></a>4.使用elementUI时间选择范围组件daterange，设置只能选择一个月时间范围设置如下：</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;el-date-picker</span><br><span class="line">  v-model=&quot;value1&quot;</span><br><span class="line">  type=&quot;daterange&quot;</span><br><span class="line">  range-separator=&quot;至&quot;</span><br><span class="line">  start-placeholder=&quot;开始日期&quot;</span><br><span class="line">  end-placeholder=&quot;结束日期&quot;</span><br><span class="line">  :picker-options=&quot;pickerOptions&quot;&gt;</span><br><span class="line">&lt;/el-date-picker&gt;</span><br><span class="line">SCRIPT -------------</span><br><span class="line">data()&#123;</span><br><span class="line">  return &#123;</span><br><span class="line">  pickerOptions:&#123;</span><br><span class="line">   onPick(&#123;minDate,maxDate&#125;)&#123;</span><br><span class="line">      if(!maxDate)&#123;</span><br><span class="line">        this.disableDate = function(time)&#123;</span><br><span class="line">            return time.getTime() &gt; minDate.getTime + 31*24*60*60*1000; </span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+<h4 id="5、因为事件没有声明，整个页面不能随之渲染，影响状态改变后的渲染"><a href="#5、因为事件没有声明，整个页面不能随之渲染，影响状态改变后的渲染" class="headerlink" title="5、因为事件没有声明，整个页面不能随之渲染，影响状态改变后的渲染"></a>5、因为事件没有声明，整个页面不能随之渲染，影响状态改变后的渲染</h4><p><img src="../images/vue-pro1.png" alt="error"></p>
+<h4 id="6、vue组件data是函数"><a href="#6、vue组件data是函数" class="headerlink" title="6、vue组件data是函数"></a>6、vue组件data是函数</h4><p>为什么是函数而不是对象呢？因为使用对象的话，每个实例（组件）上使用的data数据是相互影响的，这当然就不是我们想要的了。对象是对于内存地址的引用，直接定义个对象的话组件之间都会使用这个对象，这样会造成组件之间数据相互影响。<br>原因：在某组件中的data()函数写错，错误的写法是data(){},正确的写法是data(){return {}}<br><img src="../images/vue-pro2.png" alt="error"></p>
+<h4 id="7、注册全局组件，在App-vue-使用该全局组件，全局组件位置出现灰字处代码"><a href="#7、注册全局组件，在App-vue-使用该全局组件，全局组件位置出现灰字处代码" class="headerlink" title="7、注册全局组件，在App.vue 使用该全局组件，全局组件位置出现灰字处代码"></a>7、注册全局组件，在App.vue 使用该全局组件，全局组件位置出现灰字处代码</h4><p><img src="../images/vue-pro3.png" alt="error"></p>
+<p>vue编译版本不对,需要引入完整版<br><img src="../images/vue-pro4.png" alt="error"></p>
+<p>原因：vue运行版本不支持template模版渲染，项目使用的是vue运行版：vue-2.6.10.runtime.min.js，</p>
+<p>针对不同解决：</p>
+<p>1.全局vue：  <a href="mailto:&#x76;&#x75;&#101;&#x40;&#x32;&#x2e;&#x36;&#x2e;&#49;&#x30;&#46;&#109;&#x69;&#x6e;&#x2e;&#106;&#115;">&#x76;&#x75;&#101;&#x40;&#x32;&#x2e;&#x36;&#x2e;&#49;&#x30;&#46;&#109;&#x69;&#x6e;&#x2e;&#106;&#115;</a> 能正确渲染该全局组件。</p>
+<p>2.局部引入import Vue from ‘vue’（默认导入的是vue.runtime.common.js）<br><img src="../images/vue-pro5.png" alt="error"></p>
+<p>a.修改webpack:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">resolve: &#123;</span><br><span class="line">  alias: &#123;</span><br><span class="line">    vue: &#x27;vue/dist/vue.esm.js&#x27;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>b.修改引入方式 ：<br>import Vue from ‘vue/dist/vue.esm.js’;<br>vue运行版 和 vue完整版 区别：<br>（vue运行版 相对于 完整版没有的）<br>不支持从html获取视图<br>不支持template，需通过webpack的vue-loader将组件预编译template模版成render函数<br>没有compiler编译器</p>
+<h4 id="8、运行npm-脚本-‘webpack-dev-server-–mode-development-–config-build-webpack-config-js’-报错："><a href="#8、运行npm-脚本-‘webpack-dev-server-–mode-development-–config-build-webpack-config-js’-报错：" class="headerlink" title="8、运行npm 脚本 ‘webpack-dev-server –mode=development –config ./build/webpack.config.js’ 报错："></a>8、运行npm 脚本 ‘webpack-dev-server –mode=development –config ./build/webpack.config.js’ 报错：</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[webpack-cli] /Users/lyur/Desktop/project/personal-pro/ts_in_action/node_modules/webpack-dev-server/lib/getPort.js:13</span><br><span class="line">const maxPort = 65_535;</span><br><span class="line">                ^^</span><br><span class="line"></span><br><span class="line">SyntaxError: Invalid or unexpected token</span><br><span class="line">    at Module._compile (internal/modules/cjs/loader.js:723:23)</span><br><span class="line">    at Object.Module._extensions..js (internal/modules/cjs/loader.js:789:10)</span><br><span class="line">    at Module.load (internal/modules/cjs/loader.js:653:32)</span><br><span class="line">    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)</span><br><span class="line">    at Function.Module._load (internal/modules/cjs/loader.js:585:3)</span><br><span class="line">    at Module.require (internal/modules/cjs/loader.js:692:17)</span><br><span class="line">    at require (internal/modules/cjs/helpers.js:25:18)</span><br><span class="line">    at Function.getFreePort (/Users/lyur/Desktop/project/personal-pro/ts_in_action/node_modules/webpack-dev-server/lib/Server.js:397:21)</span><br><span class="line">    at Server.start (/Users/lyur/Desktop/project/personal-pro/ts_in_action/node_modules/webpack-dev-server/lib/Server.js:3203:40)</span><br><span class="line">    at process._tickCallback (internal/process/next_tick.js:68:7)</span><br><span class="line">npm ERR! code ELIFECYCLE</span><br><span class="line">npm ERR! errno 2</span><br><span class="line">npm ERR! ts_in_action@1.0.0 start: `webpack-dev-server --mode=development --config ./build/webpack.config.js`</span><br><span class="line">npm ERR! Exit status 2</span><br><span class="line">npm ERR!</span><br><span class="line">npm ERR! Failed at the ts_in_action@1.0.0 start script.</span><br><span class="line">npm ERR! This is probably not a problem with npm. There is likely additional logging output above.</span><br></pre></td></tr></table></figure>
+<p>原因： webpack webpack-dev-server 依赖包版本不对应，安装对应版本即可。</p>
+<h4 id="9、部署博客遇到问题"><a href="#9、部署博客遇到问题" class="headerlink" title="9、部署博客遇到问题"></a>9、部署博客遇到问题</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">kex_exchange_identification: Connection closed by remote host</span><br><span class="line">fatal: 无法读取远程仓库。</span><br></pre></td></tr></table></figure>
+<p>需要关掉我们的电脑vpn, 在进行部署。</p>
+]]></content>
+      <categories>
+        <category>遇到问题汇总</category>
+      </categories>
   </entry>
   <entry>
     <title>hexo &amp; next主题</title>
@@ -219,40 +327,6 @@ GIT BASH 指令：env|grep -i proxy 两次
       <tags>
         <tag>计算机网络基础</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>项目遇到的问题</title>
-    <url>/2020/08/08/problem/</url>
-    <content><![CDATA[<h3 id="一、问题"><a href="#一、问题" class="headerlink" title="一、问题"></a>一、问题</h3><h4 id="1-在-build-项目时-报错-plugins-0-may-only-be-a-two-tuple-or-three-tuple"><a href="#1-在-build-项目时-报错-plugins-0-may-only-be-a-two-tuple-or-three-tuple" class="headerlink" title="1.在 build 项目时,报错 .plugins[0] may only be a two-tuple or three-tuple"></a>1.在 build 项目时,报错 .plugins[0] may only be a two-tuple or three-tuple</h4><p>检查配置文件babel.config.js发现问题</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">	plugins: [</span><br><span class="line">  [</span><br><span class="line">    &#x27;component&#x27;,</span><br><span class="line">    &#123;</span><br><span class="line">      libraryName: &#x27;element-ui&#x27;,</span><br><span class="line">      styleLibraryName: &#x27;theme-chalk&#x27;</span><br><span class="line">    &#125;,</span><br><span class="line">	 ...prodPlugins,</span><br><span class="line">	&#x27;@babel/plugin-syntax-dynamic-import&#x27;</span><br><span class="line">  ]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-<pre><code>应该这样配置
-</code></pre>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">   plugins: [</span><br><span class="line">  [</span><br><span class="line">    &#x27;component&#x27;,</span><br><span class="line">    &#123;</span><br><span class="line">      libraryName: &#x27;element-ui&#x27;,</span><br><span class="line">      styleLibraryName: &#x27;theme-chalk&#x27;</span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">	 ...prodPlugins,</span><br><span class="line">	&#x27;@babel/plugin-syntax-dynamic-import&#x27;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-<h4 id="2-注意："><a href="#2-注意：" class="headerlink" title="2. 注意："></a>2. 注意：</h4><p>在使用cdn加载elementui时，public/index.html一定要先加载vue.js再加载element-ui.js要不然组件就会无效！！</p>
-<h4 id="3-error"><a href="#3-error" class="headerlink" title="3. error"></a>3. error</h4><pre><code>![error](../images/mainerr.png)
-遇到图上错误是因为next-util的package.json中的入口文件index.js丢失，我们可以点击&lt;a href=&quot;https://github.com/theme-next/next-util/&quot;&gt;这里&lt;/a&gt;
-找到对应的index.js下载到我们node_modules/next-util文件夹中即可。
-</code></pre>
-<h4 id="4-使用elementUI时间选择范围组件daterange，设置只能选择一个月时间范围设置如下："><a href="#4-使用elementUI时间选择范围组件daterange，设置只能选择一个月时间范围设置如下：" class="headerlink" title="4.使用elementUI时间选择范围组件daterange，设置只能选择一个月时间范围设置如下："></a>4.使用elementUI时间选择范围组件daterange，设置只能选择一个月时间范围设置如下：</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;el-date-picker</span><br><span class="line">  v-model=&quot;value1&quot;</span><br><span class="line">  type=&quot;daterange&quot;</span><br><span class="line">  range-separator=&quot;至&quot;</span><br><span class="line">  start-placeholder=&quot;开始日期&quot;</span><br><span class="line">  end-placeholder=&quot;结束日期&quot;</span><br><span class="line">  :picker-options=&quot;pickerOptions&quot;&gt;</span><br><span class="line">&lt;/el-date-picker&gt;</span><br><span class="line">SCRIPT -------------</span><br><span class="line">data()&#123;</span><br><span class="line">  return &#123;</span><br><span class="line">  pickerOptions:&#123;</span><br><span class="line">   onPick(&#123;minDate,maxDate&#125;)&#123;</span><br><span class="line">      if(!maxDate)&#123;</span><br><span class="line">        this.disableDate = function(time)&#123;</span><br><span class="line">            return time.getTime() &gt; minDate.getTime + 31*24*60*60*1000; </span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
-<h4 id="5、因为事件没有声明，整个页面不能随之渲染，影响状态改变后的渲染"><a href="#5、因为事件没有声明，整个页面不能随之渲染，影响状态改变后的渲染" class="headerlink" title="5、因为事件没有声明，整个页面不能随之渲染，影响状态改变后的渲染"></a>5、因为事件没有声明，整个页面不能随之渲染，影响状态改变后的渲染</h4><p><img src="../images/vue-pro1.png" alt="error"></p>
-<h4 id="6、vue组件data是函数"><a href="#6、vue组件data是函数" class="headerlink" title="6、vue组件data是函数"></a>6、vue组件data是函数</h4><p>为什么是函数而不是对象呢？因为使用对象的话，每个实例（组件）上使用的data数据是相互影响的，这当然就不是我们想要的了。对象是对于内存地址的引用，直接定义个对象的话组件之间都会使用这个对象，这样会造成组件之间数据相互影响。<br>原因：在某组件中的data()函数写错，错误的写法是data(){},正确的写法是data(){return {}}<br><img src="../images/vue-pro2.png" alt="error"></p>
-<h4 id="7、注册全局组件，在App-vue-使用该全局组件，全局组件位置出现灰字处代码"><a href="#7、注册全局组件，在App-vue-使用该全局组件，全局组件位置出现灰字处代码" class="headerlink" title="7、注册全局组件，在App.vue 使用该全局组件，全局组件位置出现灰字处代码"></a>7、注册全局组件，在App.vue 使用该全局组件，全局组件位置出现灰字处代码</h4><p><img src="../images/vue-pro3.png" alt="error"></p>
-<p>vue编译版本不对,需要引入完整版<br><img src="../images/vue-pro4.png" alt="error"></p>
-<p>原因：vue运行版本不支持template模版渲染，项目使用的是vue运行版：vue-2.6.10.runtime.min.js，</p>
-<p>针对不同解决：</p>
-<p>1.全局vue：  <a href="mailto:&#x76;&#117;&#x65;&#64;&#50;&#x2e;&#x36;&#46;&#49;&#48;&#46;&#x6d;&#105;&#x6e;&#x2e;&#106;&#115;">&#x76;&#117;&#x65;&#64;&#50;&#x2e;&#x36;&#46;&#49;&#48;&#46;&#x6d;&#105;&#x6e;&#x2e;&#106;&#115;</a> 能正确渲染该全局组件。</p>
-<p>2.局部引入import Vue from ‘vue’（默认导入的是vue.runtime.common.js）<br><img src="../images/vue-pro5.png" alt="error"></p>
-<p>a.修改webpack:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">resolve: &#123;</span><br><span class="line">  alias: &#123;</span><br><span class="line">    vue: &#x27;vue/dist/vue.esm.js&#x27;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>b.修改引入方式 ：<br>import Vue from ‘vue/dist/vue.esm.js’;<br>vue运行版 和 vue完整版 区别：<br>（vue运行版 相对于 完整版没有的）<br>不支持从html获取视图<br>不支持template，需通过webpack的vue-loader将组件预编译template模版成render函数<br>没有compiler编译器</p>
-<h4 id="8、运行npm-脚本-‘webpack-dev-server-–mode-development-–config-build-webpack-config-js’-报错："><a href="#8、运行npm-脚本-‘webpack-dev-server-–mode-development-–config-build-webpack-config-js’-报错：" class="headerlink" title="8、运行npm 脚本 ‘webpack-dev-server –mode=development –config ./build/webpack.config.js’ 报错："></a>8、运行npm 脚本 ‘webpack-dev-server –mode=development –config ./build/webpack.config.js’ 报错：</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[webpack-cli] /Users/lyur/Desktop/project/personal-pro/ts_in_action/node_modules/webpack-dev-server/lib/getPort.js:13</span><br><span class="line">const maxPort = 65_535;</span><br><span class="line">                ^^</span><br><span class="line"></span><br><span class="line">SyntaxError: Invalid or unexpected token</span><br><span class="line">    at Module._compile (internal/modules/cjs/loader.js:723:23)</span><br><span class="line">    at Object.Module._extensions..js (internal/modules/cjs/loader.js:789:10)</span><br><span class="line">    at Module.load (internal/modules/cjs/loader.js:653:32)</span><br><span class="line">    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)</span><br><span class="line">    at Function.Module._load (internal/modules/cjs/loader.js:585:3)</span><br><span class="line">    at Module.require (internal/modules/cjs/loader.js:692:17)</span><br><span class="line">    at require (internal/modules/cjs/helpers.js:25:18)</span><br><span class="line">    at Function.getFreePort (/Users/lyur/Desktop/project/personal-pro/ts_in_action/node_modules/webpack-dev-server/lib/Server.js:397:21)</span><br><span class="line">    at Server.start (/Users/lyur/Desktop/project/personal-pro/ts_in_action/node_modules/webpack-dev-server/lib/Server.js:3203:40)</span><br><span class="line">    at process._tickCallback (internal/process/next_tick.js:68:7)</span><br><span class="line">npm ERR! code ELIFECYCLE</span><br><span class="line">npm ERR! errno 2</span><br><span class="line">npm ERR! ts_in_action@1.0.0 start: `webpack-dev-server --mode=development --config ./build/webpack.config.js`</span><br><span class="line">npm ERR! Exit status 2</span><br><span class="line">npm ERR!</span><br><span class="line">npm ERR! Failed at the ts_in_action@1.0.0 start script.</span><br><span class="line">npm ERR! This is probably not a problem with npm. There is likely additional logging output above.</span><br></pre></td></tr></table></figure>
-<p>原因： webpack webpack-dev-server 依赖包版本不对应，安装对应版本即可。</p>
-<h4 id="9、部署博客遇到问题"><a href="#9、部署博客遇到问题" class="headerlink" title="9、部署博客遇到问题"></a>9、部署博客遇到问题</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">kex_exchange_identification: Connection closed by remote host</span><br><span class="line">fatal: 无法读取远程仓库。</span><br></pre></td></tr></table></figure>
-<p>需要关掉我们的电脑vpn, 在进行部署。</p>
-]]></content>
-      <categories>
-        <category>遇到问题汇总</category>
-      </categories>
   </entry>
   <entry>
     <title>直播相关</title>
