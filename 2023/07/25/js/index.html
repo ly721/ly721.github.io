@@ -20,19 +20,20 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="向着目标奔跑！！！">
-<meta property="og:type" content="website">
-<meta property="og:title" content="about">
-<meta property="og:url" content="http://example.com/about/index.html">
+  <meta name="description" content="空值合并操作符 ?? 与 逻辑或操作符 || 的区别：前者只有当左侧操作数为 null 或者 undefined 时， 会返回右侧操作数，否则返回左侧操作数；后者是当左侧操作数为假值（比如: 0, ‘’, null, undefined）时，返回右侧操作数；">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js">
+<meta property="og:url" content="http://example.com/2023/07/25/js/index.html">
 <meta property="og:site_name" content="Lucky Girl">
-<meta property="og:description" content="向着目标奔跑！！！">
+<meta property="og:description" content="空值合并操作符 ?? 与 逻辑或操作符 || 的区别：前者只有当左侧操作数为 null 或者 undefined 时， 会返回右侧操作数，否则返回左侧操作数；后者是当左侧操作数为假值（比如: 0, ‘’, null, undefined）时，返回右侧操作数；">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-06-23T10:01:22.000Z">
-<meta property="article:modified_time" content="2021-06-23T10:01:24.000Z">
+<meta property="article:published_time" content="2023-07-25T09:15:08.000Z">
+<meta property="article:modified_time" content="2023-07-25T13:34:24.410Z">
 <meta property="article:author" content="李泼泼">
+<meta property="article:tag" content="js">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/about/">
+<link rel="canonical" href="http://example.com/2023/07/25/js/">
 
 
 <script id="page-configurations">
@@ -40,13 +41,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>about | Lucky Girl
-</title>
+  <title>js | Lucky Girl</title>
   
 
 
@@ -213,43 +213,109 @@
       <div class="main-inner">
         <div class="content-wrap">
           
-  
-  
 
-          <div class="content page posts-expand">
+          <div class="content post posts-expand">
             
 
     
-    
-    
-    <div class="post-block" lang="zh-CN">
-      <header class="post-header">
-
-<h1 class="post-title" itemprop="name headline">about
-</h1>
-
-<div class="post-meta">
   
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/25/js/">
 
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="李泼泼">
+      <meta itemprop="description" content="向着目标奔跑！！！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lucky Girl">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          js
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-07-25 17:15:08 / 修改时间：21:34:24" itemprop="dateCreated datePublished" datetime="2023-07-25T17:15:08+08:00">2023-07-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/js%E7%9F%A5%E8%AF%86/" itemprop="url" rel="index"><span itemprop="name">js知识</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="空值合并操作符-与-逻辑或操作符-的区别："><a href="#空值合并操作符-与-逻辑或操作符-的区别：" class="headerlink" title="空值合并操作符 ?? 与 逻辑或操作符 || 的区别："></a>空值合并操作符 ?? 与 逻辑或操作符 || 的区别：</h3><p>前者只有当左侧操作数为 null 或者 undefined 时， 会返回右侧操作数，否则返回左侧操作数；<br>后者是当左侧操作数为假值（比如: 0, ‘’, null, undefined）时，返回右侧操作数；</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>李泼泼
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2023/07/25/js/" title="js">http://example.com/2023/07/25/js/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
 </div>
 
-</header>
 
-      
-      
-      
-      <div class="post-body">
-          
-      </div>
-      
-      
-      
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/js/" rel="tag"># js</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/07/25/filter/" rel="prev" title="css">
+      <i class="fa fa-chevron-left"></i> css
+    </a></div>
+      <div class="post-nav-item"></div>
     </div>
+      </footer>
     
+  </article>
+  
+  
+  
 
-    
-    
-    
 
 
           </div>
@@ -300,6 +366,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A9%BA%E5%80%BC%E5%90%88%E5%B9%B6%E6%93%8D%E4%BD%9C%E7%AC%A6-%E4%B8%8E-%E9%80%BB%E8%BE%91%E6%88%96%E6%93%8D%E4%BD%9C%E7%AC%A6-%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">空值合并操作符 ?? 与 逻辑或操作符 || 的区别：</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

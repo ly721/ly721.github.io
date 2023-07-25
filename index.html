@@ -217,7 +217,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/16/css/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/25/js/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -231,7 +231,146 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/04/16/css/" class="post-title-link" itemprop="url">css</a>
+            <a href="/2023/07/25/js/" class="post-title-link" itemprop="url">js</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-07-25 17:15:08 / 修改时间：21:34:24" itemprop="dateCreated datePublished" datetime="2023-07-25T17:15:08+08:00">2023-07-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/js%E7%9F%A5%E8%AF%86/" itemprop="url" rel="index"><span itemprop="name">js知识</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="空值合并操作符-与-逻辑或操作符-的区别："><a href="#空值合并操作符-与-逻辑或操作符-的区别：" class="headerlink" title="空值合并操作符 ?? 与 逻辑或操作符 || 的区别："></a>空值合并操作符 ?? 与 逻辑或操作符 || 的区别：</h3><p>前者只有当左侧操作数为 null 或者 undefined 时， 会返回右侧操作数，否则返回左侧操作数；<br>后者是当左侧操作数为假值（比如: 0, ‘’, null, undefined）时，返回右侧操作数；</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/25/filter/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="李泼泼">
+      <meta itemprop="description" content="向着目标奔跑！！！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lucky Girl">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/07/25/filter/" class="post-title-link" itemprop="url">css</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-07-25 09:25:00 / 修改时间：21:26:03" itemprop="dateCreated datePublished" datetime="2023-07-25T09:25:00+08:00">2023-07-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/css%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">css基础</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="一、filter属性值"><a href="#一、filter属性值" class="headerlink" title="一、filter属性值"></a>一、filter属性值</h3><h4 id="1-1-drop-shadow-给图像设置一个阴影效果"><a href="#1-1-drop-shadow-给图像设置一个阴影效果" class="headerlink" title="1.1 drop-shadow() 给图像设置一个阴影效果"></a>1.1 drop-shadow() 给图像设置一个阴影效果</h4><ul>
+<li>应用：提示框三角形<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">.box&#123;</span><br><span class="line">    width: 100px;</span><br><span class="line">    height: 30px;</span><br><span class="line">    border-radius: 4px;</span><br><span class="line">    box-shadow: 1px 1px 2px 2px #ccc;</span><br><span class="line">    background-color: #fff;</span><br><span class="line">    position: relative;</span><br><span class="line">    text-align: center;</span><br><span class="line">    line-height: 30px;</span><br><span class="line">    color: #666;</span><br><span class="line">    font-size: 14px;</span><br><span class="line">&#125;</span><br><span class="line">.box::before &#123;</span><br><span class="line">    content: &#x27;&#x27;;</span><br><span class="line">    display: block;</span><br><span class="line">    position: absolute;</span><br><span class="line">    right: 6px;</span><br><span class="line">    top: -22px;</span><br><span class="line">    width: 1px;</span><br><span class="line">    height: 1px;</span><br><span class="line">    border: 12px solid transparent;</span><br><span class="line">    border-bottom-color: #fff;</span><br><span class="line">    filter: drop-shadow(-1px -4px 2px #ccc);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><img src="../images/filter.jpg" alt="例子图"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/16/flex/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="李泼泼">
+      <meta itemprop="description" content="向着目标奔跑！！！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lucky Girl">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/04/16/flex/" class="post-title-link" itemprop="url">css</a>
         </h2>
 
         <div class="post-meta">
@@ -593,105 +732,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/08/08/problem/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="李泼泼">
-      <meta itemprop="description" content="向着目标奔跑！！！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lucky Girl">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/08/problem/" class="post-title-link" itemprop="url">项目遇到的问题</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-08-08 20:06:08" itemprop="dateCreated datePublished" datetime="2020-08-08T20:06:08+08:00">2020-08-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-05-09 22:12:07" itemprop="dateModified" datetime="2022-05-09T22:12:07+08:00">2022-05-09</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%81%87%E5%88%B0%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/" itemprop="url" rel="index"><span itemprop="name">遇到问题汇总</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="一、问题"><a href="#一、问题" class="headerlink" title="一、问题"></a>一、问题</h3><h4 id="1-在-build-项目时-报错-plugins-0-may-only-be-a-two-tuple-or-three-tuple"><a href="#1-在-build-项目时-报错-plugins-0-may-only-be-a-two-tuple-or-three-tuple" class="headerlink" title="1.在 build 项目时,报错 .plugins[0] may only be a two-tuple or three-tuple"></a>1.在 build 项目时,报错 .plugins[0] may only be a two-tuple or three-tuple</h4><p>检查配置文件babel.config.js发现问题</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">	plugins: [</span><br><span class="line">  [</span><br><span class="line">    &#x27;component&#x27;,</span><br><span class="line">    &#123;</span><br><span class="line">      libraryName: &#x27;element-ui&#x27;,</span><br><span class="line">      styleLibraryName: &#x27;theme-chalk&#x27;</span><br><span class="line">    &#125;,</span><br><span class="line">	 ...prodPlugins,</span><br><span class="line">	&#x27;@babel/plugin-syntax-dynamic-import&#x27;</span><br><span class="line">  ]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-<pre><code>应该这样配置
-</code></pre>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">   plugins: [</span><br><span class="line">  [</span><br><span class="line">    &#x27;component&#x27;,</span><br><span class="line">    &#123;</span><br><span class="line">      libraryName: &#x27;element-ui&#x27;,</span><br><span class="line">      styleLibraryName: &#x27;theme-chalk&#x27;</span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">	 ...prodPlugins,</span><br><span class="line">	&#x27;@babel/plugin-syntax-dynamic-import&#x27;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-<h4 id="2-注意："><a href="#2-注意：" class="headerlink" title="2. 注意："></a>2. 注意：</h4><p>在使用cdn加载elementui时，public/index.html一定要先加载vue.js再加载element-ui.js要不然组件就会无效！！</p>
-<h4 id="3-error"><a href="#3-error" class="headerlink" title="3. error"></a>3. error</h4><pre><code>![error](../images/mainerr.png)
-遇到图上错误是因为next-util的package.json中的入口文件index.js丢失，我们可以点击&lt;a href=&quot;https://github.com/theme-next/next-util/&quot;&gt;这里&lt;/a&gt;
-找到对应的index.js下载到我们node_modules/next-util文件夹中即可。
-</code></pre>
-<h4 id="4-使用elementUI时间选择范围组件daterange，设置只能选择一个月时间范围设置如下："><a href="#4-使用elementUI时间选择范围组件daterange，设置只能选择一个月时间范围设置如下：" class="headerlink" title="4.使用elementUI时间选择范围组件daterange，设置只能选择一个月时间范围设置如下："></a>4.使用elementUI时间选择范围组件daterange，设置只能选择一个月时间范围设置如下：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;el-date-picker</span><br><span class="line">  v-model=&quot;value1&quot;</span><br><span class="line">  type=&quot;daterange&quot;</span><br><span class="line">  range-separator=&quot;至&quot;</span><br><span class="line">  start-placeholder=&quot;开始日期&quot;</span><br><span class="line">  end-placeholder=&quot;结束日期&quot;</span><br><span class="line">  :picker-options=&quot;pickerOptions&quot;&gt;</span><br><span class="line">&lt;/el-date-picker&gt;</span><br><span class="line">SCRIPT -------------</span><br><span class="line">data()&#123;</span><br><span class="line">  return &#123;</span><br><span class="line">  pickerOptions:&#123;</span><br><span class="line">   onPick(&#123;minDate,maxDate&#125;)&#123;</span><br><span class="line">      if(!maxDate)&#123;</span><br><span class="line">        this.disableDate = function(time)&#123;</span><br><span class="line">            return time.getTime() &gt; minDate.getTime + 31*24*60*60*1000; </span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
-<h4 id="5、因为事件没有声明，整个页面不能随之渲染，影响状态改变后的渲染"><a href="#5、因为事件没有声明，整个页面不能随之渲染，影响状态改变后的渲染" class="headerlink" title="5、因为事件没有声明，整个页面不能随之渲染，影响状态改变后的渲染"></a>5、因为事件没有声明，整个页面不能随之渲染，影响状态改变后的渲染</h4><p><img src="../images/vue-pro1.png" alt="error"></p>
-<h4 id="6、vue组件data是函数"><a href="#6、vue组件data是函数" class="headerlink" title="6、vue组件data是函数"></a>6、vue组件data是函数</h4><p>为什么是函数而不是对象呢？因为使用对象的话，每个实例（组件）上使用的data数据是相互影响的，这当然就不是我们想要的了。对象是对于内存地址的引用，直接定义个对象的话组件之间都会使用这个对象，这样会造成组件之间数据相互影响。<br>原因：在某组件中的data()函数写错，错误的写法是data(){},正确的写法是data(){return {}}<br><img src="../images/vue-pro2.png" alt="error"></p>
-<h4 id="7、注册全局组件，在App-vue-使用该全局组件，全局组件位置出现灰字处代码"><a href="#7、注册全局组件，在App-vue-使用该全局组件，全局组件位置出现灰字处代码" class="headerlink" title="7、注册全局组件，在App.vue 使用该全局组件，全局组件位置出现灰字处代码"></a>7、注册全局组件，在App.vue 使用该全局组件，全局组件位置出现灰字处代码</h4><p><img src="../images/vue-pro3.png" alt="error"></p>
-<p>vue编译版本不对,需要引入完整版<br><img src="../images/vue-pro4.png" alt="error"></p>
-<p>原因：vue运行版本不支持template模版渲染，项目使用的是vue运行版：vue-2.6.10.runtime.min.js，</p>
-<p>针对不同解决：</p>
-<p>1.全局vue：  <a href="mailto:&#x76;&#x75;&#101;&#x40;&#x32;&#x2e;&#x36;&#x2e;&#49;&#x30;&#46;&#109;&#x69;&#x6e;&#x2e;&#106;&#115;">&#x76;&#x75;&#101;&#x40;&#x32;&#x2e;&#x36;&#x2e;&#49;&#x30;&#46;&#109;&#x69;&#x6e;&#x2e;&#106;&#115;</a> 能正确渲染该全局组件。</p>
-<p>2.局部引入import Vue from ‘vue’（默认导入的是vue.runtime.common.js）<br><img src="../images/vue-pro5.png" alt="error"></p>
-<p>a.修改webpack:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">resolve: &#123;</span><br><span class="line">  alias: &#123;</span><br><span class="line">    vue: &#x27;vue/dist/vue.esm.js&#x27;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>b.修改引入方式 ：<br>import Vue from ‘vue/dist/vue.esm.js’;<br>vue运行版 和 vue完整版 区别：<br>（vue运行版 相对于 完整版没有的）<br>不支持从html获取视图<br>不支持template，需通过webpack的vue-loader将组件预编译template模版成render函数<br>没有compiler编译器</p>
-<h4 id="8、运行npm-脚本-‘webpack-dev-server-–mode-development-–config-build-webpack-config-js’-报错："><a href="#8、运行npm-脚本-‘webpack-dev-server-–mode-development-–config-build-webpack-config-js’-报错：" class="headerlink" title="8、运行npm 脚本 ‘webpack-dev-server –mode=development –config ./build/webpack.config.js’ 报错："></a>8、运行npm 脚本 ‘webpack-dev-server –mode=development –config ./build/webpack.config.js’ 报错：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">[webpack-cli] /Users/lyur/Desktop/project/personal-pro/ts_in_action/node_modules/webpack-dev-server/lib/getPort.js:13</span><br><span class="line">const maxPort = 65_535;</span><br><span class="line">                ^^</span><br><span class="line"></span><br><span class="line">SyntaxError: Invalid or unexpected token</span><br><span class="line">    at Module._compile (internal/modules/cjs/loader.js:723:23)</span><br><span class="line">    at Object.Module._extensions..js (internal/modules/cjs/loader.js:789:10)</span><br><span class="line">    at Module.load (internal/modules/cjs/loader.js:653:32)</span><br><span class="line">    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)</span><br><span class="line">    at Function.Module._load (internal/modules/cjs/loader.js:585:3)</span><br><span class="line">    at Module.require (internal/modules/cjs/loader.js:692:17)</span><br><span class="line">    at require (internal/modules/cjs/helpers.js:25:18)</span><br><span class="line">    at Function.getFreePort (/Users/lyur/Desktop/project/personal-pro/ts_in_action/node_modules/webpack-dev-server/lib/Server.js:397:21)</span><br><span class="line">    at Server.start (/Users/lyur/Desktop/project/personal-pro/ts_in_action/node_modules/webpack-dev-server/lib/Server.js:3203:40)</span><br><span class="line">    at process._tickCallback (internal/process/next_tick.js:68:7)</span><br><span class="line">npm ERR! code ELIFECYCLE</span><br><span class="line">npm ERR! errno 2</span><br><span class="line">npm ERR! ts_in_action@1.0.0 start: `webpack-dev-server --mode=development --config ./build/webpack.config.js`</span><br><span class="line">npm ERR! Exit status 2</span><br><span class="line">npm ERR!</span><br><span class="line">npm ERR! Failed at the ts_in_action@1.0.0 start script.</span><br><span class="line">npm ERR! This is probably not a problem with npm. There is likely additional logging output above.</span><br></pre></td></tr></table></figure>
-<p>原因： webpack webpack-dev-server 依赖包版本不对应，安装对应版本即可。</p>
-<h4 id="9、部署博客遇到问题"><a href="#9、部署博客遇到问题" class="headerlink" title="9、部署博客遇到问题"></a>9、部署博客遇到问题</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kex_exchange_identification: Connection closed by remote host</span><br><span class="line">fatal: 无法读取远程仓库。</span><br></pre></td></tr></table></figure>
-<p>需要关掉我们的电脑vpn, 在进行部署。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2020/08/08/http/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -798,6 +838,109 @@
 <p>   在交互过程中如果数据传送完了，如果不想断开两端连接可以在HTTP的响应体的Connection字段指定为keep-alive</p>
 <h3 id="九、TCP滑动窗口（分为发送窗口和接收窗口）"><a href="#九、TCP滑动窗口（分为发送窗口和接收窗口）" class="headerlink" title="九、TCP滑动窗口（分为发送窗口和接收窗口）"></a>九、TCP滑动窗口（分为发送窗口和接收窗口）</h3><pre><code>在TCP连接中，对于发送端和接收端，TCP需要把发送的数据放到发送缓存区，将接收的数据放到接收缓存区。经常会发生发送端发送过多而接收端无法接收的情况，所以需要流量控制，也就是根据接收缓存区的大小来控制发送端的发送。如果接收缓存区已经满了，此时发送端就不需要继续发送数据了。
 </code></pre>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/08/08/problem/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="李泼泼">
+      <meta itemprop="description" content="向着目标奔跑！！！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lucky Girl">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/08/problem/" class="post-title-link" itemprop="url">项目遇到的问题</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-08-08 20:06:08" itemprop="dateCreated datePublished" datetime="2020-08-08T20:06:08+08:00">2020-08-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-07-25 21:32:33" itemprop="dateModified" datetime="2023-07-25T21:32:33+08:00">2023-07-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%81%87%E5%88%B0%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/" itemprop="url" rel="index"><span itemprop="name">遇到问题汇总</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="一、问题"><a href="#一、问题" class="headerlink" title="一、问题"></a>一、问题</h3><h4 id="1-在-build-项目时-报错-plugins-0-may-only-be-a-two-tuple-or-three-tuple"><a href="#1-在-build-项目时-报错-plugins-0-may-only-be-a-two-tuple-or-three-tuple" class="headerlink" title="1.在 build 项目时,报错 .plugins[0] may only be a two-tuple or three-tuple"></a>1.在 build 项目时,报错 .plugins[0] may only be a two-tuple or three-tuple</h4><p>检查配置文件babel.config.js发现问题</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">	plugins: [</span><br><span class="line">  [</span><br><span class="line">    &#x27;component&#x27;,</span><br><span class="line">    &#123;</span><br><span class="line">      libraryName: &#x27;element-ui&#x27;,</span><br><span class="line">      styleLibraryName: &#x27;theme-chalk&#x27;</span><br><span class="line">    &#125;,</span><br><span class="line">	 ...prodPlugins,</span><br><span class="line">	&#x27;@babel/plugin-syntax-dynamic-import&#x27;</span><br><span class="line">  ]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<pre><code>应该这样配置
+</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">   plugins: [</span><br><span class="line">  [</span><br><span class="line">    &#x27;component&#x27;,</span><br><span class="line">    &#123;</span><br><span class="line">      libraryName: &#x27;element-ui&#x27;,</span><br><span class="line">      styleLibraryName: &#x27;theme-chalk&#x27;</span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">	 ...prodPlugins,</span><br><span class="line">	&#x27;@babel/plugin-syntax-dynamic-import&#x27;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<h4 id="2-注意："><a href="#2-注意：" class="headerlink" title="2. 注意："></a>2. 注意：</h4><p>在使用cdn加载elementui时，public/index.html一定要先加载vue.js再加载element-ui.js要不然组件就会无效！！</p>
+<h4 id="3-error"><a href="#3-error" class="headerlink" title="3. error"></a>3. error</h4><pre><code>![error](../images/mainerr.png)
+遇到图上错误是因为next-util的package.json中的入口文件index.js丢失，我们可以点击&lt;a href=&quot;https://github.com/theme-next/next-util/&quot;&gt;这里&lt;/a&gt;
+找到对应的index.js下载到我们node_modules/next-util文件夹中即可。
+</code></pre>
+<h4 id="4-使用elementUI时间选择范围组件daterange，设置只能选择一个月时间范围设置如下："><a href="#4-使用elementUI时间选择范围组件daterange，设置只能选择一个月时间范围设置如下：" class="headerlink" title="4.使用elementUI时间选择范围组件daterange，设置只能选择一个月时间范围设置如下："></a>4.使用elementUI时间选择范围组件daterange，设置只能选择一个月时间范围设置如下：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;el-date-picker</span><br><span class="line">  v-model=&quot;value1&quot;</span><br><span class="line">  type=&quot;daterange&quot;</span><br><span class="line">  range-separator=&quot;至&quot;</span><br><span class="line">  start-placeholder=&quot;开始日期&quot;</span><br><span class="line">  end-placeholder=&quot;结束日期&quot;</span><br><span class="line">  :picker-options=&quot;pickerOptions&quot;&gt;</span><br><span class="line">&lt;/el-date-picker&gt;</span><br><span class="line">SCRIPT -------------</span><br><span class="line">data()&#123;</span><br><span class="line">  return &#123;</span><br><span class="line">  pickerOptions:&#123;</span><br><span class="line">   onPick(&#123;minDate,maxDate&#125;)&#123;</span><br><span class="line">      if(!maxDate)&#123;</span><br><span class="line">        this.disableDate = function(time)&#123;</span><br><span class="line">            return time.getTime() &gt; minDate.getTime + 31*24*60*60*1000; </span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+<h4 id="5、因为事件没有声明，整个页面不能随之渲染，影响状态改变后的渲染"><a href="#5、因为事件没有声明，整个页面不能随之渲染，影响状态改变后的渲染" class="headerlink" title="5、因为事件没有声明，整个页面不能随之渲染，影响状态改变后的渲染"></a>5、因为事件没有声明，整个页面不能随之渲染，影响状态改变后的渲染</h4><p><img src="../images/vue-pro1.png" alt="error"></p>
+<h4 id="6、vue组件data是函数"><a href="#6、vue组件data是函数" class="headerlink" title="6、vue组件data是函数"></a>6、vue组件data是函数</h4><p>为什么是函数而不是对象呢？因为使用对象的话，每个实例（组件）上使用的data数据是相互影响的，这当然就不是我们想要的了。对象是对于内存地址的引用，直接定义个对象的话组件之间都会使用这个对象，这样会造成组件之间数据相互影响。<br>原因：在某组件中的data()函数写错，错误的写法是data(){},正确的写法是data(){return {}}<br><img src="../images/vue-pro2.png" alt="error"></p>
+<h4 id="7、注册全局组件，在App-vue-使用该全局组件，全局组件位置出现灰字处代码"><a href="#7、注册全局组件，在App-vue-使用该全局组件，全局组件位置出现灰字处代码" class="headerlink" title="7、注册全局组件，在App.vue 使用该全局组件，全局组件位置出现灰字处代码"></a>7、注册全局组件，在App.vue 使用该全局组件，全局组件位置出现灰字处代码</h4><p><img src="../images/vue-pro3.png" alt="error"></p>
+<p>vue编译版本不对,需要引入完整版<br><img src="../images/vue-pro4.png" alt="error"></p>
+<p>原因：vue运行版本不支持template模版渲染，项目使用的是vue运行版：vue-2.6.10.runtime.min.js，</p>
+<p>针对不同解决：</p>
+<p>1.全局vue：  <a href="mailto:&#x76;&#x75;&#x65;&#x40;&#x32;&#x2e;&#x36;&#46;&#x31;&#x30;&#x2e;&#109;&#105;&#x6e;&#46;&#x6a;&#x73;">&#x76;&#x75;&#x65;&#x40;&#x32;&#x2e;&#x36;&#46;&#x31;&#x30;&#x2e;&#109;&#105;&#x6e;&#46;&#x6a;&#x73;</a> 能正确渲染该全局组件。</p>
+<p>2.局部引入import Vue from ‘vue’（默认导入的是vue.runtime.common.js）<br><img src="../images/vue-pro5.png" alt="error"></p>
+<p>a.修改webpack:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">resolve: &#123;</span><br><span class="line">  alias: &#123;</span><br><span class="line">    vue: &#x27;vue/dist/vue.esm.js&#x27;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>b.修改引入方式 ：<br>import Vue from ‘vue/dist/vue.esm.js’;<br>vue运行版 和 vue完整版 区别：<br>（vue运行版 相对于 完整版没有的）<br>不支持从html获取视图<br>不支持template，需通过webpack的vue-loader将组件预编译template模版成render函数<br>没有compiler编译器</p>
+<h4 id="8、运行npm-脚本-‘webpack-dev-server-–mode-development-–config-build-webpack-config-js’-报错："><a href="#8、运行npm-脚本-‘webpack-dev-server-–mode-development-–config-build-webpack-config-js’-报错：" class="headerlink" title="8、运行npm 脚本 ‘webpack-dev-server –mode=development –config ./build/webpack.config.js’ 报错："></a>8、运行npm 脚本 ‘webpack-dev-server –mode=development –config ./build/webpack.config.js’ 报错：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">[webpack-cli] /Users/lyur/Desktop/project/personal-pro/ts_in_action/node_modules/webpack-dev-server/lib/getPort.js:13</span><br><span class="line">const maxPort = 65_535;</span><br><span class="line">                ^^</span><br><span class="line"></span><br><span class="line">SyntaxError: Invalid or unexpected token</span><br><span class="line">    at Module._compile (internal/modules/cjs/loader.js:723:23)</span><br><span class="line">    at Object.Module._extensions..js (internal/modules/cjs/loader.js:789:10)</span><br><span class="line">    at Module.load (internal/modules/cjs/loader.js:653:32)</span><br><span class="line">    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)</span><br><span class="line">    at Function.Module._load (internal/modules/cjs/loader.js:585:3)</span><br><span class="line">    at Module.require (internal/modules/cjs/loader.js:692:17)</span><br><span class="line">    at require (internal/modules/cjs/helpers.js:25:18)</span><br><span class="line">    at Function.getFreePort (/Users/lyur/Desktop/project/personal-pro/ts_in_action/node_modules/webpack-dev-server/lib/Server.js:397:21)</span><br><span class="line">    at Server.start (/Users/lyur/Desktop/project/personal-pro/ts_in_action/node_modules/webpack-dev-server/lib/Server.js:3203:40)</span><br><span class="line">    at process._tickCallback (internal/process/next_tick.js:68:7)</span><br><span class="line">npm ERR! code ELIFECYCLE</span><br><span class="line">npm ERR! errno 2</span><br><span class="line">npm ERR! ts_in_action@1.0.0 start: `webpack-dev-server --mode=development --config ./build/webpack.config.js`</span><br><span class="line">npm ERR! Exit status 2</span><br><span class="line">npm ERR!</span><br><span class="line">npm ERR! Failed at the ts_in_action@1.0.0 start script.</span><br><span class="line">npm ERR! This is probably not a problem with npm. There is likely additional logging output above.</span><br></pre></td></tr></table></figure>
+<p>原因： webpack webpack-dev-server 依赖包版本不对应，安装对应版本即可。</p>
+<h4 id="9、部署博客遇到问题"><a href="#9、部署博客遇到问题" class="headerlink" title="9、部署博客遇到问题"></a>9、部署博客遇到问题</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kex_exchange_identification: Connection closed by remote host</span><br><span class="line">fatal: 无法读取远程仓库。</span><br></pre></td></tr></table></figure>
+<p>需要关掉我们的电脑vpn, 在进行部署。</p>
+<h4 id="10、script脚本：”eslint-src-–ext-js-ts”报错："><a href="#10、script脚本：”eslint-src-–ext-js-ts”报错：" class="headerlink" title="10、script脚本：”eslint src –ext .js,.ts”报错："></a>10、script脚本：”eslint src –ext .js,.ts”报错：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Error: Cannot find module &#x27;eslint-plugin- @typescript-eslint&#x27;</span><br><span class="line">Referenced from: /Users/lyur/Desktop/project/personal-pro/ts-babel/.eslintrc.json</span><br></pre></td></tr></table></figure>
+<p>.eslintrc.json</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;plugins&quot;: [&quot;@typescript-eslint&quot;],</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="11、vant升级，vue-router-params传参数全挂"><a href="#11、vant升级，vue-router-params传参数全挂" class="headerlink" title="11、vant升级，vue-router params传参数全挂"></a>11、vant升级，vue-router params传参数全挂</h4><p><img src="../images/vant.jpg" alt="vue-router升级说明"><br>vant 升级到4 （依赖的<a href="mailto:&#x76;&#117;&#x65;&#x2d;&#x72;&#x6f;&#x75;&#x74;&#x65;&#x72;&#64;&#x34;&#46;&#x32;&#x2e;&#x32;">&#x76;&#117;&#x65;&#x2d;&#x72;&#x6f;&#x75;&#x74;&#x65;&#x72;&#64;&#x34;&#46;&#x32;&#x2e;&#x32;</a>）params路由传参数出错， 因为npm安装包会根据package.json中的依赖修饰符（~, ^）自动升级依赖版本。 package.json 中 vue-router^4.0.12（^允许安装4.x.x符合依赖的版本，也就是会安装4.2.2，这个版本已经删除params路由传参数）<br>解决方案： 将package.json中 vue-router版本’4.0.12’ 指定安装的就是4.0.12，params路由传参不会报错</p>
 
       
     </div>
@@ -927,133 +1070,6 @@
 <li>2、导航完成之前获取：在路由进入守卫之前获取数据，获取数据完毕之后跳转路由，注意，这里获取数据还保留在当前页面，也需要加进度条显示正加载页面。<br>路由懒加载：只有访问到该路由，再去加载对应组件</li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var routes = [</span><br><span class="line">    &#123;path: &#x27;/foo&#x27;, component: () =&gt; import(&#x27;./foo.vue&#x27;)&#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/08/08/gitconf/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="李泼泼">
-      <meta itemprop="description" content="向着目标奔跑！！！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lucky Girl">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/08/gitconf/" class="post-title-link" itemprop="url">hexo & next主题</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-08-08 17:17:47" itemprop="dateCreated datePublished" datetime="2020-08-08T17:17:47+08:00">2020-08-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-04-16 17:11:25" itemprop="dateModified" datetime="2022-04-16T17:11:25+08:00">2022-04-16</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">前端开发</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="1-git-guide"><a href="#1-git-guide" class="headerlink" title="1. git guide"></a>1. git guide</h2><ol>
-<li>npm i -g hexo 安装全局hexo</li>
-<li>在一个空目录 hexo init 初始化博客系统</li>
-<li>hexodir\source_posts 下的 .md 文档就是博客文档</li>
-<li>撰写博客 新建 .md文件</li>
-<li>把 md文件 转html  hexo g</li>
-<li>cmd 中 hexo s –debug  后在浏览器 localhost:4000 查看格式</li>
-<li>与 github 关联</li>
-<li>npm i hexo-deployer-git –save 插件安装</li>
-<li>配置文件 根目录下 _config.yml</li>
-<li>更新blog使用命令 :1.hexo clean 2. hexo g -d</li>
-</ol>
-<h4 id="1-1-更新blog到github上出现如下错误"><a href="#1-1-更新blog到github上出现如下错误" class="headerlink" title="1.1 更新blog到github上出现如下错误"></a>1.1 更新blog到github上出现如下错误</h4><pre><code>ERROR: fatal: unable to access &#39;https://github.com/ly721/ly721.github.io.git/&#39;: OpenSSL
-SSL_read: Connection was reset, errno 10054
-GIT BASH 指令：env|grep -i proxy 两次
-</code></pre>
-<h4 id="1-2-git指令快速查询"><a href="#1-2-git指令快速查询" class="headerlink" title="1.2 git指令快速查询"></a>1.2 git指令快速查询</h4><p><img src="'./images/Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4.jpg'" alt="Git常用指令"></p>
-<h4 id="1-3-github教程文章网址"><a href="#1-3-github教程文章网址" class="headerlink" title="1.3 github教程文章网址"></a>1.3 github教程文章网址</h4><p><a target="_blank" rel="noopener" href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/">廖雪峰-Git教程</a></p>
-<h3 id="2-博客-使用-next-主题"><a href="#2-博客-使用-next-主题" class="headerlink" title="2. 博客 使用 next 主题"></a>2. 博客 使用 next 主题</h3><ul>
-<li>下载next主题文件夹<ul>
-<li>安装next主题到博客目录主题文件夹下<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$  git clone https://github.com/theme-next/hexo-theme-next themes/next</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-</ul>
-<ul>
-<li>使用主题，更改站点配置文件 theme 字段值为 next</li>
-</ul>
-<ul>
-<li>设置站点统计—-使用不蒜子统计</li>
-</ul>
-<ul>
-<li><p>1.主题配置文件加入如下字段</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">busuanzi_count:</span><br><span class="line"> # count values only if the other configs are false</span><br><span class="line"> enable: true</span><br><span class="line"> # custom uv span for the whole site</span><br><span class="line"> site_uv: true</span><br><span class="line"> site_uv_header: &lt;i class=&quot;fa fa-user&quot;&gt;&lt;/i&gt; 本站访问数</span><br><span class="line"> site_uv_footer: 人</span><br><span class="line"> # custom pv span for the whole site</span><br><span class="line"> site_pv: true</span><br><span class="line"> site_pv_header: &lt;i class=&quot;fa fa-eye&quot;&gt;&lt;/i&gt; 本站总访问量</span><br><span class="line"> site_pv_footer: 次</span><br><span class="line"> # custom pv span for one page only</span><br><span class="line"> page_pv: false</span><br><span class="line"> page_pv_header: &lt;i class=&quot;fa fa-file-o&quot;&gt;&lt;/i&gt; 本文总阅读量</span><br><span class="line"> page_pv_footer: 次</span><br></pre></td></tr></table></figure></li>
-<li><p>2.在themes/next/layout/_partials/footer.swig 文件加入</p>
-</li>
-</ul>
- <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&#123;% if theme.busuanzi_count.enable %&#125;</span><br><span class="line">&lt;div class=&quot;busuanzi-count&quot;&gt;</span><br><span class="line">  &lt;script async src=&quot;https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js&quot;&gt;</span><br><span class="line">  &lt;/script&gt;</span><br><span class="line">  &#123;% if theme.busuanzi_count.site_uv %&#125;</span><br><span class="line">  &lt;span class=&quot;site-uv&quot;&gt;</span><br><span class="line">   &#123;&#123; theme.busuanzi_count.site_uv_header &#125;&#125;</span><br><span class="line">   &lt;span class=&quot;busuanzi-value&quot; id=&quot;busuanzi_value_site_uv&quot;&gt;&lt;/span&gt;</span><br><span class="line">   &#123;&#123; theme.busuanzi_count.site_uv_footer &#125;&#125;</span><br><span class="line">   &lt;/span&gt;</span><br><span class="line">   &#123;% endif %&#125;</span><br><span class="line">   </span><br><span class="line">   &#123;% if theme.busuanzi_count.site_pv %&#125;</span><br><span class="line">   &lt;span class=&quot;site-pv&quot;&gt;</span><br><span class="line">    &#123;&#123; theme.busuanzi_count.site_pv_header &#125;&#125;</span><br><span class="line">    &lt;span class=&quot;busuanzi-value&quot; id=&quot;busuanzi_value_site_pv&quot;&gt;&lt;/span&gt;</span><br><span class="line">    &#123;&#123; theme.busuanzi_count.site_pv_footer &#125;&#125;</span><br><span class="line">    &lt;/span&gt;</span><br><span class="line">    &#123;% endif %&#125;</span><br><span class="line">   &lt;/div&gt;</span><br><span class="line">&#123;% endif %&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>3.加入本站运行时间,在上面文件最后加入如下代码即可<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;span&gt;</span><br><span class="line">  &lt;span class=&quot;post-meta-divider&quot;&gt;|&lt;/span&gt;</span><br><span class="line">  本站已运行</span><br><span class="line">  &lt;span id=&quot;showDays&quot;&gt;&lt;/span&gt;</span><br><span class="line">&lt;/span&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  var seconds = 1000;</span><br><span class="line">  var minutes = seconds * 60;</span><br><span class="line">  var hours = minutes * 60;</span><br><span class="line">  var days = hours * 24;</span><br><span class="line">  var years = days * 365;</span><br><span class="line">  var birthDay = Date.UTC(2019,01,20,14,00,00); // 这里设置建站时间</span><br><span class="line">  setInterval(function() &#123;</span><br><span class="line">    var today = new Date();</span><br><span class="line">    var todayYear = today.getFullYear();</span><br><span class="line">    var todayMonth = today.getMonth()+1;</span><br><span class="line">    var todayDate = today.getDate();</span><br><span class="line">    var todayHour = today.getHours();</span><br><span class="line">    var todayMinute = today.getMinutes();</span><br><span class="line">    var todaySecond = today.getSeconds();</span><br><span class="line">    var now = Date.UTC(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond);</span><br><span class="line">    var diff = now - birthDay;</span><br><span class="line">    var diffYears = Math.floor(diff/years);</span><br><span class="line">    var diffDays = Math.floor((diff/days)-diffYears*365);</span><br><span class="line">    var diffHours = Math.floor((diff-(diffYears*365+diffDays)*days)/hours);</span><br><span class="line">    var diffMinutes = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours)/minutes);</span><br><span class="line">    var diffSeconds = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours-diffMinutes*minutes)/seconds);</span><br><span class="line">      document.getElementById(&#x27;showDays&#x27;).innerHTML=&quot;&quot;+diffYears+&quot;年&quot;+diffDays+&quot;天&quot;+diffHours+&quot;小时&quot;+diffMinutes+&quot;分钟&quot;+diffSeconds+&quot;秒&quot;;</span><br><span class="line">  &#125;, 1000);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<ul>
-<li>设置头像、背景图片等</li>
-</ul>
- <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"># 主题配置文件</span><br><span class="line">avatar:</span><br><span class="line">  # Replace the default image and set the url here.</span><br><span class="line">  # 将头像放到 themes/next/source/images目录</span><br><span class="line">  url: /images/avatar.jpg</span><br><span class="line">  </span><br><span class="line"># 找到themes/next/source/css/main.styl样式文件，设如下自定义样式即可 </span><br><span class="line">// 自定义样式</span><br><span class="line">body &#123;</span><br><span class="line">  background: url(../images/bg.jpg);</span><br><span class="line">	background-repeat: no-repeat;</span><br><span class="line">	background-position: 50% 50%;</span><br><span class="line">	background-attachment: fixed;</span><br><span class="line">  color: var(--text-color);</span><br><span class="line">  font-family: &#x27;Lato&#x27;, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif;</span><br><span class="line">  font-size: 1em;</span><br><span class="line">  line-height: 2;</span><br><span class="line">&#125;</span><br><span class="line">  </span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>设置看板娘</li>
-</ul>
-<ul>
-<li>1.安装插件<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save hexo-helper-live2d</span><br></pre></td></tr></table></figure></li>
-<li>2.选择你想要的看板娘模型，安装，在这里我使用的是koharu<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install live2d-widget-model-koharu</span><br></pre></td></tr></table></figure></li>
-<li>3.在站点配置文件加入如下字段<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">live2d:</span><br><span class="line">  enable: true</span><br><span class="line">  scriptFrom: local</span><br><span class="line">  pluginRootPath: live2dw/</span><br><span class="line">  pluginJsPath: lib/</span><br><span class="line">  pluginModelPath: assets/</span><br><span class="line">  tagMode: false</span><br><span class="line">  debug: false</span><br><span class="line">  model:</span><br><span class="line">    use: live2d-widget-model-koharu</span><br><span class="line">  display:</span><br><span class="line">    position: left</span><br><span class="line">    width: 175</span><br><span class="line">    height: 350</span><br><span class="line">  mobile:</span><br><span class="line">    show: true</span><br></pre></td></tr></table></figure></li>
-</ul>
-
       
     </div>
 
@@ -1511,6 +1527,133 @@ GIT BASH 指令：env|grep -i proxy 两次
 </ul>
 <h4 id="webpack异步加载原理"><a href="#webpack异步加载原理" class="headerlink" title="webpack异步加载原理"></a>webpack异步加载原理</h4><ul>
 <li>webpack.ensure的原理<br>把一些js模块给独立出一个个js文件，然后需要用到的时候，再创建一个script对象，加入到document.head对象中即可。<br>浏览器会自动发起请求这个js文件，再回调函数中定义的到这个js文件之后，需要做什么逻辑操作<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">异步加载a.js</span><br><span class="line">requie.resure([],function()&#123;</span><br><span class="line">	var a = require(&quot;./a.js&quot;);</span><br><span class="line">	alert(a.data);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/08/08/gitconf/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="李泼泼">
+      <meta itemprop="description" content="向着目标奔跑！！！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lucky Girl">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/08/gitconf/" class="post-title-link" itemprop="url">hexo & next主题</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-08-08 17:17:47" itemprop="dateCreated datePublished" datetime="2020-08-08T17:17:47+08:00">2020-08-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-04-16 17:11:25" itemprop="dateModified" datetime="2022-04-16T17:11:25+08:00">2022-04-16</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">前端开发</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="1-git-guide"><a href="#1-git-guide" class="headerlink" title="1. git guide"></a>1. git guide</h2><ol>
+<li>npm i -g hexo 安装全局hexo</li>
+<li>在一个空目录 hexo init 初始化博客系统</li>
+<li>hexodir\source_posts 下的 .md 文档就是博客文档</li>
+<li>撰写博客 新建 .md文件</li>
+<li>把 md文件 转html  hexo g</li>
+<li>cmd 中 hexo s –debug  后在浏览器 localhost:4000 查看格式</li>
+<li>与 github 关联</li>
+<li>npm i hexo-deployer-git –save 插件安装</li>
+<li>配置文件 根目录下 _config.yml</li>
+<li>更新blog使用命令 :1.hexo clean 2. hexo g -d</li>
+</ol>
+<h4 id="1-1-更新blog到github上出现如下错误"><a href="#1-1-更新blog到github上出现如下错误" class="headerlink" title="1.1 更新blog到github上出现如下错误"></a>1.1 更新blog到github上出现如下错误</h4><pre><code>ERROR: fatal: unable to access &#39;https://github.com/ly721/ly721.github.io.git/&#39;: OpenSSL
+SSL_read: Connection was reset, errno 10054
+GIT BASH 指令：env|grep -i proxy 两次
+</code></pre>
+<h4 id="1-2-git指令快速查询"><a href="#1-2-git指令快速查询" class="headerlink" title="1.2 git指令快速查询"></a>1.2 git指令快速查询</h4><p><img src="'./images/Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4.jpg'" alt="Git常用指令"></p>
+<h4 id="1-3-github教程文章网址"><a href="#1-3-github教程文章网址" class="headerlink" title="1.3 github教程文章网址"></a>1.3 github教程文章网址</h4><p><a target="_blank" rel="noopener" href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/">廖雪峰-Git教程</a></p>
+<h3 id="2-博客-使用-next-主题"><a href="#2-博客-使用-next-主题" class="headerlink" title="2. 博客 使用 next 主题"></a>2. 博客 使用 next 主题</h3><ul>
+<li>下载next主题文件夹<ul>
+<li>安装next主题到博客目录主题文件夹下<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$  git clone https://github.com/theme-next/hexo-theme-next themes/next</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>使用主题，更改站点配置文件 theme 字段值为 next</li>
+</ul>
+<ul>
+<li>设置站点统计—-使用不蒜子统计</li>
+</ul>
+<ul>
+<li><p>1.主题配置文件加入如下字段</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">busuanzi_count:</span><br><span class="line"> # count values only if the other configs are false</span><br><span class="line"> enable: true</span><br><span class="line"> # custom uv span for the whole site</span><br><span class="line"> site_uv: true</span><br><span class="line"> site_uv_header: &lt;i class=&quot;fa fa-user&quot;&gt;&lt;/i&gt; 本站访问数</span><br><span class="line"> site_uv_footer: 人</span><br><span class="line"> # custom pv span for the whole site</span><br><span class="line"> site_pv: true</span><br><span class="line"> site_pv_header: &lt;i class=&quot;fa fa-eye&quot;&gt;&lt;/i&gt; 本站总访问量</span><br><span class="line"> site_pv_footer: 次</span><br><span class="line"> # custom pv span for one page only</span><br><span class="line"> page_pv: false</span><br><span class="line"> page_pv_header: &lt;i class=&quot;fa fa-file-o&quot;&gt;&lt;/i&gt; 本文总阅读量</span><br><span class="line"> page_pv_footer: 次</span><br></pre></td></tr></table></figure></li>
+<li><p>2.在themes/next/layout/_partials/footer.swig 文件加入</p>
+</li>
+</ul>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&#123;% if theme.busuanzi_count.enable %&#125;</span><br><span class="line">&lt;div class=&quot;busuanzi-count&quot;&gt;</span><br><span class="line">  &lt;script async src=&quot;https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js&quot;&gt;</span><br><span class="line">  &lt;/script&gt;</span><br><span class="line">  &#123;% if theme.busuanzi_count.site_uv %&#125;</span><br><span class="line">  &lt;span class=&quot;site-uv&quot;&gt;</span><br><span class="line">   &#123;&#123; theme.busuanzi_count.site_uv_header &#125;&#125;</span><br><span class="line">   &lt;span class=&quot;busuanzi-value&quot; id=&quot;busuanzi_value_site_uv&quot;&gt;&lt;/span&gt;</span><br><span class="line">   &#123;&#123; theme.busuanzi_count.site_uv_footer &#125;&#125;</span><br><span class="line">   &lt;/span&gt;</span><br><span class="line">   &#123;% endif %&#125;</span><br><span class="line">   </span><br><span class="line">   &#123;% if theme.busuanzi_count.site_pv %&#125;</span><br><span class="line">   &lt;span class=&quot;site-pv&quot;&gt;</span><br><span class="line">    &#123;&#123; theme.busuanzi_count.site_pv_header &#125;&#125;</span><br><span class="line">    &lt;span class=&quot;busuanzi-value&quot; id=&quot;busuanzi_value_site_pv&quot;&gt;&lt;/span&gt;</span><br><span class="line">    &#123;&#123; theme.busuanzi_count.site_pv_footer &#125;&#125;</span><br><span class="line">    &lt;/span&gt;</span><br><span class="line">    &#123;% endif %&#125;</span><br><span class="line">   &lt;/div&gt;</span><br><span class="line">&#123;% endif %&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>3.加入本站运行时间,在上面文件最后加入如下代码即可<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;span&gt;</span><br><span class="line">  &lt;span class=&quot;post-meta-divider&quot;&gt;|&lt;/span&gt;</span><br><span class="line">  本站已运行</span><br><span class="line">  &lt;span id=&quot;showDays&quot;&gt;&lt;/span&gt;</span><br><span class="line">&lt;/span&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  var seconds = 1000;</span><br><span class="line">  var minutes = seconds * 60;</span><br><span class="line">  var hours = minutes * 60;</span><br><span class="line">  var days = hours * 24;</span><br><span class="line">  var years = days * 365;</span><br><span class="line">  var birthDay = Date.UTC(2019,01,20,14,00,00); // 这里设置建站时间</span><br><span class="line">  setInterval(function() &#123;</span><br><span class="line">    var today = new Date();</span><br><span class="line">    var todayYear = today.getFullYear();</span><br><span class="line">    var todayMonth = today.getMonth()+1;</span><br><span class="line">    var todayDate = today.getDate();</span><br><span class="line">    var todayHour = today.getHours();</span><br><span class="line">    var todayMinute = today.getMinutes();</span><br><span class="line">    var todaySecond = today.getSeconds();</span><br><span class="line">    var now = Date.UTC(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond);</span><br><span class="line">    var diff = now - birthDay;</span><br><span class="line">    var diffYears = Math.floor(diff/years);</span><br><span class="line">    var diffDays = Math.floor((diff/days)-diffYears*365);</span><br><span class="line">    var diffHours = Math.floor((diff-(diffYears*365+diffDays)*days)/hours);</span><br><span class="line">    var diffMinutes = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours)/minutes);</span><br><span class="line">    var diffSeconds = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours-diffMinutes*minutes)/seconds);</span><br><span class="line">      document.getElementById(&#x27;showDays&#x27;).innerHTML=&quot;&quot;+diffYears+&quot;年&quot;+diffDays+&quot;天&quot;+diffHours+&quot;小时&quot;+diffMinutes+&quot;分钟&quot;+diffSeconds+&quot;秒&quot;;</span><br><span class="line">  &#125;, 1000);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<ul>
+<li>设置头像、背景图片等</li>
+</ul>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"># 主题配置文件</span><br><span class="line">avatar:</span><br><span class="line">  # Replace the default image and set the url here.</span><br><span class="line">  # 将头像放到 themes/next/source/images目录</span><br><span class="line">  url: /images/avatar.jpg</span><br><span class="line">  </span><br><span class="line"># 找到themes/next/source/css/main.styl样式文件，设如下自定义样式即可 </span><br><span class="line">// 自定义样式</span><br><span class="line">body &#123;</span><br><span class="line">  background: url(../images/bg.jpg);</span><br><span class="line">	background-repeat: no-repeat;</span><br><span class="line">	background-position: 50% 50%;</span><br><span class="line">	background-attachment: fixed;</span><br><span class="line">  color: var(--text-color);</span><br><span class="line">  font-family: &#x27;Lato&#x27;, &quot;PingFang SC&quot;, &quot;Microsoft YaHei&quot;, sans-serif;</span><br><span class="line">  font-size: 1em;</span><br><span class="line">  line-height: 2;</span><br><span class="line">&#125;</span><br><span class="line">  </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>设置看板娘</li>
+</ul>
+<ul>
+<li>1.安装插件<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save hexo-helper-live2d</span><br></pre></td></tr></table></figure></li>
+<li>2.选择你想要的看板娘模型，安装，在这里我使用的是koharu<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install live2d-widget-model-koharu</span><br></pre></td></tr></table></figure></li>
+<li>3.在站点配置文件加入如下字段<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">live2d:</span><br><span class="line">  enable: true</span><br><span class="line">  scriptFrom: local</span><br><span class="line">  pluginRootPath: live2dw/</span><br><span class="line">  pluginJsPath: lib/</span><br><span class="line">  pluginModelPath: assets/</span><br><span class="line">  tagMode: false</span><br><span class="line">  debug: false</span><br><span class="line">  model:</span><br><span class="line">    use: live2d-widget-model-koharu</span><br><span class="line">  display:</span><br><span class="line">    position: left</span><br><span class="line">    width: 175</span><br><span class="line">    height: 350</span><br><span class="line">  mobile:</span><br><span class="line">    show: true</span><br></pre></td></tr></table></figure></li>
 </ul>
 
       
@@ -2380,20 +2523,20 @@ GIT BASH 指令：env|grep -i proxy 两次
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-count">10</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -2428,7 +2571,7 @@ GIT BASH 指令：env|grep -i proxy 两次
 <div class="copyright">
   
   &copy; 2019 – 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
